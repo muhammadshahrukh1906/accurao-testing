@@ -109,8 +109,9 @@
   .hero-actions{width:100%;align-items:stretch!important;gap:9px!important}
   .hero-actions .button{min-height:46px!important}
 
-  /* Remove desktop-only motion that costs space/clarity on touch devices. */
-  .motion-ready .scroll-reveal{opacity:1!important;transform:none!important;transition:none!important}
+  /* Keep the desktop scroll-reveal system on phones as well.
+     The shared site.js + styles.css handle the same left/right/up fade-in behavior;
+     mobile only continues to disable hover transforms below. */
   .nav-cta:hover,.button:hover,.hero-pill:hover,.feature-card:hover,.audience-item:hover,.step:hover,.check-group:hover,.fact:hover,.context-visual:hover{transform:none!important}
 
   /* HOME — mobile-first composition */
