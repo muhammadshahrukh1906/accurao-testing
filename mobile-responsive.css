@@ -1914,3 +1914,16 @@
     transition: none !important;
   }
 }
+
+/* v10 — neutralise the superseded mobile-only reveal rules. The shared v10
+   observer in site.js now handles both desktop and mobile. */
+@media (max-width:700px){
+  html.mobile-motion-ready body main .mobile-scroll-reveal,
+  html.mobile-motion-ready body main .mobile-scroll-reveal:not(.mobile-visible),
+  html.mobile-motion-ready body main .mobile-scroll-reveal.mobile-visible{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+    transition:none!important;
+  }
+}

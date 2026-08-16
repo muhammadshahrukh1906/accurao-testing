@@ -167,15 +167,19 @@
   });
 })();
 
-/* Corporate scroll-reveal system and reading progress. */
+/* Unified scroll-reveal system and reading progress — v10.
+   One observer drives desktop + mobile. The reveal intentionally avoids blur
+   filters, scale transforms and transforms on individual illustration cards. */
 (function(){
   var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Thin reading-progress rule. */
-  var progress=document.createElement('div');
-  progress.className='scroll-progress';
-  progress.setAttribute('aria-hidden','true');
-  document.body.appendChild(progress);
+  var progress=document.querySelector('.scroll-progress');
+  if(!progress){
+    progress=document.createElement('div');
+    progress.className='scroll-progress';
+    progress.setAttribute('aria-hidden','true');
+    document.body.appendChild(progress);
+  }
   var progressRaf=0;
   function updateProgress(){
     progressRaf=0;
@@ -184,102 +188,82 @@
     var pct=Math.max(0,Math.min(1,window.scrollY/total));
     progress.style.transform='scaleX('+pct.toFixed(4)+')';
   }
-  function requestProgressUpdate(){
-    if(!progressRaf) progressRaf=requestAnimationFrame(updateProgress);
-  }
+  function requestProgressUpdate(){if(!progressRaf) progressRaf=requestAnimationFrame(updateProgress);}
   updateProgress();
   window.addEventListener('scroll',requestProgressUpdate,{passive:true});
   window.addEventListener('resize',requestProgressUpdate,{passive:true});
 
   if(reduceMotion) return;
 
-  /* The hero already has its own load animation. Everything below reveals on entry. */
-  var groups=[
-    '.intro-section .editorial-head > *',
-    '.feature-band .feature-heading > *',
-    '.feature-band .feature-card',
-    '.feature-band .section-link',
-    '.steps-section .feature-heading > *',
-    '.steps-section .attio-steps article',
-    '.steps-section .quiet-block',
-    '.audience-section .feature-heading > *',
-    '.audience-section .audience-item',
-    '.final-cta .final-cta-inner > *',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .check-group',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .working',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .closing-line',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .quiet-block',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .step',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .fact',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .faq-item',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .founder-photo',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .founder-copy > *',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .beta-panel > *',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .booking-shell',
-    'main > .section:not(.intro-section):not(.feature-band):not(.steps-section):not(.audience-section):not(.final-cta) .legal-shell > *'
-  ];
-
-  var seen=[];
-  groups.forEach(function(selector){
-    document.querySelectorAll(selector).forEach(function(el){
-      if(seen.indexOf(el)===-1) seen.push(el);
+  var items=[];
+  function add(el,dir,delay){
+    if(!el || items.indexOf(el)!==-1) return;
+    if(el.matches('.premium-interactive-card,.interactive-layer,.reference-card,.how-input,.how-review-card,.how-findings,.how-insight,.wicp-card,.wicp-ai,.wicp-result,.security-v-card')) return;
+    el.classList.add('scroll-reveal',dir==='right'?'reveal-right':dir==='up'?'reveal-up':'reveal-left');
+    el.style.setProperty('--reveal-delay',(delay||0)+'ms');
+    items.push(el);
+  }
+  function addAll(selector,pattern){
+    var dirs=pattern||['left','right','up'];
+    document.querySelectorAll(selector).forEach(function(el,i){
+      add(el,dirs[i%dirs.length],Math.min((i%3)*70,140));
     });
-  });
+  }
 
-  seen.forEach(function(el,index){
-    el.classList.add('scroll-reveal');
-    var direction=index%4;
-    if(direction===0) el.classList.add('reveal-left');
-    else if(direction===1) el.classList.add('reveal-right');
-    else el.classList.add('reveal-up');
-    el.style.setProperty('--reveal-delay',Math.min((index%3)*95,190)+'ms');
-  });
+  /* Home: the scrolling sections now use the same reveal language. */
+  addAll('.page-home .intro-section .editorial-head > *',['left','right','up']);
+  addAll('.page-home #wic-hero > *',['left','right']);
+  addAll('.page-home .feature-band .section-link',['right']);
+  addAll('.page-home .steps-section .feature-heading > *',['left','right']);
+  addAll('.page-home .steps-section .attio-steps > article',['left','right','left']);
+  addAll('.page-home .steps-section .quiet-block',['up']);
+  addAll('.page-home .audience-section .feature-heading > *',['left','right']);
+  addAll('.page-home .audience-section .audience-item',['left','right','left']);
+  addAll('.page-home .final-cta .final-cta-inner > *',['up','left','right']);
 
+  /* What it checks: copy reveals line-by-line; the illustration is one stable wrapper. */
+  addAll('.page-what-it-checks #wic-page-hero .wicp-copy > *',['left','left','left']);
+  addAll('.page-what-it-checks #wic-page-hero .wicp-visual',['right']);
+
+  /* How it works: same structure, avoiding transforms on internal cards. */
+  addAll('.page-how-it-works .how-hero-copy > *',['left','left','left']);
+  addAll('.page-how-it-works .how-hero-visual',['right']);
+
+  /* Security previously had no reliable hero reveal coverage. */
+  addAll('.page-security .security-hero-copy > .eyebrow, .page-security .security-hero-copy > h1, .page-security .security-hero-copy > .security-hero-lede',['left','left','left']);
+  addAll('.page-security .security-quick-read',['left']);
+  addAll('.page-security .security-hero-visual',['right']);
+
+  /* Shared inner-page content. */
+  addAll('body:not(.page-home) main > .section .check-group',['left','right']);
+  addAll('body:not(.page-home) main > .section .working',['left']);
+  addAll('body:not(.page-home) main > .section .closing-line',['right']);
+  addAll('body:not(.page-home) main > .section .quiet-block',['up']);
+  addAll('body:not(.page-home) main > .section .step',['left','right','left']);
+  addAll('body:not(.page-home) main > .section .fact',['left','right','left']);
+  addAll('body:not(.page-home) main > .section .faq-item',['left','right']);
+  addAll('body:not(.page-home) main > .section .founder-photo',['left']);
+  addAll('body:not(.page-home) main > .section .founder-copy > *',['right','up']);
+  addAll('body:not(.page-home) main > .section .beta-panel > *',['left','right']);
+  addAll('body:not(.page-home) main > .section .booking-shell',['up']);
+  addAll('body:not(.page-home) main > .section .legal-shell > *',['left','right','up']);
+  addAll('body:not(.page-home) main > .section .section-label > *',['left','right']);
+  addAll('body:not(.page-home) main > .section .editorial-placeholder',['right']);
+
+  if(!items.length) return;
   document.documentElement.classList.add('motion-ready');
 
-  if(!('IntersectionObserver' in window)){
-    seen.forEach(function(el){el.classList.add('is-visible');});
-    return;
-  }
+  function reveal(el){el.classList.add('is-visible');}
+  if(!('IntersectionObserver' in window)){items.forEach(reveal);return;}
 
   var observer=new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
+      if(entry.isIntersecting){reveal(entry.target);observer.unobserve(entry.target);}
     });
-  },{threshold:.16,rootMargin:'0px 0px -10% 0px'});
+  },{threshold:.10,rootMargin:'0px 0px -7% 0px'});
 
-  seen.forEach(function(el){
-    /* Content already comfortably inside the initial viewport should not blink out after page load. */
-    if(el.getBoundingClientRect().top < window.innerHeight*.92) el.classList.add('is-visible');
-    else observer.observe(el);
-  });
-})();
-
-/* Ensure editorial label/content pairs on inner pages also participate in the reveal system. */
-(function(){
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var extras=Array.prototype.slice.call(document.querySelectorAll('.section-label > *, .editorial-placeholder'));
-  extras=extras.filter(function(el){return !el.classList.contains('scroll-reveal');});
-  if(!extras.length) return;
-  extras.forEach(function(el,i){
-    el.classList.add('scroll-reveal',i%2===0?'reveal-left':'reveal-right');
-    el.style.setProperty('--reveal-delay',(i%2)*100+'ms');
-  });
-  if(!('IntersectionObserver' in window)){
-    extras.forEach(function(el){el.classList.add('is-visible');});
-    return;
-  }
-  var observer=new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
-    });
-  },{threshold:.16,rootMargin:'0px 0px -10% 0px'});
-  extras.forEach(function(el){
-    if(el.getBoundingClientRect().top < window.innerHeight*.92) el.classList.add('is-visible');
-    else observer.observe(el);
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){items.forEach(function(el){observer.observe(el);});});
   });
 })();
 
@@ -532,80 +516,5 @@
       });
     });
     visual.addEventListener('keydown',function(e){if(e.key==='Escape'&&pinned){activate(pinned,false);pinned=null;}});
-  });
-})();
-
-/* v9: mobile-only scroll reveal. Uses a lightweight scroll check so it also works
-   reliably inside iOS/WhatsApp in-app browsers where observer timing can be eager. */
-(function(){
-  if(!window.matchMedia || !window.matchMedia('(max-width: 700px)').matches) return;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var selectors=[
-    '.page-hero > .container > *',
-    '.page-home .reference-match-main > *:not(.reference-match-visual)',
-    '.page-home .reference-benefits > *',
-    'main > .section > .container > *',
-    'main > .section .editorial-copy > *',
-    'main > .section .attio-steps > article',
-    'main > .section .audience-grid > *',
-    'main > .section .check-split > *',
-    'main > .section .security-facts > *',
-    'main > .section .faq-list > *',
-    'main > .section .founder-copy > *',
-    'main > .section .beta-panel > *',
-    'main > .section .legal-shell > *'
-  ];
-
-  var items=[];
-  selectors.forEach(function(selector){
-    document.querySelectorAll(selector).forEach(function(el){
-      if(items.indexOf(el)!==-1) return;
-      if(el.matches('.reference-match-visual,.wicp-visual,.how-hero-visual,.security-hero-visual,.security-vector-illustration,.premium-scroll-illustration,.context-visual')) return;
-      if(el.closest('.site-header,.site-footer')) return;
-      items.push(el);
-    });
-  });
-  if(!items.length) return;
-
-  items.forEach(function(el,index){
-    el.classList.add('mobile-scroll-reveal');
-    var mode=index%3;
-    el.classList.add(mode===0?'mobile-from-left':mode===1?'mobile-from-right':'mobile-from-up');
-    el.style.setProperty('--mobile-reveal-delay',((index%2)*55)+'ms');
-    /* Existing desktop reveal may already have declared the item visible. The
-       mobile class above intentionally overrides that until our own trigger fires. */
-  });
-
-  document.documentElement.classList.add('mobile-motion-ready');
-
-  var raf=0;
-  var started=false;
-  function check(){
-    raf=0;
-    var vh=window.innerHeight || document.documentElement.clientHeight;
-    var trigger=vh*0.88;
-    items.forEach(function(el){
-      if(el.classList.contains('mobile-visible')) return;
-      var rect=el.getBoundingClientRect();
-      if(rect.top < trigger && rect.bottom > 0){
-        el.classList.add('mobile-visible');
-      }
-    });
-  }
-  function requestCheck(){
-    if(!raf) raf=requestAnimationFrame(check);
-  }
-
-  window.addEventListener('scroll',requestCheck,{passive:true});
-  window.addEventListener('resize',requestCheck,{passive:true});
-  window.addEventListener('orientationchange',requestCheck,{passive:true});
-
-  /* Give Safari one paint with the hidden/offset state first. This guarantees the
-     first reveal transition is visible rather than collapsing into the initial paint. */
-  requestAnimationFrame(function(){
-    requestAnimationFrame(function(){
-      setTimeout(function(){started=true;check();},90);
-    });
   });
 })();

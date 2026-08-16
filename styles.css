@@ -5399,3 +5399,70 @@ main li,
   backface-visibility:visible!important;
   -webkit-backface-visibility:visible!important;
 }
+
+/* ========================================================================== 
+   v10 — stable unified scroll reveal (desktop + mobile)
+   ========================================================================== */
+
+/* Stop the older direct-child page-load animation from competing with the
+   scroll observer on the three illustrated inner-page heroes. */
+body.page-what-it-checks .page-hero > .container > *,
+body.page-how-it-works .page-hero > .container > *,
+body.page-security .page-hero > .container > *{
+  animation:none!important;
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+/* Stable reveal: opacity + small 2D translation only. No blur, no scale, no
+   forced compositor layer. This prevents the black-rectangle artefact on large
+   headings while keeping the same side-entry character as the web design. */
+html.motion-ready body main .scroll-reveal{
+  --reveal-x:0px;
+  --reveal-y:0px;
+  opacity:0!important;
+  transform:translate(var(--reveal-x),var(--reveal-y))!important;
+  filter:none!important;
+  transition:
+    opacity .68s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms),
+    transform .76s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms)!important;
+  will-change:auto!important;
+  backface-visibility:visible!important;
+}
+html.motion-ready body main .scroll-reveal.reveal-left{--reveal-x:-44px;--reveal-y:4px}
+html.motion-ready body main .scroll-reveal.reveal-right{--reveal-x:44px;--reveal-y:4px}
+html.motion-ready body main .scroll-reveal.reveal-up{--reveal-x:0px;--reveal-y:24px}
+html.motion-ready body main .scroll-reveal.is-visible{
+  opacity:1!important;
+  transform:translate(0,0)!important;
+  filter:none!important;
+}
+
+/* The illustration scenes animate only as whole wrappers. Their cards, paths,
+   hover transforms and vector geometry remain independent. */
+html.motion-ready body.page-what-it-checks #wic-page-hero .wicp-visual.scroll-reveal,
+html.motion-ready body.page-how-it-works .how-hero-visual.scroll-reveal,
+html.motion-ready body.page-security .security-hero-visual.scroll-reveal{
+  transform:translate(var(--reveal-x),var(--reveal-y))!important;
+}
+html.motion-ready body.page-what-it-checks #wic-page-hero .wicp-visual.scroll-reveal.is-visible,
+html.motion-ready body.page-how-it-works .how-hero-visual.scroll-reveal.is-visible,
+html.motion-ready body.page-security .security-hero-visual.scroll-reveal.is-visible{
+  transform:translate(0,0)!important;
+}
+
+@media(max-width:700px){
+  html.motion-ready body main .scroll-reveal.reveal-left{--reveal-x:-24px;--reveal-y:3px}
+  html.motion-ready body main .scroll-reveal.reveal-right{--reveal-x:24px;--reveal-y:3px}
+  html.motion-ready body main .scroll-reveal.reveal-up{--reveal-x:0px;--reveal-y:16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html.motion-ready body main .scroll-reveal{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+    transition:none!important;
+  }
+}
