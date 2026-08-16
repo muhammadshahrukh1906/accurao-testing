@@ -23,7 +23,6 @@ Do not guess these. Replace only with values Momina has confirmed:
 {{SUBPROCESSORS}}
 {{BETA_TERMS}}
 {{ENTITY}}
-{{CAL_BETA_URL}}
 
 ALSO REQUIRED BEFORE LIVE USE
 -----------------------------
@@ -32,8 +31,8 @@ ALSO REQUIRED BEFORE LIVE USE
 3. Add the approved self-hosted Space Grotesk and Manrope .woff2 files in /fonts/.
 4. Momina must provide the concrete first-person example for the About page.
 5. Momina must provide final Privacy and Terms wording.
-6. Create a dedicated 20-minute Accurao Reviewer beta event in Cal.com. Do NOT reuse
-   the bookkeeping free-consultation event. Replace {{CAL_BETA_URL}} in beta.html.
+6. The beta page lazy-loads the approved Cal.com URL: cal.eu/momina.athar/free-consultation.
+   Keep third-party booking code confined to the beta page.
 7. Verify Security wording against the live product configuration.
 8. Keep the social-proof region empty until real beta participants consent in writing.
 

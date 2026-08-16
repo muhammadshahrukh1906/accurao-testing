@@ -296,9 +296,7 @@
     el.setAttribute('aria-hidden','true');
 
     if(type==='mismatch'){
-      el.innerHTML='\
-        <div class="cv-top"><span>Late adjustment</span><em>Review gap</em></div>\
-        <div class="cv-mismatch">\
+      el.innerHTML='\        <div class="cv-mismatch">\
           <div class="cv-sheet"><small>Balance sheet</small><b>Updated</b><i></i><i></i><i class="accent-line"></i></div>\
           <div class="cv-not-equal"><strong>≠</strong><small>out of sync</small></div>\
           <div class="cv-sheet"><small>Related note</small><b>Still old</b><i></i><i class="short"></i><i></i></div>\
@@ -314,39 +312,33 @@
           </svg>\
           <div class="checks-paper-stack" aria-hidden="true"><i></i><i></i></div>\
           <button class="checks-layer checks-layer-exact" type="button" data-checks-layer="exact" aria-label="Exact checks: deterministic arithmetic and matching">\
-            <span class="checks-status exact-status">✓</span><span class="checks-layer-copy"><strong>Exact checks</strong><small>Arithmetic &amp; tie-outs</small></span>\
+            <span class="checks-status exact-status">✓</span><span class="checks-layer-copy"><strong>Exact checks</strong><small>Arithmetic and matching</small></span>\
           </button>\
           <button class="checks-layer checks-layer-assisted" type="button" data-checks-layer="assisted" aria-label="AI-assisted checks: disclosure presence with evidence to confirm">\
-            <span class="checks-status assisted-status"></span><span class="checks-layer-copy"><strong>AI-assisted checks</strong><small>Disclosure checks</small></span>\
+            <span class="checks-status assisted-status"></span><span class="checks-layer-copy"><strong>AI-assisted checks</strong><small>Presence detection</small></span>\
           </button>\
           <button class="checks-ai-core" type="button" data-checks-layer="reviewer" aria-label="Accurao Reviewer combines exact checks and AI-assisted disclosure assessment"><span>AI</span></button>\
           <div class="checks-stack-insight" aria-live="polite">\
             <span class="checks-insight-icon" aria-hidden="true"></span>\
-            <div><strong data-checks-insight-title>Designed to catch what slips through</strong><p data-checks-insight-body>Across numbers and disclosures.</p></div>\
+            <div><strong data-checks-insight-title>Prompts to confirm</strong><p data-checks-insight-body>Reviewer decides.</p></div>\
           </div>\
         </div>';
     } else if(type==='split'){
-      el.innerHTML='\
-        <div class="cv-top"><span>Two kinds of check</span><em>Different confidence</em></div>\
-        <div class="cv-split">\
+      el.innerHTML='\        <div class="cv-split">\
           <div class="cv-lane exact"><div class="lane-head"><b>Exact</b><span>Deterministic</span></div><div class="lane-row"><span>TB tie-out</span><i>Tied</i></div><div class="lane-row"><span>Note-to-face</span><i>Tied</i></div></div>\
           <div class="cv-lane assisted"><div class="lane-head"><b>AI-assisted</b><span>Evidence</span></div><div class="evidence-lines"><i></i><i></i><i class="short"></i></div><div class="confirm-chip">Confirm</div></div>\
         </div>\
         <div class="cv-caption">Same inputs → same exact result. Disclosure evidence → reviewer confirms.</div>';
     } else if(type==='flow'){
-      el.innerHTML='\
-        <div class="cv-top"><span>Independent review layer</span><em>Read-only</em></div>\
-        <div class="cv-flow">\
+      el.innerHTML='\        <div class="cv-flow">\
           <div class="flow-inputs"><div class="flow-doc"><b>PDF</b><span>Finished accounts</span></div><div class="flow-doc"><b>TB</b><span>Trial balance</span></div></div>\
           <div class="flow-arrow">→</div>\
-          <div class="flow-engine"><span></span><b>Review checks</b><small>tie · compare · assess</small></div>\
+          <div class="flow-engine"><span></span><b>Review checks</b><small>arithmetic · consistency · disclosure</small></div>\
           <div class="flow-arrow">→</div>\
           <div class="flow-output"><b>Findings</b><span>Confirm</span><span>Dismiss</span><span>Correct</span></div>\
         </div>';
     } else if(type==='security'){
-      el.innerHTML='\
-        <div class="cv-top"><span>Data path</span><em>Disclosure check only</em></div>\
-        <div class="cv-security">\
+      el.innerHTML='\        <div class="cv-security">\
           <div class="secure-node"><i class="lock-mark"></i><b>Your account</b><small>per-user access</small></div>\
           <span class="secure-link"></span>\
           <div class="secure-node"><b>Reviewer</b><small>document + TB</small></div>\
@@ -354,24 +346,18 @@
           <div class="secure-node"><b>Anthropic API</b><small>document text for disclosure checks</small></div>\
         </div>';
     } else if(type==='faq'){
-      el.innerHTML='\
-        <div class="cv-top"><span>Common questions</span><em>Before the call</em></div>\
-        <div class="cv-faq">\
+      el.innerHTML='\        <div class="cv-faq">\
           <div><span>01</span><b>Client data</b><i>+</i></div>\
           <div><span>02</span><b>Your review</b><i>+</i></div>\
           <div><span>03</span><b>Files & software</b><i>+</i></div>\
         </div>';
     } else if(type==='founder'){
-      el.innerHTML='\
-        <div class="cv-top"><span>Built from review work</span><em>Pre-beta</em></div>\
-        <div class="cv-founder">\
+      el.innerHTML='\        <div class="cv-founder">\
           <div class="founder-monogram">MA</div>\
-          <div><b>Momina Athar</b><span>ACA · Chartered Accountant</span><small>Reviewer by design — not an accounts production tool.</small></div>\
+          <div><b>Momina Athar</b><span>ACA · Chartered Accountant</span><small>Independent review of finished accounts.</small></div>\
         </div>';
     } else if(type==='beta'){
-      el.innerHTML='\
-        <div class="cv-top"><span>Closed beta</span><em>20 minutes</em></div>\
-        <div class="cv-beta">\
+      el.innerHTML='\        <div class="cv-beta">\
           <div class="calendar-mini"><div></div><b>20</b><span>MIN</span></div>\
           <div class="beta-brief"><b>Run reviewed files</b><span>Tell us what it found.</span><span>Tell us what it missed.</span><small>Call with Momina</small></div>\
         </div>';
@@ -391,10 +377,9 @@
   if(problem) addContext(problem,'mismatch',problem.querySelector('.editorial-copy'));
 
   document.querySelectorAll('.page-home .feature-heading').forEach(function(box){
-    var label=(box.querySelector('.eyebrow')||{}).textContent||'';
-    if(/what it checks/i.test(label)) addContext(box,'split',box.querySelector(':scope > p'));
-    else if(/how it works/i.test(label)) addContext(box,'flow',box.querySelector(':scope > p'));
-    /* Who it's for already has two audience panels; no decorative visual added. */
+    var heading=(box.querySelector('h2')||{}).textContent||'';
+    if(/Finished accounts in\. Findings out/i.test(heading)) addContext(box,'flow',box.querySelector(':scope > p'));
+    /* The audience section already has its own two content panels. */
   });
 
   var finalBox=document.querySelector('.page-home .final-cta-inner');
@@ -425,15 +410,15 @@
   var body=stack.querySelector('[data-stack-insight-body]');
   var copy={
     accounts:{title:'Read-only finished accounts',body:'The signed or draft accounts are reviewed as a PDF. Accurao does not edit the document.'},
-    source:{title:'Tie every figure back to source',body:'Every financial-statement line is traced back to the trial balance, with the difference shown.'},
-    reviewer:{title:'AI-assisted, reviewer-decided',body:'Exact checks are deterministic. Disclosure presence is returned with evidence for you to confirm.'}
+    source:{title:'Tie every figure back to the trial balance',body:'Every financial-statement line is traced back to the trial balance, with the difference shown.'},
+    reviewer:{title:'AI-assisted; reviewer decides',body:'Exact checks are deterministic. Disclosure presence is returned with evidence for you to confirm.'}
   };
   var pinned=null;
   function activate(key){
     stack.dataset.active=key||'';
     cards.forEach(function(card){card.classList.toggle('is-active',card.dataset.layer===key);});
     if(key&&copy[key]){if(title) title.textContent=copy[key].title;if(body) body.textContent=copy[key].body;}
-    else{if(title) title.textContent='Independent by design';if(body) body.textContent='The accounts stay read-only. You decide what happens to every finding.';}
+    else{if(title) title.textContent='Read-only review';if(body) body.textContent='The accounts stay read-only. You decide what happens to every finding.';}
   }
   cards.forEach(function(card){
     var key=card.dataset.layer;
@@ -459,9 +444,9 @@
   var title=stack.querySelector('[data-checks-insight-title]');
   var body=stack.querySelector('[data-checks-insight-body]');
   var copy={
-    exact:{title:'Exact where it can be exact',body:'Arithmetic and matching are deterministic — the same inputs give the same result every time.'},
-    assisted:{title:'Evidence where judgement stays yours',body:'Disclosure presence is AI-assisted and returned as evidence for you to confirm, not as certainty.'},
-    reviewer:{title:'One independent review layer',body:'Accurao combines both kinds of check without changing the finished accounts or replacing your judgement.'}
+    exact:{title:'Deterministic arithmetic and matching',body:'The same inputs give the same result every time.'},
+    assisted:{title:'Presence detection, not certainty',body:'Disclosure evidence is returned for you to confirm.'},
+    reviewer:{title:'Independent review layer',body:'Accurao combines both kinds of check without changing the finished accounts or replacing your judgement.'}
   };
   var pinned=null;
   function activate(key){
@@ -471,8 +456,8 @@
       if(title) title.textContent=copy[key].title;
       if(body) body.textContent=copy[key].body;
     }else{
-      if(title) title.textContent='Designed to catch what slips through';
-      if(body) body.textContent='Across numbers and disclosures.';
+      if(title) title.textContent='Prompts to confirm';
+      if(body) body.textContent='Reviewer decides.';
     }
   }
   items.forEach(function(item){

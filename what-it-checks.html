@@ -172,15 +172,14 @@
   <link rel="stylesheet" href="mobile-responsive.css">
 </head>
 <body class="page-what-it-checks">
-<div class="announcement"><a href="beta.html"><span>Closed beta</span><strong>Accurao Reviewer for FRS 102 Section 1A and FRS 105</strong><b aria-hidden="true">→</b></a></div>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="Accurao Reviewer home">
       <span class="brand-fallback">Accurao</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
-    <nav class="main-nav" id="primary-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="what-it-checks.html" aria-current="page">What it checks</a><a href="how-it-works.html">How it works</a><a href="security.html">Security</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a class="mobile-only" href="beta.html">Book a beta call</a></nav>
-    <a class="nav-cta" href="beta.html">Book a beta call</a>
+    <nav class="main-nav" id="primary-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="what-it-checks.html" aria-current="page">What it checks</a><a href="how-it-works.html">How it works</a><a href="security.html">Security</a><a href="faq.html">FAQ</a><a href="about.html">About</a></nav>
+    <a class="nav-cta" href="https://cal.eu/momina.athar/free-consultation" target="_blank" rel="noopener">Book a beta call</a>
   </div>
 </header>
 <main>
@@ -188,7 +187,7 @@
 <section class="page-hero">
   <div class="container" id="wic-page-hero">
     <div class="wicp-copy">
-      <div class="eyebrow">Credibility page</div>
+      
       <h1>What it checks</h1>
       <p class="lede">The complete review is split deliberately between deterministic arithmetic and matching, and AI-assisted disclosure presence detection. They are not the same kind of finding.</p>
     </div>
@@ -204,26 +203,26 @@
 
       <div class="wicp-card wicp-exact premium-interactive-card" tabindex="0" data-illustration-card="exact">
         <span class="wicp-icon" aria-hidden="true">✓</span>
-        <span><strong>Exact checks</strong><small>Arithmetic &amp; tie-outs</small></span>
+        <span><strong>Exact checks</strong><small>Arithmetic and matching</small></span>
       </div>
 
       <div class="wicp-card wicp-assisted premium-interactive-card" tabindex="0" data-illustration-card="assisted">
         <span class="wicp-icon" aria-hidden="true"></span>
-        <span><strong>AI-assisted checks</strong><small>Disclosure checks</small></span>
+        <span><strong>AI-assisted checks</strong><small>Presence detection</small></span>
       </div>
 
       <div class="wicp-ai premium-interactive-card" tabindex="0" data-illustration-card="ai" aria-label="AI-assisted review">AI</div>
 
       <div class="wicp-result premium-interactive-card" tabindex="0" data-illustration-card="result">
         <span class="wicp-result-icon" aria-hidden="true"></span>
-        <strong>Designed to catch what slips through — across numbers and disclosures.</strong>
+        <strong>Prompts to confirm. Reviewer decides.</strong>
       </div>
     </div>
   </div>
 </section>
 <section class="section"><div class="container">
   <div class="check-split">
-    <section class="check-group" aria-labelledby="exact-full"><h2 id="exact-full">Exact checks</h2><p class="group-note">Arithmetic and matching. Deterministic — same inputs, same result, every time.</p>
+    <section class="check-group" aria-labelledby="exact-full"><h2 id="exact-full">Exact checks</h2><p class="group-note">Arithmetic and matching. Deterministic — same inputs, same result, every time. How the AI is used: extraction is AI-assisted, comparison is deterministic. The model reads figures out of the document. Every comparison and every arithmetic check is then performed in code, server-side. The model is not asked to decide whether two numbers agree.</p>
       <ul class="check-list"><li><strong>Trial balance tie-out</strong> — every line in the accounts traced back to the trial balance, with the difference shown</li><li><strong>Internal consistency</strong> — the balance sheet foots, notes agree to the face of the balance sheet, the fixed asset note casts</li><li><strong>Fixed asset register cross-match</strong> — your uploaded register against the fixed-asset note</li><li><strong>Prior-year comparatives</strong> — checked against the actual prior-year accounts filed at Companies House, or a copy you upload</li><li><strong>Identifier consistency</strong> — company name, registered number and director names used consistently throughout the document</li></ul>
     </section>
     <section class="check-group" aria-labelledby="ai-full"><h2 id="ai-full" class="ai-label">AI-assisted checks</h2><p class="group-note">Presence detection, not certainty. Treat these as prompts to confirm.</p><ul class="check-list"><li><strong>Disclosure assessment</strong> — <span class="token">{{DISCLOSURE_COUNT}}</span> FRS 102 Section 1A disclosure requirements, each returned with the specific text found in your document as evidence, so you can judge it yourself rather than trust a tick</li></ul></section>
@@ -231,7 +230,7 @@
   <div class="working"><h3>Working through it</h3><ul><li>Materiality threshold you set</li><li>Confirm, dismiss or correct each finding</li><li>Per-section sign-off with an audit trail</li><li>Read-only view of the accounts PDF with findings anchored to the relevant text</li></ul></div>
   <p class="closing-line">It won't catch everything, and it doesn't replace your review. It catches the class of error that survives a careful read.</p>
 </div></section>
-<section class="section alt"><div class="container"><div class="quiet-block"><p>It does not prepare, edit, file, or export statutory accounts. It reviews the accounts you've already produced, in whatever software you produce them in. The document view is read-only, deliberately.</p></div></div></section>
+<section class="section alt"><div class="container"><div class="quiet-block"><p>It does not prepare, edit, export or file statutory accounts. There is no iXBRL output and no filing capability. It reviews the finished accounts you've already produced, in whatever software you produce them in. The document view is read-only, deliberately. Findings are for a qualified reviewer to judge; the tool does not substitute for professional judgement.</p></div></div></section>
 
 </main>
 <footer class="site-footer">
