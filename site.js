@@ -210,7 +210,9 @@
     });
   }
 
-  /* Home: the scrolling sections now use the same reveal language. */
+  /* Home: the scrolling sections use the shared reveal language. The main hero
+     headline is handled by the compositor-safe headline system below. */
+  addAll('.page-home .reference-kicker, .page-home .reference-match-sub, .page-home .reference-match-actions, .page-home .reference-beta-note',['left','left','up','up']);
   addAll('.page-home .intro-section .editorial-head > *',['left','right','up']);
   addAll('.page-home #wic-hero > *',['left','right']);
   addAll('.page-home .feature-band .section-link',['right']);
@@ -221,16 +223,16 @@
   addAll('.page-home .audience-section .audience-item',['left','right','left']);
   addAll('.page-home .final-cta .final-cta-inner > *',['up','left','right']);
 
-  /* What it checks: copy reveals line-by-line; the illustration is one stable wrapper. */
-  addAll('.page-what-it-checks #wic-page-hero .wicp-copy > *',['left','left','left']);
+  /* Hero display type is deliberately excluded from transform-based scroll reveal.
+     Large serif/sans display glyphs were being rasterised as dark rectangles in
+     Chromium/WebKit. Eyebrows and body copy can still slide normally. */
+  addAll('.page-what-it-checks #wic-page-hero .wicp-copy > .eyebrow, .page-what-it-checks #wic-page-hero .wicp-copy > .lede',['left','left']);
   addAll('.page-what-it-checks #wic-page-hero .wicp-visual',['right']);
 
-  /* How it works: same structure, avoiding transforms on internal cards. */
-  addAll('.page-how-it-works .how-hero-copy > *',['left','left','left']);
+  addAll('.page-how-it-works .how-hero-copy > .eyebrow, .page-how-it-works .how-hero-copy > .how-hero-lede',['left','left']);
   addAll('.page-how-it-works .how-hero-visual',['right']);
 
-  /* Security previously had no reliable hero reveal coverage. */
-  addAll('.page-security .security-hero-copy > .eyebrow, .page-security .security-hero-copy > h1, .page-security .security-hero-copy > .security-hero-lede',['left','left','left']);
+  addAll('.page-security .security-hero-copy > .eyebrow, .page-security .security-hero-copy > .security-hero-lede',['left','left']);
   addAll('.page-security .security-quick-read',['left']);
   addAll('.page-security .security-hero-visual',['right']);
 

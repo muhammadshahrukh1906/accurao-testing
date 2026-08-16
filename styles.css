@@ -5466,3 +5466,115 @@ html.motion-ready body.page-security .security-hero-visual.scroll-reveal.is-visi
     transition:none!important;
   }
 }
+
+/* ========================================================================== 
+   v11 — compositor-safe display-title reveal + smoother shared scroll motion
+   ========================================================================== */
+
+/* Large hero titles must never be transform/filter composited. That is the
+   source of the persistent dark backing rectangles seen in Chromium/WebKit. */
+.page-home .reference-match-copy h1,
+.page-what-it-checks #wic-page-hero h1,
+.page-how-it-works .how-hero-copy h1,
+.page-security .security-hero-copy h1{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+  will-change:auto!important;
+  isolation:auto!important;
+  -webkit-backface-visibility:visible!important;
+  backface-visibility:visible!important;
+  position:relative;
+}
+
+/* If an older reveal class was attached by cached JS, neutralise it on titles. */
+html.motion-ready body main .page-home .reference-match-copy h1.scroll-reveal,
+html.motion-ready body main .page-what-it-checks #wic-page-hero h1.scroll-reveal,
+html.motion-ready body main .page-how-it-works .how-hero-copy h1.scroll-reveal,
+html.motion-ready body main .page-security .security-hero-copy h1.scroll-reveal{
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+  transition:none!important;
+}
+
+/* Smooth display-title entrance using layout-position (left) rather than
+   transform. It is slightly slower than the cards and remains crisp. */
+@media (prefers-reduced-motion:no-preference){
+  .page-home .reference-match-copy h1,
+  .page-what-it-checks #wic-page-hero h1,
+  .page-how-it-works .how-hero-copy h1,
+  .page-security .security-hero-copy h1{
+    opacity:0;
+    left:-24px;
+    animation:accHeadlineSafe 1.08s .14s cubic-bezier(.22,1,.36,1) forwards!important;
+  }
+
+  /* Home already has two semantic lines, so give the second line a subtle
+     counter-directional entrance without compositing the whole headline. */
+  .page-home .reference-match-copy h1 .hero-sentence{
+    position:relative;
+    opacity:0;
+    left:-18px;
+    animation:accHeadlineLineLeft .98s .18s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .page-home .reference-match-copy h1 .hero-secondary-sentence{
+    left:18px;
+    animation-name:accHeadlineLineRight;
+    animation-delay:.34s;
+  }
+}
+
+@keyframes accHeadlineSafe{
+  0%{opacity:0;left:-24px}
+  42%{opacity:.62}
+  100%{opacity:1;left:0}
+}
+@keyframes accHeadlineLineLeft{
+  0%{opacity:0;left:-18px}
+  100%{opacity:1;left:0}
+}
+@keyframes accHeadlineLineRight{
+  0%{opacity:0;left:18px}
+  100%{opacity:1;left:0}
+}
+
+/* Make the rest of the reveal language calmer and less abrupt. */
+html.motion-ready body main .scroll-reveal{
+  transition:
+    opacity .92s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms),
+    transform 1.04s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms)!important;
+}
+html.motion-ready body main .scroll-reveal.reveal-left{--reveal-x:-34px;--reveal-y:3px}
+html.motion-ready body main .scroll-reveal.reveal-right{--reveal-x:34px;--reveal-y:3px}
+html.motion-ready body main .scroll-reveal.reveal-up{--reveal-x:0px;--reveal-y:20px}
+
+@media(max-width:700px){
+  html.motion-ready body main .scroll-reveal.reveal-left{--reveal-x:-18px;--reveal-y:2px}
+  html.motion-ready body main .scroll-reveal.reveal-right{--reveal-x:18px;--reveal-y:2px}
+  html.motion-ready body main .scroll-reveal.reveal-up{--reveal-x:0px;--reveal-y:12px}
+  @media (prefers-reduced-motion:no-preference){
+    .page-home .reference-match-copy h1,
+    .page-what-it-checks #wic-page-hero h1,
+    .page-how-it-works .how-hero-copy h1,
+    .page-security .security-hero-copy h1{
+      left:-14px;
+      animation-duration:.92s!important;
+      animation-delay:.10s!important;
+    }
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .page-home .reference-match-copy h1,
+  .page-home .reference-match-copy h1 .hero-sentence,
+  .page-what-it-checks #wic-page-hero h1,
+  .page-how-it-works .how-hero-copy h1,
+  .page-security .security-hero-copy h1{
+    opacity:1!important;
+    left:0!important;
+    animation:none!important;
+  }
+}
