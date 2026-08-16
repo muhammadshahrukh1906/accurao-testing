@@ -1283,3 +1283,205 @@
   .page-how-it-works .how-hero h1,
   .page-security .security-hero h1{font-size:2.18rem!important}
 }
+
+/* ========================================================================== 
+   Mobile v5 — true phone-safe content frame.
+   Fixes composite .container width conflicts and gives copy more breathing room.
+   Phone-only; desktop/tablet remain untouched.
+   ========================================================================== */
+@media (max-width:767px){
+  :root{
+    --phone-side:clamp(24px,6.2vw,28px);
+  }
+
+  /* Header keeps its own full-width internal grid; page content gets gutters. */
+  .header-inner.container{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+
+  /* Critical fix: many page layout elements are also .container elements. */
+  .container:not(.header-inner){
+    width:auto!important;
+    max-width:none!important;
+    margin-left:var(--phone-side)!important;
+    margin-right:var(--phone-side)!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    box-sizing:border-box!important;
+  }
+
+  /* Defeat earlier high-specificity hero/full-width rules. */
+  .page-home .reference-match-main.container,
+  .page-home .reference-benefits.container,
+  .page-home .editorial-head.container,
+  .page-home .feature-heading.container,
+  .page-home .attio-steps.container,
+  .page-home .audience-grid.container,
+  .page-home .final-cta-inner.container,
+  .page-what-it-checks #wic-page-hero.container,
+  .page-how-it-works .how-hero>.how-hero-grid.container,
+  .page-how-it-works .section-label.container,
+  .page-security .security-hero>.security-hero-grid.container,
+  .page-security .section-label.container,
+  .page-about .about-grid.container,
+  .page-beta .beta-panel.container,
+  .page-privacy .legal-shell.container,
+  .page-terms .legal-shell.container,
+  .site-footer .footer-rule.container{
+    width:auto!important;
+    max-width:none!important;
+    margin-left:var(--phone-side)!important;
+    margin-right:var(--phone-side)!important;
+  }
+
+  /* Nothing content-bearing may add width on top of its container margins. */
+  .container.editorial-head,
+  .container.feature-heading,
+  .container.attio-steps,
+  .container.audience-grid,
+  .container.final-cta-inner,
+  .container.reference-benefits,
+  .container.section-label,
+  .container.about-grid,
+  .container.beta-panel,
+  .container.legal-shell,
+  .container.footer-rule{
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+
+  /* More phone-native type scale. */
+  body{font-size:14.5px!important;line-height:1.55!important}
+  h1,.page-hero h1,
+  .page-home .reference-match-copy h1,
+  .page-what-it-checks #wic-page-hero h1,
+  .page-how-it-works .how-hero h1,
+  .page-security .security-hero h1{
+    font-size:clamp(1.92rem,8.7vw,2.22rem)!important;
+    line-height:1.01!important;
+    letter-spacing:-.035em!important;
+  }
+  h2,
+  .page-home .editorial-head h2,
+  .page-home #wic-hero .wic-hero-heading,
+  .page-home .feature-heading h2,
+  .page-home .final-cta h2,
+  .page-about .founder-copy h2,
+  .page-how-it-works .section-label h2,
+  .page-security .section-label h2{
+    font-size:clamp(1.38rem,6.3vw,1.62rem)!important;
+    line-height:1.12!important;
+    letter-spacing:-.025em!important;
+  }
+  h3{font-size:.98rem!important;line-height:1.28!important}
+  p,li,
+  .lede,.how-hero-lede,.security-hero-lede,
+  .page-home .editorial-copy p,
+  .page-about .founder-copy>p,
+  .page-beta .beta-copy p,
+  .page-faq .faq-answer-inner p,
+  .page-faq .faq-answer-inner li,
+  .page-security .section-label p,
+  .page-how-it-works .section-label p,
+  .page-how-it-works .section-label li{
+    font-size:.9rem!important;
+    line-height:1.58!important;
+  }
+
+  /* Cleaner readable line length and no accidental edge contact. */
+  .measure,.editorial-copy,.founder-copy,.beta-copy,.faq-answer-inner,
+  .check-group,.working,.quiet-block,.fact,.booking-placeholder{
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  .quiet-block,
+  .page-home .editorial-copy .pitch,
+  .page-what-it-checks .working,
+  .page-what-it-checks .quiet-block,
+  .page-how-it-works .quiet-block,
+  .page-about .editorial-placeholder,
+  .page-beta .booking-placeholder{
+    padding-left:13px!important;
+    padding-right:13px!important;
+  }
+
+  /* HOW IT WORKS: use the full text width instead of sacrificing a side column. */
+  .page-how-it-works .steps .step,
+  body:not(.page-home) .steps .step{
+    display:block!important;
+    width:100%!important;
+    padding:15px 0 17px!important;
+    border-left:0!important;
+    border-right:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+  }
+  .page-how-it-works .step-number,
+  body:not(.page-home) .steps .step-number{
+    display:block!important;
+    width:auto!important;
+    margin:0 0 7px!important;
+    padding:0!important;
+    font-size:.7rem!important;
+    line-height:1!important;
+  }
+  .page-how-it-works .step>div:last-child,
+  body:not(.page-home) .steps .step>div:last-child{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .page-how-it-works .step h2,
+  body:not(.page-home) .steps .step h2,
+  body:not(.page-home) .steps .step h3{
+    margin:0 0 8px!important;
+    font-size:1.08rem!important;
+    line-height:1.25!important;
+  }
+  .page-how-it-works .step p,
+  body:not(.page-home) .steps .step p{
+    margin:0!important;
+    padding:0!important;
+    font-size:.9rem!important;
+    line-height:1.58!important;
+    background:transparent!important;
+    border:0!important;
+  }
+
+  /* What it checks / security: keep information dense but not oversized. */
+  .page-what-it-checks .check-group h2{font-size:1.3rem!important}
+  .page-what-it-checks .check-list li{font-size:.9rem!important;line-height:1.56!important}
+  .page-what-it-checks .closing-line{font-size:1.08rem!important;line-height:1.4!important}
+  .page-what-it-checks .working li{font-size:.88rem!important}
+  .page-security .fact p{font-size:.88rem!important;line-height:1.55!important}
+
+  /* Beta CTA stays inside the same frame instead of feeling full-bleed. */
+  .page-beta .beta-copy>.button{
+    width:100%!important;
+    max-width:100%!important;
+    min-height:44px!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  /* Slightly tighter vertical spacing so mobile pages feel composed, not enlarged desktop pages. */
+  .section,body:not(.page-home) main>.section,.page-home main>.section{padding:1.75rem 0!important}
+  .section.compact{padding:1.5rem 0!important}
+  .page-hero,body:not(.page-home) .page-hero{padding:1.15rem 0 1.45rem!important}
+  .page-home .reference-match-main{padding-top:1.15rem!important;padding-bottom:1rem!important}
+}
+
+@media (max-width:390px){
+  :root{--phone-side:22px}
+  h1,.page-hero h1,
+  .page-home .reference-match-copy h1,
+  .page-what-it-checks #wic-page-hero h1,
+  .page-how-it-works .how-hero h1,
+  .page-security .security-hero h1{font-size:1.92rem!important}
+  p,li{font-size:.88rem!important}
+}
