@@ -1873,34 +1873,79 @@
 }
 
 
+
+
+/* Mobile marker cleanup — source markers removed, keep text flush. */
+@media (max-width:767px){
+  .page-home .attio-steps p,
+  .page-home .editorial-copy p,
+  .page-home .check-list li,
+  .page-what-it-checks .check-list li{padding-left:0!important;}
+  .page-home .check-list,
+  .page-what-it-checks .check-list{list-style:none!important;padding-left:0!important;}
+  .page-what-it-checks .ai-label{gap:0!important;}
+}
+
 /* ========================================================================== 
-   Mobile v14 — remove decorative text markers that overlap copy.
-   Phone-only: desktop marker styling remains unchanged.
+   Mobile text-marker removal — definitive source cleanup.
+   No decorative/native bullets may sit on top of reading copy on phones.
    ========================================================================== */
 @media (max-width:767px){
-  /* Decorative square/circle markers must never sit on top of mobile copy. */
-  .page-home .attio-steps p::before,
-  .page-home .editorial-copy p::before,
-  .page-home .check-list li::before,
-  .page-what-it-checks .check-list li::before,
-  .page-what-it-checks .ai-label::before,
-  .page-security .fact h3::before{
-    display:none!important;
-    content:none!important;
-  }
-
-  /* Remove the indentation that existed only to make room for those markers. */
-  .page-home .attio-steps p,
-  .page-home .check-list li,
-  .page-what-it-checks .check-list li{
-    padding-left:0!important;
-  }
-
-  .page-what-it-checks .check-list,
-  .page-home .check-list{
-    padding-left:0!important;
+  main p,
+  main li,
+  main strong{
     list-style:none!important;
   }
+  main li{
+    display:block!important;
+    list-style-type:none!important;
+    list-style-position:outside!important;
+  }
+  main li::marker{
+    content:''!important;
+    font-size:0!important;
+    color:transparent!important;
+  }
+  main p::before,
+  main p::after,
+  main li::before,
+  main li::after,
+  main strong::before,
+  main strong::after{
+    content:none!important;
+    display:none!important;
+    width:0!important;
+    height:0!important;
+    border:0!important;
+    box-shadow:none!important;
+    background:none!important;
+  }
 
-  .page-what-it-checks .ai-label{gap:0!important}
+  /* Lists in the checks/working copy are rendered as clean text rows. */
+  .page-home .check-list,
+  .page-home .home-working ul,
+  .page-what-it-checks .check-list,
+  .page-what-it-checks .working ul{
+    list-style:none!important;
+    padding-left:0!important;
+    margin-left:0!important;
+  }
+  .page-home .check-list li,
+  .page-home .home-working li,
+  .page-what-it-checks .check-list li,
+  .page-what-it-checks .working li{
+    display:block!important;
+    padding-left:0!important;
+    margin-left:0!important;
+    text-indent:0!important;
+  }
+
+  /* Step body copy must be plain paragraphs — never marker-bearing nodes. */
+  .page-home .attio-steps p,
+  .page-how-it-works .step p,
+  .page-home .editorial-copy p{
+    display:block!important;
+    list-style:none!important;
+    text-indent:0!important;
+  }
 }

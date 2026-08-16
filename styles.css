@@ -110,7 +110,7 @@ p{margin:0 0 1.15rem;max-width:var(--measure)}
 .page-hero{padding:clamp(5.5rem,9vw,8.5rem) 0 clamp(4.5rem,7vw,7rem);border-bottom:1px solid var(--rule);text-align:center;background:#fff}.page-hero>.container{display:flex;flex-direction:column;align-items:center}.page-hero h1{font-size:clamp(3.5rem,6.5vw,6rem);max-width:1000px;margin-top:.7rem}.page-hero .lede{max-width:700px;margin-top:1.5rem}.page-hero .hero-actions{justify-content:center}
 .section-label{display:grid;grid-template-columns:170px minmax(0,1fr);gap:52px;align-items:start}.section-label .side-label{position:sticky;top:104px}
 .steps{border:1px solid var(--rule)}.step{display:grid;grid-template-columns:78px minmax(0,1fr);gap:24px;padding:2.1rem 2rem;border-bottom:1px solid var(--rule)}.step:last-child{border-bottom:0}.step-number{font-family:'Space Grotesk',ui-sans-serif,sans-serif;font-size:.78rem;color:#999;font-variant-numeric:tabular-nums}.step h2,.step h3{font-size:clamp(1.3rem,2vw,1.75rem);margin-bottom:.6rem;max-width:none}.step p{margin:0;color:#666}
-.check-split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);border:1px solid var(--rule);background:#fff}.check-group{padding:2.1rem}.check-group+ .check-group{border-left:1px solid var(--rule)}.check-group h2,.check-group h3{font-size:clamp(1.6rem,2.5vw,2.25rem);margin-bottom:.35rem;max-width:none}.group-note{color:#888;font-size:.78rem;margin-bottom:1.5rem}.check-list{list-style:none;padding:0;margin:0}.check-list li{padding:1.05rem 0;border-top:1px solid var(--rule);max-width:66ch;color:#555}.check-list li:first-child{border-top:0}.check-list strong{font-weight:700;color:#222}.ai-label{display:inline-flex;align-items:center;gap:.5rem;color:var(--accent)}.ai-label:before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%}.working{margin-top:2rem;padding:1.6rem 1.8rem;border:1px solid var(--rule);background:#fafafa}.working h3{font-size:1.1rem}.working ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;padding-left:1.1rem;margin:.8rem 0 0}.working li{padding:.32rem 0;color:#555}.closing-line{font-family:'Space Grotesk',ui-sans-serif,sans-serif;font-size:clamp(1.7rem,2.9vw,2.6rem);line-height:1.22;letter-spacing:-.04em;max-width:31ch;margin-top:3rem}
+.check-split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);border:1px solid var(--rule);background:#fff}.check-group{padding:2.1rem}.check-group+ .check-group{border-left:1px solid var(--rule)}.check-group h2,.check-group h3{font-size:clamp(1.6rem,2.5vw,2.25rem);margin-bottom:.35rem;max-width:none}.group-note{color:#888;font-size:.78rem;margin-bottom:1.5rem}.check-list{list-style:none;padding:0;margin:0}.check-list li{padding:1.05rem 0;border-top:1px solid var(--rule);max-width:66ch;color:#555}.check-list li:first-child{border-top:0}.check-list strong{font-weight:700;color:#222}.ai-label{display:inline-flex;align-items:center;gap:.5rem;color:var(--accent)}.ai-label:before{content:none;display:none}.working{margin-top:2rem;padding:1.6rem 1.8rem;border:1px solid var(--rule);background:#fafafa}.working h3{font-size:1.1rem}.working ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;padding-left:1.1rem;margin:.8rem 0 0}.working li{padding:.32rem 0;color:#555}.closing-line{font-family:'Space Grotesk',ui-sans-serif,sans-serif;font-size:clamp(1.7rem,2.9vw,2.6rem);line-height:1.22;letter-spacing:-.04em;max-width:31ch;margin-top:3rem}
 
 .faq-list{max-width:920px;margin:0 auto;border-top:1px solid #222}.faq-item{padding:2.15rem 0;border-bottom:1px solid var(--rule)}.faq-item h2{font-size:clamp(1.45rem,2.2vw,1.95rem);max-width:none;margin-bottom:1rem}.faq-item p,.faq-item ul{max-width:72ch;color:#555}.faq-item ul{padding-left:1.25rem}
 .security-facts{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--rule);background:#fff}.fact{padding:1.8rem}.fact+ .fact{border-left:1px solid var(--rule)}.fact h3{font-size:1rem;margin-bottom:.5rem}.fact p{font-size:.86rem;color:#555;margin:0}
@@ -807,7 +807,7 @@ main > .final-cta::before{border-top-color:var(--accent)}
 .security-facts{border-color:#d5d5d1;box-shadow:0 12px 38px rgba(20,20,20,.03)}
 .fact{position:relative;background:#fff}
 .fact h3{display:flex;align-items:center;gap:.55rem}
-.fact h3::before{content:'';width:7px;height:7px;border:1px solid #777;border-radius:2px;background:#fafafa}
+.fact h3::before{content:none;display:none}
 .faq-list{border-top:2px solid #242424}
 .faq-item{transition:background .22s ease,padding .22s ease,border-color .22s ease}
 .faq-item.is-open{
@@ -1210,16 +1210,7 @@ main > .section::before{width:64px}
   line-height:1.66;
   transition:background .2s ease,border-color .2s ease,transform .2s ease;
 }
-.editorial-copy p::before{
-  content:'';
-  position:absolute;
-  left:0;
-  top:19px;
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#8d8d88;
-}
+.editorial-copy p::before{content:none;display:none}
 .editorial-copy p:hover{
   background:var(--copy-panel);
   border-color:#cfcfca;
@@ -1235,7 +1226,7 @@ main > .section::before{width:64px}
   color:var(--copy-strong);
   font-weight:570;
 }
-.editorial-copy .pitch::before{background:var(--accent)}
+
 
 /* Intro copy beside section headings looks like a concise annotation panel. */
 .feature-heading>p{
@@ -1298,16 +1289,7 @@ main > .section::before{width:64px}
   font-size:.79rem;
   line-height:1.58;
 }
-.attio-steps p::before{
-  content:'';
-  position:absolute;
-  left:0;
-  top:17px;
-  width:5px;
-  height:5px;
-  border-radius:1px;
-  background:#92928d;
-}
+.attio-steps p::before{content:none;display:none}
 .attio-steps article:hover p{border-color:#cacac5;background:#f7f7f4}
 
 /* Audience descriptions: compact profile-like blocks. */
@@ -1393,17 +1375,8 @@ main > .section::before{width:64px}
   color:var(--copy);
   transition:background .18s ease,padding-left .18s ease;
 }
-.check-list li::before{
-  content:'';
-  position:absolute;
-  left:.48rem;
-  top:1.16rem;
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#777;
-}
-.check-group + .check-group .check-list li::before{background:var(--accent)}
+.check-list li::before{content:none;display:none}
+
 .check-list li:hover{background:#fafaf8;padding-left:1.5rem}
 .check-list strong{color:#222;font-weight:700}
 
@@ -1531,7 +1504,7 @@ main > .section::before{width:64px}
   .feature-heading>p{margin-top:2px}
   .editorial-copy{gap:8px}
   .editorial-copy p{border:1px solid #e2e2de;border-radius:6px;padding:13px 14px 13px 18px}
-  .editorial-copy p::before{left:8px;top:18px}
+  .editorial-copy p::before{content:none;display:none}
 }
 
 @media(max-width:700px){
@@ -5411,3 +5384,74 @@ html.acc-motion-ready .acc-reveal.acc-visible{
   html.acc-motion-ready .acc-reveal.acc-visible{left:0;top:0}
 }
 \n\n/* Copy-fidelity cleanup: decorative eyebrow/kicker labels were removed from markup.\n   Collapse the grid tracks they previously occupied so no blank columns/rows remain. */\nbody .page-hero > .container > h1{grid-row:1!important;margin-top:0!important}\nbody.page-home .editorial-head > h2{grid-row:1!important;margin-top:0!important}\nbody .section-label{grid-template-columns:minmax(0,1fr)!important;gap:0!important}\nbody .section-label > .measure{grid-column:1!important;max-width:920px!important}\nbody.page-home .final-cta h2{grid-row:1 / span 5!important;margin-top:0!important}\n
+/* ========================================================================== 
+   Home / What it checks — desktop layout repair
+   The approved content stays unchanged; only the desktop composition changes.
+   ========================================================================== */
+@media (min-width:901px){
+  body.page-home .feature-band #wic-hero{
+    display:block!important;
+    width:min(calc(100% - 96px),1546px)!important;
+    max-width:1546px!important;
+    min-height:0!important;
+    padding:38px 0 52px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  body.page-home #wic-hero .wic-home-heading{
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 34px!important;
+  }
+  body.page-home #wic-hero .wic-hero-heading{
+    max-width:none!important;
+    margin:0!important;
+    font-size:clamp(3.35rem,4.25vw,4.85rem)!important;
+    line-height:.94!important;
+  }
+  body.page-home #wic-hero .home-check-split{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.45fr) minmax(360px,.72fr)!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    border:1px solid #d7d7d3!important;
+    border-radius:10px!important;
+    overflow:hidden!important;
+    background:#fff!important;
+    box-shadow:0 16px 46px rgba(20,20,20,.04)!important;
+  }
+  body.page-home #wic-hero .home-check-split .check-group{
+    width:auto!important;
+    min-width:0!important;
+    padding:30px 32px!important;
+  }
+  body.page-home #wic-hero .home-check-split .check-group + .check-group{
+    border-left:1px solid #d9d9d5!important;
+  }
+  body.page-home #wic-hero .home-check-split .check-list li{
+    max-width:none!important;
+  }
+  body.page-home #wic-hero .home-working{
+    width:100%!important;
+    max-width:none!important;
+    margin:24px 0 0!important;
+    padding:22px 24px!important;
+  }
+  body.page-home #wic-hero .home-working ul{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:0 24px!important;
+    padding-left:1rem!important;
+  }
+  body.page-home #wic-hero .closing-line{
+    width:100%!important;
+    max-width:1050px!important;
+    margin:34px 0 0!important;
+  }
+  body.page-home .feature-band > .section-link{
+    width:min(calc(100% - 96px),1546px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
