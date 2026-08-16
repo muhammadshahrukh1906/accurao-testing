@@ -1485,3 +1485,232 @@
   .page-security .security-hero h1{font-size:1.92rem!important}
   p,li{font-size:.88rem!important}
 }
+
+/* ========================================================================== 
+   Mobile v6 — single safe content frame.
+   One outer gutter per section; no nested width subtraction or side columns.
+   Phone-only. Desktop/tablet are intentionally untouched.
+   ========================================================================== */
+@media (max-width:767px){
+  :root{--phone-content-gutter:20px}
+
+  html,body{width:100%;max-width:100%;overflow-x:hidden!important}
+  *,*::before,*::after{box-sizing:border-box}
+  main{width:100%;max-width:100%;overflow:hidden}
+
+  /* The SECTION owns the horizontal breathing room. */
+  main>section{
+    width:100%!important;
+    max-width:100%!important;
+    padding-left:var(--phone-content-gutter)!important;
+    padding-right:var(--phone-content-gutter)!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  /* Everything inside that section gets the entire safe width. */
+  main>section>.container,
+  main>section>.container:not(.header-inner),
+  main>section .container{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+
+  /* Explicitly beat older ID/high-specificity mobile width rules. */
+  .page-home .reference-match-main.container,
+  .page-home .reference-benefits.container,
+  .page-home #wic-hero.container,
+  .page-home .editorial-head.container,
+  .page-home .feature-heading.container,
+  .page-home .attio-steps.container,
+  .page-home .audience-grid.container,
+  .page-home .final-cta-inner.container,
+  .page-what-it-checks #wic-page-hero.container,
+  .page-how-it-works .how-hero>.how-hero-grid.container,
+  .page-how-it-works .section-label.container,
+  .page-security .security-hero>.security-hero-grid.container,
+  .page-security .section-label.container,
+  .page-about .about-grid.container,
+  .page-beta .beta-panel.container,
+  .page-faq .faq-list.container,
+  .page-privacy .legal-shell.container,
+  .page-terms .legal-shell.container{
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  /* Phone-sized typography: readable, but no desktop-scale wrapping. */
+  body{font-size:14px!important;line-height:1.52!important}
+  p,li,
+  .lede,.how-hero-lede,.security-hero-lede,
+  .page-home .editorial-copy p,
+  .page-home #wic-hero .wic-hero-copytext,
+  .page-home .attio-steps p,
+  .page-home .audience-item p,
+  .page-about .founder-copy>p,
+  .page-beta .beta-copy p,
+  .page-faq .faq-answer-inner p,
+  .page-faq .faq-answer-inner li,
+  .page-how-it-works .section-label p,
+  .page-how-it-works .section-label li,
+  .page-security .section-label p{
+    font-size:.86rem!important;
+    line-height:1.55!important;
+  }
+
+  h1,.page-hero h1,
+  .page-home .reference-match-copy h1,
+  .page-what-it-checks #wic-page-hero h1,
+  .page-how-it-works .how-hero h1,
+  .page-security .security-hero h1{
+    font-size:clamp(1.82rem,8vw,2.12rem)!important;
+    line-height:1.02!important;
+    letter-spacing:-.032em!important;
+    max-width:100%!important;
+  }
+  h2,
+  .page-home .editorial-head h2,
+  .page-home #wic-hero .wic-hero-heading,
+  .page-home .feature-heading h2,
+  .page-home .final-cta h2,
+  .page-about .founder-copy h2,
+  .page-how-it-works .section-label h2,
+  .page-security .section-label h2{
+    font-size:clamp(1.3rem,5.9vw,1.55rem)!important;
+    line-height:1.12!important;
+    max-width:100%!important;
+  }
+
+  /* HOME — What it checks should be a normal full-width reading block. */
+  .page-home #wic-hero{
+    display:block!important;
+    padding:0 0 22px!important;
+  }
+  .page-home #wic-hero .reference-kicker{
+    margin:0 0 12px!important;
+    padding:0!important;
+    gap:7px!important;
+    font-size:.62rem!important;
+    line-height:1.35!important;
+  }
+  .page-home #wic-hero .reference-kicker b{
+    width:auto!important;
+    padding-left:0!important;
+    font-size:.62rem!important;
+  }
+  .page-home #wic-hero .wic-hero-heading{
+    margin:0!important;
+    font-size:1.68rem!important;
+    line-height:1.04!important;
+  }
+  .page-home #wic-hero .wic-hero-copytext{
+    width:100%!important;
+    max-width:100%!important;
+    margin:14px 0 0!important;
+  }
+  .page-home .feature-band .section-link{
+    width:100%!important;
+    margin:14px 0 0!important;
+    padding-top:14px!important;
+  }
+
+  /* HOME — Three steps: no 42px left rail stealing text width. */
+  .page-home .attio-steps{
+    display:block!important;
+    width:100%!important;
+    border-top:1px solid #d8d8d4!important;
+  }
+  .page-home .attio-steps article{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    padding:15px 0 17px!important;
+    border:0!important;
+    border-bottom:1px solid #e2e2df!important;
+    background:transparent!important;
+  }
+  .page-home .step-num{
+    position:static!important;
+    display:block!important;
+    width:auto!important;
+    margin:0 0 7px!important;
+    padding:0!important;
+    font-size:.68rem!important;
+    line-height:1!important;
+  }
+  .page-home .attio-steps h3{
+    width:100%!important;
+    margin:0 0 7px!important;
+    font-size:1.04rem!important;
+    line-height:1.25!important;
+  }
+  .page-home .attio-steps p{
+    width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    background:transparent!important;
+  }
+
+  /* Standalone How it works uses the same full-width step logic. */
+  .page-how-it-works .steps,
+  .page-how-it-works .steps .step{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  .page-how-it-works .steps .step{
+    display:block!important;
+    padding:15px 0 17px!important;
+  }
+  .page-how-it-works .step-number{
+    position:static!important;
+    display:block!important;
+    margin:0 0 7px!important;
+  }
+  .page-how-it-works .step>div:last-child{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  .page-how-it-works .step h2{
+    width:100%!important;
+    margin:0 0 7px!important;
+    font-size:1.04rem!important;
+    line-height:1.25!important;
+  }
+  .page-how-it-works .step p{width:100%!important;margin:0!important;padding:0!important}
+
+  /* Remove nested card indentation where it offers no value on a phone. */
+  .page-home .quiet-block,
+  .page-home .editorial-copy .pitch,
+  .page-what-it-checks .working,
+  .page-what-it-checks .quiet-block,
+  .page-how-it-works .quiet-block,
+  .page-beta .booking-placeholder,
+  .page-about .editorial-placeholder{
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+
+  /* Long labels/tokens can never force horizontal overflow. */
+  .token,a,strong,em{max-width:100%}
+  .token{overflow-wrap:anywhere!important;word-break:break-word!important}
+  img,svg,video,canvas,iframe{max-width:100%}
+}
+
+@media (max-width:360px){
+  :root{--phone-content-gutter:16px}
+  body{font-size:13.5px!important}
+  h1,.page-hero h1{font-size:1.78rem!important}
+}
