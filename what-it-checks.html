@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>What it checks — Accurao Reviewer</title>
+  <meta name="description" content="See the exact arithmetic and matching checks and the separate AI-assisted disclosure assessment used by Accurao Reviewer.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="What it checks — Accurao Reviewer">
+  <meta property="og:description" content="See the exact arithmetic and matching checks and the separate AI-assisted disclosure assessment used by Accurao Reviewer.">
+  <meta property="og:image" content="images/og-image.png">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+
+<style id="what-it-checks-baked-hero">
+/* Baked-in What it checks hero. This is deliberately independent of site.js. */
+.page-what-it-checks .page-hero{
+  min-height:0!important;
+  padding:clamp(48px,5vw,76px) 0 clamp(42px,4.5vw,68px)!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  border-bottom:0!important;
+  text-align:left!important;
+}
+#wic-page-hero{
+  width:min(calc(100% - 56px),1420px)!important;
+  margin-inline:auto!important;
+  display:grid!important;
+  grid-template-columns:minmax(420px,.92fr) minmax(560px,1.08fr)!important;
+  gap:clamp(42px,5vw,78px)!important;
+  align-items:center!important;
+  min-height:470px!important;
+  padding:0!important;
+  position:relative!important;
+}
+#wic-page-hero .wicp-copy{
+  min-width:0;
+  max-width:650px;
+  align-self:center;
+}
+#wic-page-hero .eyebrow{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  width:auto!important;
+  max-width:none!important;
+  margin:0 0 22px!important;
+  padding:0!important;
+  color:#66666b!important;
+  font-size:.72rem!important;
+  line-height:1!important;
+  letter-spacing:.04em!important;
+  text-align:left!important;
+}
+#wic-page-hero .eyebrow::before{display:none!important}
+#wic-page-hero h1{
+  display:block!important;
+  margin:0!important;
+  max-width:9ch!important;
+  color:#111113!important;
+  font-family:'Space Grotesk',ui-sans-serif,sans-serif!important;
+  font-size:clamp(4rem,6vw,6.2rem)!important;
+  line-height:.91!important;
+  letter-spacing:-.067em!important;
+  font-weight:630!important;
+  text-align:left!important;
+  transform:none!important;
+}
+#wic-page-hero .lede{
+  display:block!important;
+  max-width:56ch!important;
+  margin:34px 0 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#66666b!important;
+  font-size:.96rem!important;
+  line-height:1.72!important;
+  text-align:left!important;
+  transform:none!important;
+}
+#wic-page-hero .lede::before{display:none!important;content:none!important}
+
+/* Variation-6 illustration, authored directly in this HTML file. */
+#wic-page-hero .wicp-visual{
+  position:relative!important;
+  width:100%!important;
+  min-width:0!important;
+  height:430px!important;
+  min-height:430px!important;
+  align-self:center!important;
+  isolation:isolate!important;
+  perspective:1200px!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+}
+#wic-page-hero .wicp-visual::before{
+  content:"";
+  position:absolute;
+  z-index:-3;
+  left:2%; right:-2%; bottom:-2%; height:58%;
+  background-image:linear-gradient(#ecece8 1px,transparent 1px),linear-gradient(90deg,#ecece8 1px,transparent 1px);
+  background-size:28px 28px;
+  opacity:.28;
+  transform:perspective(850px) rotateX(61deg) rotateZ(-5deg) translateY(32px) scale(.98);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 55%,#000 0,rgba(0,0,0,.68) 45%,transparent 78%);
+  mask-image:radial-gradient(ellipse at 50% 55%,#000 0,rgba(0,0,0,.68) 45%,transparent 78%);
+  pointer-events:none;
+}
+#wic-page-hero .wicp-paths{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:visible;pointer-events:none}
+#wic-page-hero .wicp-paths path{fill:none;stroke:#bfc0c4;stroke-width:1.35;stroke-dasharray:6 7;vector-effect:non-scaling-stroke}
+#wic-page-hero .wicp-paths circle{fill:#fff;stroke:#9b9ca1;stroke-width:1.2}
+#wic-page-hero .wicp-paper-stack{position:absolute;left:3%;top:83px;width:350px;height:224px;z-index:0;pointer-events:none}
+#wic-page-hero .wicp-paper-stack i{position:absolute;inset:0;border:1px solid #e5e5e1;border-radius:13px;background:rgba(255,255,255,.78);box-shadow:0 12px 26px rgba(20,20,20,.035)}
+#wic-page-hero .wicp-paper-stack i:first-child{transform:translate(-15px,18px) rotate(-3deg)}
+#wic-page-hero .wicp-paper-stack i:last-child{transform:translate(3px,7px) rotate(1.4deg)}
+#wic-page-hero .wicp-card{
+  position:absolute;z-index:4;width:350px;height:106px;padding:18px 20px;
+  display:grid;grid-template-columns:48px minmax(0,1fr);gap:15px;align-items:center;
+  border:1px solid #deded9;border-radius:13px;background:#fff;color:#202023;
+  box-shadow:0 18px 38px rgba(20,20,20,.095);
+  transition:transform .25s ease,box-shadow .25s ease,border-color .2s ease;
+}
+#wic-page-hero .wicp-card:hover{border-color:#c9c9c4;box-shadow:0 25px 50px rgba(20,20,20,.13)}
+#wic-page-hero .wicp-exact{left:1%;top:48px;transform:rotate(-3deg)}
+#wic-page-hero .wicp-exact:hover{transform:translateY(-6px) rotate(-3deg)}
+#wic-page-hero .wicp-assisted{left:7%;top:225px;transform:rotate(2deg)}
+#wic-page-hero .wicp-assisted:hover{transform:translateY(-6px) rotate(2deg)}
+#wic-page-hero .wicp-icon{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;position:relative;background:#171719;color:#fff;font-size:1rem;font-weight:700}
+#wic-page-hero .wicp-assisted .wicp-icon{background:#fff;border:1.4px dashed #171719;color:transparent}
+#wic-page-hero .wicp-assisted .wicp-icon::after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;right:-1px;bottom:2px;background:#d86818}
+#wic-page-hero .wicp-card strong{display:block;margin:0 0 6px;font-family:'Space Grotesk',ui-sans-serif,sans-serif;font-size:.97rem;line-height:1.2;letter-spacing:-.025em;font-weight:650}
+#wic-page-hero .wicp-card small{display:block;color:#7c7c80;font-size:.64rem;line-height:1.4}
+#wic-page-hero .wicp-ai{position:absolute;left:58%;top:170px;z-index:6;width:70px;height:70px;display:grid;place-items:center;border:1px solid #171719;border-radius:8px;background:#171719;color:#fff;box-shadow:0 17px 35px rgba(20,20,20,.17);font-family:'Space Grotesk',ui-sans-serif,sans-serif;font-size:1.2rem;letter-spacing:-.04em;transition:transform .25s ease,box-shadow .25s ease}
+#wic-page-hero .wicp-ai:hover{transform:translateY(-5px);box-shadow:0 22px 42px rgba(20,20,20,.22)}
+#wic-page-hero .wicp-result{position:absolute;right:0;top:103px;z-index:3;width:230px;min-height:198px;padding:24px;border:1px solid #deded9;border-radius:13px;background:#fff;color:#262629;box-shadow:0 18px 38px rgba(20,20,20,.075)}
+#wic-page-hero .wicp-result-icon{width:38px;height:38px;margin-bottom:18px;border-radius:50%;display:grid;place-items:center;position:relative;background:#fff6ef;border:1px solid #efd6c3}
+#wic-page-hero .wicp-result-icon::before{content:"";width:13px;height:15px;border:1.6px solid #b45309;border-radius:7px 7px 9px 9px;clip-path:polygon(50% 0,100% 22%,90% 75%,50% 100%,10% 75%,0 22%)}
+#wic-page-hero .wicp-result strong{display:block;max-width:15ch;font-family:'Space Grotesk',ui-sans-serif,sans-serif;font-size:.84rem;line-height:1.45;letter-spacing:-.018em;font-weight:650}
+#wic-page-hero .wicp-result p{margin:9px 0 0;color:#77777b;font-size:.62rem;line-height:1.55}
+
+/* The content section begins right after the hero; no reserved blank canvas. */
+.page-what-it-checks .page-hero + .section{padding-top:clamp(28px,3vw,42px)!important}
+
+@media(max-width:1120px){
+  #wic-page-hero{grid-template-columns:minmax(360px,.86fr) minmax(500px,1.14fr)!important;gap:32px!important}
+  #wic-page-hero .wicp-visual{transform:scale(.92)!important;transform-origin:center right!important}
+}
+@media(max-width:860px){
+  .page-what-it-checks .page-hero{padding:42px 0 34px!important}
+  #wic-page-hero{width:min(calc(100% - 36px),900px)!important;grid-template-columns:1fr!important;gap:28px!important;min-height:0!important}
+  #wic-page-hero .wicp-copy{max-width:680px}
+  #wic-page-hero h1{font-size:clamp(3.5rem,11vw,5rem)!important;max-width:8ch!important}
+  #wic-page-hero .lede{margin-top:24px!important;max-width:60ch!important}
+  #wic-page-hero .wicp-visual{height:400px!important;min-height:400px!important;max-width:690px!important;margin:0 auto!important;transform:none!important}
+}
+@media(max-width:600px){
+  #wic-page-hero{width:min(calc(100% - 28px),900px)!important}
+  #wic-page-hero .eyebrow{margin-bottom:16px!important;font-size:.66rem!important}
+  #wic-page-hero h1{font-size:clamp(3rem,15vw,4.2rem)!important}
+  #wic-page-hero .lede{font-size:.88rem!important;line-height:1.65!important}
+  #wic-page-hero .wicp-visual{width:118%!important;margin-left:-9%!important;height:355px!important;min-height:355px!important;transform:scale(.82)!important;transform-origin:top center!important;margin-bottom:-58px!important}
+}
+@media(max-width:430px){
+  #wic-page-hero .wicp-visual{width:132%!important;margin-left:-16%!important;transform:scale(.72)!important;margin-bottom:-92px!important}
+}
+@media(prefers-reduced-motion:reduce){#wic-page-hero .wicp-card,#wic-page-hero .wicp-ai{transition:none!important}}
+</style>
+  <link rel="stylesheet" href="illustrations-3d.css">
+  <link rel="stylesheet" href="mobile-responsive.css">
+</head>
+<body class="page-what-it-checks">
+<div class="announcement"><a href="beta.html"><span>Closed beta</span><strong>Accurao Reviewer for FRS 102 Section 1A and FRS 105</strong><b aria-hidden="true">→</b></a></div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Accurao Reviewer home">
+      <span class="brand-fallback">Accurao</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="main-nav" id="primary-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="what-it-checks.html" aria-current="page">What it checks</a><a href="how-it-works.html">How it works</a><a href="security.html">Security</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a class="mobile-only" href="beta.html">Book a beta call</a></nav>
+    <a class="nav-cta" href="beta.html">Book a beta call</a>
+  </div>
+</header>
+<main>
+
+<section class="page-hero">
+  <div class="container" id="wic-page-hero">
+    <div class="wicp-copy">
+      <div class="eyebrow">Credibility page</div>
+      <h1>What it checks</h1>
+      <p class="lede">The complete review is split deliberately between deterministic arithmetic and matching, and AI-assisted disclosure presence detection. They are not the same kind of finding.</p>
+    </div>
+
+    <div class="wicp-visual premium-scroll-illustration" data-premium-illustration="checks" role="group" aria-label="Exact checks and AI-assisted disclosure checks flow through Accurao Reviewer to surface findings across numbers and disclosures">
+      <svg class="wicp-paths" viewBox="0 0 700 430" preserveAspectRatio="none" aria-hidden="true" shape-rendering="geometricPrecision">
+        <path class="wicp-flow-path wicp-flow-a" d="M345 101 C387 101 400 143 430 176" />
+        <path class="wicp-flow-path wicp-flow-b" d="M365 276 C404 276 410 222 430 204" />
+        <path class="wicp-flow-path wicp-flow-c" d="M500 199 H548" />
+        <circle class="wicp-junction" cx="523" cy="199" r="4" />
+      </svg>
+      <div class="wicp-paper-stack" aria-hidden="true"><i></i><i></i></div>
+
+      <div class="wicp-card wicp-exact premium-interactive-card" tabindex="0" data-illustration-card="exact">
+        <span class="wicp-icon" aria-hidden="true">✓</span>
+        <span><strong>Exact checks</strong><small>Arithmetic &amp; tie-outs</small></span>
+      </div>
+
+      <div class="wicp-card wicp-assisted premium-interactive-card" tabindex="0" data-illustration-card="assisted">
+        <span class="wicp-icon" aria-hidden="true"></span>
+        <span><strong>AI-assisted checks</strong><small>Disclosure checks</small></span>
+      </div>
+
+      <div class="wicp-ai premium-interactive-card" tabindex="0" data-illustration-card="ai" aria-label="AI-assisted review">AI</div>
+
+      <div class="wicp-result premium-interactive-card" tabindex="0" data-illustration-card="result">
+        <span class="wicp-result-icon" aria-hidden="true"></span>
+        <strong>Designed to catch what slips through — across numbers and disclosures.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section"><div class="container">
+  <div class="check-split">
+    <section class="check-group" aria-labelledby="exact-full"><h2 id="exact-full">Exact checks</h2><p class="group-note">Arithmetic and matching. Deterministic — same inputs, same result, every time.</p>
+      <ul class="check-list"><li><strong>Trial balance tie-out</strong> — every line in the accounts traced back to the trial balance, with the difference shown</li><li><strong>Internal consistency</strong> — the balance sheet foots, notes agree to the face of the balance sheet, the fixed asset note casts</li><li><strong>Fixed asset register cross-match</strong> — your uploaded register against the fixed-asset note</li><li><strong>Prior-year comparatives</strong> — checked against the actual prior-year accounts filed at Companies House, or a copy you upload</li><li><strong>Identifier consistency</strong> — company name, registered number and director names used consistently throughout the document</li></ul>
+    </section>
+    <section class="check-group" aria-labelledby="ai-full"><h2 id="ai-full" class="ai-label">AI-assisted checks</h2><p class="group-note">Presence detection, not certainty. Treat these as prompts to confirm.</p><ul class="check-list"><li><strong>Disclosure assessment</strong> — <span class="token">{{DISCLOSURE_COUNT}}</span> FRS 102 Section 1A disclosure requirements, each returned with the specific text found in your document as evidence, so you can judge it yourself rather than trust a tick</li></ul></section>
+  </div>
+  <div class="working"><h3>Working through it</h3><ul><li>Materiality threshold you set</li><li>Confirm, dismiss or correct each finding</li><li>Per-section sign-off with an audit trail</li><li>Read-only view of the accounts PDF with findings anchored to the relevant text</li></ul></div>
+  <p class="closing-line">It won't catch everything, and it doesn't replace your review. It catches the class of error that survives a careful read.</p>
+</div></section>
+<section class="section alt"><div class="container"><div class="quiet-block"><p>It does not prepare, edit, file, or export statutory accounts. It reviews the accounts you've already produced, in whatever software you produce them in. The document view is read-only, deliberately.</p></div></div></section>
+
+</main>
+<footer class="site-footer">
+  <div class="container footer-rule">
+    <div class="footer-brand">Accurao Reviewer</div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="beta.html">Beta</a>
+    </nav>
+  </div>
+</footer>
+<script src="site.js" defer></script>
+
+</body>
+</html>

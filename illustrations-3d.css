@@ -1,0 +1,1431 @@
+/* Accurao illustration depth pass — v1
+   Adds dimensionality without changing semantic structure or interaction hooks. */
+
+:root{
+  --ill-orange:#d86818;
+  --ill-orange-bright:#ea7625;
+  --ill-ink:#18181a;
+  --ill-edge:#d8d8d3;
+  --ill-soft:#f6f6f3;
+  --ill-shadow:rgba(24,24,26,.13);
+}
+
+/* ---------- Shared rendering ---------- */
+.page-home .reference-match-visual,
+.page-what-it-checks #wic-page-hero .wicp-visual,
+.page-how-it-works .how-hero-visual,
+.page-security .security-hero-visual{
+  perspective:1250px!important;
+  perspective-origin:50% 46%!important;
+}
+
+/* ---------- HOME: reviewer stack ---------- */
+.page-home .reference-grid{
+  opacity:.54!important;
+  filter:drop-shadow(0 18px 24px rgba(35,35,35,.025));
+}
+.page-home .reference-card{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.99) 0%,rgba(255,255,255,.96) 49%,rgba(244,244,240,.98) 100%)!important;
+  border-color:#d8d8d2!important;
+  transform:rotateX(6deg) rotateY(-8deg) rotateZ(4.4deg)!important;
+  transform-style:preserve-3d!important;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.95) inset,
+    -1px -1px 0 rgba(255,255,255,.78) inset,
+    1px 1px 0 rgba(195,195,188,.25) inset,
+    7px 9px 0 #eeeeea,
+    11px 15px 0 rgba(222,222,216,.74),
+    0 29px 48px rgba(24,24,26,.12)!important;
+}
+.page-home .reference-card::before{
+  background:linear-gradient(112deg,transparent 14%,rgba(255,255,255,.08) 34%,rgba(255,255,255,.86) 47%,rgba(255,255,255,.12) 59%,transparent 72%)!important;
+  opacity:.74;
+}
+.page-home .reference-card-accounts{transform:rotateX(6deg) rotateY(-8deg) rotateZ(4.8deg)!important}
+.page-home .reference-card-source{transform:rotateX(5deg) rotateY(-7deg) rotateZ(3.5deg)!important}
+.page-home .reference-card-reviewer{
+  background:
+    radial-gradient(circle at 76% 16%,rgba(255,255,255,.09),transparent 28%),
+    linear-gradient(145deg,#2d2d30 0%,#1d1d1f 52%,#111113 100%)!important;
+  border-color:#343438!important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.12) inset,
+    0 -1px 0 rgba(0,0,0,.55) inset,
+    7px 9px 0 #2a2a2d,
+    11px 15px 0 #151517,
+    0 34px 55px rgba(16,16,18,.27)!important;
+  transform:rotateX(6deg) rotateY(-8deg) rotateZ(4.2deg)!important;
+}
+.page-home .reference-card-reviewer::after{
+  width:3px!important;
+  background:linear-gradient(180deg,#f28a3b 0%,var(--ill-orange) 58%,#9f430a 100%)!important;
+  box-shadow:1px 0 10px rgba(216,104,24,.18);
+}
+.page-home .reference-card:hover,
+.page-home .reference-card:focus-visible{
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.95) inset,
+    7px 9px 0 #eeeeea,
+    11px 15px 0 rgba(222,222,216,.74),
+    0 37px 62px rgba(24,24,26,.16)!important;
+}
+.page-home .reference-card-accounts:hover,.page-home .reference-card-accounts:focus-visible{
+  transform:translateY(-9px) rotateX(4deg) rotateY(-6deg) rotateZ(4.8deg)!important;
+}
+.page-home .reference-card-source:hover,.page-home .reference-card-source:focus-visible{
+  transform:translateY(-7px) rotateX(4deg) rotateY(-6deg) rotateZ(3.5deg)!important;
+}
+.page-home .reference-card-reviewer:hover,.page-home .reference-card-reviewer:focus-visible{
+  transform:translateY(3px) rotateX(4deg) rotateY(-6deg) rotateZ(4.2deg)!important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.12) inset,
+    7px 9px 0 #2a2a2d,
+    11px 15px 0 #151517,
+    0 42px 68px rgba(16,16,18,.32)!important;
+}
+.page-home .layer-icon{
+  background:linear-gradient(145deg,#fff 0%,#f3f3ef 100%)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 7px 14px rgba(22,22,24,.075)!important;
+}
+.page-home .reference-card-reviewer .layer-icon{
+  background:linear-gradient(145deg,#3b3b3f,#202023)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.11) inset,0 8px 17px rgba(0,0,0,.24)!important;
+}
+.page-home .layer-tag{
+  background:linear-gradient(#fff,#f5f5f2)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 9px rgba(28,28,30,.05);
+}
+.page-home .reference-card-reviewer .layer-tag{background:linear-gradient(#323236,#242427)!important}
+.page-home .reference-search{
+  background:linear-gradient(145deg,#fff,#efefeb)!important;
+  box-shadow:0 2px 0 #fff inset,5px 7px 0 #e6e6e1,0 18px 27px rgba(24,24,26,.12)!important;
+  transform:rotateX(8deg) rotateY(-9deg) rotateZ(3deg)!important;
+}
+.page-home .stack-insight{
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(246,246,242,.95))!important;
+  box-shadow:0 1px 0 #fff inset,5px 7px 0 rgba(232,232,227,.82),0 22px 40px rgba(24,24,26,.105)!important;
+  transform:rotateX(3deg) rotateY(-4deg)!important;
+}
+
+/* ---------- WHAT IT CHECKS: layered 3D cards ---------- */
+.page-what-it-checks #wic-page-hero .wicp-visual::before{
+  opacity:.42!important;
+  transform:perspective(900px) rotateX(62deg) rotateZ(-5deg) translateY(38px) scale(.98)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-paper-stack i{
+  background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(244,244,240,.82))!important;
+  border-color:#deded8!important;
+  box-shadow:4px 7px 0 rgba(233,233,228,.8),0 19px 35px rgba(24,24,26,.055)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-card{
+  background:linear-gradient(145deg,#fff 0%,#fff 47%,#f3f3ef 100%)!important;
+  border-color:#d7d7d1!important;
+  transform-style:preserve-3d!important;
+  box-shadow:0 2px 0 #fff inset,6px 8px 0 #ecece7,10px 13px 0 rgba(222,222,216,.78),0 29px 48px rgba(24,24,26,.12)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-exact{
+  transform:rotateX(6deg) rotateY(-7deg) rotateZ(-2.1deg)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-assisted{
+  transform:rotateX(5deg) rotateY(-7deg) rotateZ(2.4deg)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-exact:hover,
+.page-what-it-checks #wic-page-hero .wicp-exact.is-active{
+  transform:translateY(-7px) rotateX(4deg) rotateY(-5deg) rotateZ(-2.1deg)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-assisted:hover,
+.page-what-it-checks #wic-page-hero .wicp-assisted.is-active{
+  transform:translateY(-7px) rotateX(4deg) rotateY(-5deg) rotateZ(2.4deg)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-icon{
+  background:linear-gradient(145deg,#2d2d30,#111113)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.15) inset,3px 5px 0 #0d0d0e,0 12px 18px rgba(20,20,22,.16);
+}
+.page-what-it-checks #wic-page-hero .wicp-assisted .wicp-icon{
+  background:linear-gradient(145deg,#fff,#f1f1ed)!important;
+  box-shadow:0 1px 0 #fff inset,3px 5px 0 #e3e3de,0 11px 17px rgba(20,20,22,.09);
+}
+.page-what-it-checks #wic-page-hero .wicp-ai{
+  border-color:#313134!important;
+  background:radial-gradient(circle at 70% 18%,rgba(255,255,255,.12),transparent 30%),linear-gradient(145deg,#303034,#101012)!important;
+  border-radius:12px!important;
+  transform:rotateX(8deg) rotateY(-10deg) rotateZ(3deg)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.12) inset,5px 7px 0 #27272a,9px 12px 0 #111113,0 28px 43px rgba(18,18,20,.25)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-ai:hover,
+.page-what-it-checks #wic-page-hero .wicp-ai.is-active{
+  transform:translateY(-6px) rotateX(5deg) rotateY(-7deg) rotateZ(3deg)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.12) inset,5px 7px 0 #27272a,9px 12px 0 #111113,0 36px 52px rgba(18,18,20,.3)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-result{
+  background:linear-gradient(145deg,#fff,#f5f5f1)!important;
+  border-color:#d7d7d1!important;
+  transform:rotateX(5deg) rotateY(5deg) rotateZ(-1.4deg)!important;
+  box-shadow:0 2px 0 #fff inset,-5px 7px 0 #ecece7,-9px 12px 0 rgba(222,222,216,.68),0 29px 45px rgba(24,24,26,.105)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-result-icon{
+  background:linear-gradient(145deg,#fffaf6,#f4e3d5)!important;
+  box-shadow:0 1px 0 #fff inset,2px 4px 0 #ead5c4,0 10px 16px rgba(180,83,9,.08);
+}
+
+/* ---------- HOW IT WORKS: product-render workflow ---------- */
+.page-how-it-works .how-grid-floor{
+  opacity:.48!important;
+  transform:perspective(520px) rotateX(64deg) rotateZ(-1.5deg) translateY(58px)!important;
+}
+.page-how-it-works .how-input,
+.page-how-it-works .how-findings,
+.page-how-it-works .how-insight,
+.page-how-it-works .how-review-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.99),rgba(246,246,242,.97))!important;
+  border-color:#d8d8d2!important;
+  box-shadow:0 2px 0 #fff inset,5px 7px 0 #ecece7,9px 12px 0 rgba(221,221,215,.7),0 25px 43px rgba(24,24,26,.10)!important;
+  transform-style:preserve-3d!important;
+}
+.page-how-it-works .how-input-pdf{
+  transform:rotateX(7deg) rotateY(-8deg) rotateZ(2.5deg)!important;
+}
+.page-how-it-works .how-input-tb{
+  transform:rotateX(6deg) rotateY(-7deg) rotateZ(-1deg)!important;
+}
+.page-how-it-works .how-input-pdf:hover,.page-how-it-works .how-input-pdf:focus-visible,.page-how-it-works .how-input-pdf.is-active{
+  transform:translateY(-7px) rotateX(4deg) rotateY(-5deg) rotateZ(2.5deg)!important;
+  box-shadow:0 2px 0 #fff inset,5px 7px 0 #ecece7,9px 12px 0 rgba(221,221,215,.7),0 34px 51px rgba(24,24,26,.14)!important;
+}
+.page-how-it-works .how-input-tb:hover,.page-how-it-works .how-input-tb:focus-visible,.page-how-it-works .how-input-tb.is-active{
+  transform:translateY(-7px) rotateX(4deg) rotateY(-5deg) rotateZ(-1deg)!important;
+  box-shadow:0 2px 0 #fff inset,5px 7px 0 #ecece7,9px 12px 0 rgba(221,221,215,.7),0 34px 51px rgba(24,24,26,.14)!important;
+}
+.page-how-it-works .how-doc-icon,
+.page-how-it-works .how-table-icon{
+  background:linear-gradient(145deg,#fff,#f0f0ec)!important;
+  border-color:#d1d2cc!important;
+  box-shadow:0 1px 0 #fff inset,3px 5px 0 #e6e6e1,0 11px 17px rgba(24,24,26,.09)!important;
+  transform:rotateX(7deg) rotateY(-8deg);
+}
+.page-how-it-works .how-input em{
+  background:linear-gradient(#fff,#f2f2ee)!important;
+  box-shadow:0 1px 0 #fff inset,0 5px 9px rgba(24,24,26,.05);
+}
+.page-how-it-works .how-review-wrap{perspective:900px!important;transform-style:preserve-3d!important}
+.page-how-it-works .how-review-base{
+  box-shadow:0 14px 24px rgba(25,25,27,.13)!important;
+}
+.page-how-it-works .base-back{
+  background:linear-gradient(180deg,#f4f4f1 0%,#d8d8d2 100%)!important;
+  border:1px solid #d0d0cb;
+}
+.page-how-it-works .base-front{
+  background:linear-gradient(180deg,#f38a3e 0%,#d85e10 56%,#b94808 100%)!important;
+  box-shadow:0 2px 0 rgba(255,255,255,.25) inset,0 15px 27px rgba(203,82,7,.22)!important;
+}
+.page-how-it-works .how-review-card{
+  background:
+    radial-gradient(circle at 70% 12%,rgba(255,255,255,.95),transparent 30%),
+    linear-gradient(145deg,#fff 0%,#f7f7f3 58%,#ecece7 100%)!important;
+  border-color:#df8b54!important;
+  transform:translateX(-50%) rotateX(5deg) rotateY(-4deg)!important;
+  box-shadow:0 2px 0 #fff inset,6px 8px 0 #ecebe6,10px 14px 0 rgba(218,217,210,.8),0 32px 50px rgba(24,24,26,.13)!important;
+}
+.page-how-it-works .how-review-card:hover,.page-how-it-works .how-review-card:focus-visible,.page-how-it-works .how-review-card.is-active{
+  transform:translateX(-50%) translateY(-8px) rotateX(3deg) rotateY(-2deg)!important;
+  box-shadow:0 2px 0 #fff inset,6px 8px 0 #ecebe6,10px 14px 0 rgba(218,217,210,.8),0 41px 60px rgba(24,24,26,.17)!important;
+}
+.page-how-it-works .how-shield{
+  filter:drop-shadow(2px 5px 5px rgba(216,104,24,.14));
+}
+.page-how-it-works .how-findings{
+  transform:rotateX(5deg) rotateY(-3deg) rotateZ(.6deg)!important;
+}
+.page-how-it-works .how-findings:hover,.page-how-it-works .how-findings:focus-visible,.page-how-it-works .how-findings.is-active{
+  transform:translateY(-7px) rotateX(3deg) rotateY(-2deg) rotateZ(.6deg)!important;
+  box-shadow:0 2px 0 #fff inset,5px 7px 0 #ecece7,9px 12px 0 rgba(221,221,215,.7),0 34px 51px rgba(24,24,26,.14)!important;
+}
+.page-how-it-works .how-findings b{
+  background:linear-gradient(145deg,#fff,#f3f3ef)!important;
+  box-shadow:0 1px 0 #fff inset,0 5px 10px rgba(24,24,26,.06);
+}
+.page-how-it-works .how-insight{
+  transform:rotateX(5deg) rotateY(4deg) rotateZ(-.8deg)!important;
+}
+.page-how-it-works .how-insight:hover,.page-how-it-works .how-insight:focus-visible,.page-how-it-works .how-insight.is-active{
+  transform:translateY(-6px) rotateX(3deg) rotateY(2deg) rotateZ(-.8deg)!important;
+  box-shadow:0 2px 0 #fff inset,-5px 7px 0 #ecece7,-9px 12px 0 rgba(221,221,215,.65),0 34px 51px rgba(24,24,26,.13)!important;
+}
+.page-how-it-works .how-insight i{
+  background:linear-gradient(180deg,#f18a42,#c74f08)!important;
+  box-shadow:0 0 10px rgba(216,104,24,.12);
+}
+
+/* ---------- SECURITY: dimensional SVG treatment ---------- */
+.page-security .security-vector-illustration{
+  filter:drop-shadow(0 24px 24px rgba(25,25,27,.035));
+}
+.page-security .security-v-card,
+.page-security .security-v-note,
+.page-security .security-v-shield,
+.page-security .security-v-platform{
+  transform-style:preserve-3d!important;
+}
+.page-security .security-v-card>rect:first-child{
+  fill:url(#cardSurface3d)!important;
+  stroke:#d8d8d2!important;
+  stroke-width:1.2!important;
+  filter:url(#cardShadow3d)!important;
+}
+.page-security .security-v-card{
+  filter:drop-shadow(4px 7px 0 #ecece7) drop-shadow(8px 12px 0 rgba(222,222,216,.72))!important;
+}
+.page-security .security-v-card:hover,
+.page-security .security-v-card.is-active{
+  transform:translateY(-6px) scale(1.008)!important;
+  filter:drop-shadow(4px 7px 0 #ecece7) drop-shadow(8px 12px 0 rgba(222,222,216,.72)) drop-shadow(0 22px 18px rgba(20,20,22,.11))!important;
+}
+.page-security .security-v-shield{
+  filter:drop-shadow(6px 10px 0 rgba(220,220,214,.82)) drop-shadow(10px 16px 0 rgba(216,104,24,.18)) drop-shadow(0 26px 20px rgba(24,24,26,.15))!important;
+}
+.page-security .security-v-shield:hover,
+.page-security .security-v-shield.is-active{
+  transform:translateY(-6px) scale(1.015)!important;
+  filter:drop-shadow(6px 10px 0 rgba(220,220,214,.82)) drop-shadow(10px 16px 0 rgba(216,104,24,.22)) drop-shadow(0 34px 25px rgba(24,24,26,.18))!important;
+}
+.page-security .security-v-platform{
+  filter:drop-shadow(0 18px 12px rgba(24,24,26,.14));
+}
+.page-security .security-v-note{
+  filter:drop-shadow(-4px 7px 0 #ecece7) drop-shadow(-8px 12px 0 rgba(222,222,216,.66))!important;
+}
+.page-security .security-v-note:hover,
+.page-security .security-v-note.is-active{
+  transform:translateY(-6px) scale(1.008)!important;
+  filter:drop-shadow(-4px 7px 0 #ecece7) drop-shadow(-8px 12px 0 rgba(222,222,216,.66)) drop-shadow(0 22px 18px rgba(20,20,22,.10))!important;
+}
+.page-security .security-v-note>g:first-child rect{
+  fill:url(#cardSurface3d)!important;
+  stroke:#d8d8d2!important;
+  stroke-width:1.2!important;
+}
+.page-security .security-orbits circle{
+  stroke:#deded9!important;
+}
+.page-security .security-flow-line{stroke:#bfc3be!important}
+
+/* ---------- Responsive: preserve readability over stronger perspective ---------- */
+@media(max-width:860px){
+  .page-home .reference-card,
+  .page-home .reference-card-accounts,
+  .page-home .reference-card-source,
+  .page-home .reference-card-reviewer{transform:rotateX(4deg) rotateY(-4deg) rotateZ(2.5deg)!important}
+  .page-what-it-checks #wic-page-hero .wicp-card{transform:rotateX(4deg) rotateY(-4deg)!important}
+  .page-how-it-works .how-input-pdf{transform:rotateX(4deg) rotateY(-4deg) rotateZ(2deg)!important}
+  .page-how-it-works .how-input-tb{transform:rotateX(4deg) rotateY(-4deg) rotateZ(-1deg)!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .page-home .reference-card,
+  .page-what-it-checks #wic-page-hero .wicp-card,
+  .page-what-it-checks #wic-page-hero .wicp-ai,
+  .page-how-it-works .how-input,
+  .page-how-it-works .how-review-card,
+  .page-how-it-works .how-findings,
+  .page-how-it-works .how-insight{transition:none!important}
+}
+
+/* ---------- Performance pass — v2 ----------
+   Keeps the dimensional treatment while avoiding expensive repaint-heavy effects. */
+
+/* Fixed live backdrop blur and a blurred pseudo-shadow repaint on every scroll frame. */
+.site-header{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  background:rgba(255,255,255,.992)!important;
+  box-shadow:0 10px 28px rgba(21,21,21,.075),0 1px 4px rgba(21,21,21,.03)!important;
+}
+.site-header::after{display:none!important;filter:none!important}
+.site-header.scrolled{
+  background:#fff!important;
+  box-shadow:0 12px 30px rgba(21,21,21,.085),0 1px 4px rgba(21,21,21,.03)!important;
+}
+
+/* Off-screen document sections do not need to be fully rendered during initial load. */
+main > .section{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 720px;
+}
+
+/* Keep reveals, but remove per-element blur layers and long-lived compositor hints. */
+.motion-ready .scroll-reveal{
+  filter:none!important;
+  will-change:auto!important;
+  transition:opacity .52s cubic-bezier(.16,1,.3,1) var(--reveal-delay),transform .56s cubic-bezier(.16,1,.3,1) var(--reveal-delay)!important;
+}
+.premium-scroll-illustration svg{shape-rendering:auto!important;text-rendering:auto!important}
+.page-what-it-checks #wic-page-hero .wicp-card,
+.page-what-it-checks #wic-page-hero .wicp-ai,
+.page-what-it-checks #wic-page-hero .wicp-result{will-change:auto!important}
+
+/* Continuous SVG/CSS animation is attractive but unnecessary for the dimensional read.
+   Hover/focus interactions remain active. */
+.page-what-it-checks #wic-page-hero .wicp-visual.is-illustration-active .wicp-flow-path,
+.page-what-it-checks #wic-page-hero .wicp-visual.is-illustration-active .wicp-junction,
+.page-how-it-works .how-hero-visual.is-illustration-active .how-flow-path,
+.page-how-it-works .how-hero-visual.is-illustration-active .how-line-strong,
+.page-how-it-works .how-hero-visual.is-illustration-active .orbit-a,
+.page-how-it-works .how-hero-visual.is-illustration-active .orbit-b,
+.page-how-it-works .how-hero-visual.is-illustration-active .orbit-c,
+.page-security .security-hero-visual.is-illustration-active .security-flow-line,
+.page-security .security-hero-visual.is-illustration-active .security-orbits circle,
+.page-security .security-hero-visual.is-illustration-active .security-v-shield>path:nth-of-type(2),
+.page-security .security-hero-visual.is-illustration-active .security-v-platform{
+  animation:none!important;
+}
+
+/* HOME — fewer shadow layers and smaller blur radii. */
+.page-home .reference-grid{filter:none!important}
+.page-home .reference-card{
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,6px 8px 0 #e9e9e4,0 17px 25px rgba(24,24,26,.095)!important;
+}
+.page-home .reference-card-reviewer{
+  box-shadow:0 1px 0 rgba(255,255,255,.1) inset,6px 8px 0 #202023,0 19px 28px rgba(16,16,18,.20)!important;
+}
+.page-home .reference-card:hover,.page-home .reference-card:focus-visible{
+  box-shadow:6px 8px 0 #e9e9e4,0 21px 29px rgba(24,24,26,.12)!important;
+}
+.page-home .reference-card-reviewer:hover,.page-home .reference-card-reviewer:focus-visible{
+  box-shadow:6px 8px 0 #202023,0 22px 31px rgba(16,16,18,.24)!important;
+}
+.page-home .layer-icon{box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 5px 10px rgba(22,22,24,.06)!important}
+.page-home .reference-card-reviewer .layer-icon{box-shadow:0 1px 0 rgba(255,255,255,.1) inset,0 6px 11px rgba(0,0,0,.18)!important}
+.page-home .layer-tag{box-shadow:0 1px 0 rgba(255,255,255,.9) inset!important}
+.page-home .reference-search{box-shadow:4px 5px 0 #e5e5df,0 12px 18px rgba(24,24,26,.09)!important}
+.page-home .stack-insight{box-shadow:4px 5px 0 rgba(232,232,227,.82),0 14px 21px rgba(24,24,26,.08)!important}
+
+/* WHAT IT CHECKS — retain hard depth, reduce blurred depth. */
+.page-what-it-checks #wic-page-hero .wicp-paper-stack i{
+  box-shadow:4px 6px 0 rgba(233,233,228,.8),0 12px 18px rgba(24,24,26,.04)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-card{
+  box-shadow:0 1px 0 #fff inset,6px 8px 0 #e9e9e4,0 17px 25px rgba(24,24,26,.095)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-icon{box-shadow:0 1px 0 rgba(255,255,255,.12) inset,3px 4px 0 #0d0d0e,0 7px 11px rgba(20,20,22,.12)!important}
+.page-what-it-checks #wic-page-hero .wicp-assisted .wicp-icon{box-shadow:0 1px 0 #fff inset,3px 4px 0 #e3e3de,0 7px 11px rgba(20,20,22,.07)!important}
+.page-what-it-checks #wic-page-hero .wicp-ai{
+  box-shadow:0 1px 0 rgba(255,255,255,.1) inset,5px 7px 0 #202023,0 18px 26px rgba(18,18,20,.20)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-ai:hover,
+.page-what-it-checks #wic-page-hero .wicp-ai.is-active{box-shadow:5px 7px 0 #202023,0 21px 30px rgba(18,18,20,.23)!important}
+.page-what-it-checks #wic-page-hero .wicp-result{box-shadow:-5px 7px 0 #e9e9e4,0 17px 24px rgba(24,24,26,.08)!important}
+.page-what-it-checks #wic-page-hero .wicp-result-icon{box-shadow:0 1px 0 #fff inset,2px 3px 0 #ead5c4!important}
+
+/* HOW IT WORKS — smaller shadows, no glow filters. */
+.page-how-it-works .how-input,
+.page-how-it-works .how-findings,
+.page-how-it-works .how-insight,
+.page-how-it-works .how-review-card{
+  box-shadow:0 1px 0 #fff inset,5px 7px 0 #e9e9e4,0 16px 24px rgba(24,24,26,.08)!important;
+}
+.page-how-it-works .how-input-pdf:hover,.page-how-it-works .how-input-pdf:focus-visible,.page-how-it-works .how-input-pdf.is-active,
+.page-how-it-works .how-input-tb:hover,.page-how-it-works .how-input-tb:focus-visible,.page-how-it-works .how-input-tb.is-active,
+.page-how-it-works .how-findings:hover,.page-how-it-works .how-findings:focus-visible,.page-how-it-works .how-findings.is-active,
+.page-how-it-works .how-insight:hover,.page-how-it-works .how-insight:focus-visible,.page-how-it-works .how-insight.is-active{
+  box-shadow:5px 7px 0 #e9e9e4,0 20px 28px rgba(24,24,26,.105)!important;
+}
+.page-how-it-works .how-doc-icon,.page-how-it-works .how-table-icon{box-shadow:0 1px 0 #fff inset,3px 4px 0 #e6e6e1,0 7px 11px rgba(24,24,26,.065)!important}
+.page-how-it-works .how-input em,.page-how-it-works .how-findings b{box-shadow:0 1px 0 #fff inset!important}
+.page-how-it-works .how-insight i{box-shadow:none!important}
+
+/* SECURITY — SVG filters are among the most repaint-heavy effects. Gradients and geometry keep the 3D read. */
+.page-security .security-vector-illustration{filter:none!important}
+.page-security .security-v-card>rect:first-child{filter:none!important}
+.page-security .security-v-card,
+.page-security .security-v-card:hover,
+.page-security .security-v-card.is-active,
+.page-security .security-v-note,
+.page-security .security-v-note:hover,
+.page-security .security-v-note.is-active,
+.page-security .security-v-platform{filter:none!important}
+.page-security .security-v-shield{filter:drop-shadow(5px 8px 2px rgba(24,24,26,.11))!important}
+.page-security .security-v-shield:hover,.page-security .security-v-shield.is-active{filter:drop-shadow(5px 9px 3px rgba(24,24,26,.13))!important}
+
+/* Coarse-pointer/mobile devices get a static 3D treatment: same design, much cheaper compositing. */
+@media(max-width:860px), (hover:none) and (pointer:coarse){
+  .page-home .reference-match-visual,
+  .page-what-it-checks #wic-page-hero .wicp-visual,
+  .page-how-it-works .how-hero-visual,
+  .page-security .security-hero-visual{perspective:none!important}
+
+  .page-home .reference-card,
+  .page-home .reference-card-accounts,
+  .page-home .reference-card-source,
+  .page-home .reference-card-reviewer{transform:rotate(2.2deg)!important;transform-style:flat!important}
+  .page-home .reference-card-reviewer{transform:rotate(1.8deg)!important}
+  .page-home .reference-search,.page-home .stack-insight{transform:rotate(1deg)!important}
+
+  .page-what-it-checks #wic-page-hero .wicp-card{transform:rotate(-1deg)!important;transform-style:flat!important}
+  .page-what-it-checks #wic-page-hero .wicp-assisted{transform:rotate(1.2deg)!important}
+  .page-what-it-checks #wic-page-hero .wicp-ai{transform:rotate(1.5deg)!important;transform-style:flat!important}
+  .page-what-it-checks #wic-page-hero .wicp-result{transform:rotate(-.8deg)!important}
+
+  .page-how-it-works .how-input,
+  .page-how-it-works .how-review-card,
+  .page-how-it-works .how-findings,
+  .page-how-it-works .how-insight{transform-style:flat!important}
+  .page-how-it-works .how-input-pdf{transform:rotate(1.5deg)!important}
+  .page-how-it-works .how-input-tb{transform:rotate(-.8deg)!important}
+  .page-how-it-works .how-findings{transform:rotate(.4deg)!important}
+  .page-how-it-works .how-insight{transform:rotate(-.4deg)!important}
+
+  .premium-interactive-card,
+  .reference-card,
+  .how-input,.how-review-card,.how-findings,.how-insight,
+  .security-v-card,.security-v-shield,.security-v-note{transition-duration:.16s!important}
+
+  main > .section{contain-intrinsic-size:auto 620px}
+}
+.scroll-progress{
+  width:100%!important;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:none!important;
+  will-change:transform;
+}
+
+/* ========================================================================== 
+   Illustration stability patch — v3
+   Home + How it works only. Keeps depth through surfaces/shadows while
+   preventing perspective transforms from fighting absolute layout geometry.
+   ========================================================================== */
+
+/* HOME: the connector paths were authored against the flat card coordinates.
+   Keep the dimensional materials, but use stable Z-rotation so paths, hit areas
+   and active states stay visually locked together. */
+.page-home .reference-match-visual{
+  perspective:none!important;
+}
+.page-home .reference-card{
+  transform-style:flat!important;
+}
+.page-home .reference-card-accounts{
+  transform:rotate(4.2deg)!important;
+}
+.page-home .reference-card-source{
+  transform:rotate(2.8deg)!important;
+}
+.page-home .reference-card-reviewer{
+  transform:rotate(3.5deg)!important;
+}
+.page-home .reference-card-accounts:hover,
+.page-home .reference-card-accounts:focus-visible,
+.page-home .reference-card-accounts.is-active{
+  transform:translateY(-7px) rotate(4.2deg)!important;
+}
+.page-home .reference-card-source:hover,
+.page-home .reference-card-source:focus-visible,
+.page-home .reference-card-source.is-active{
+  transform:translateY(-5px) rotate(2.8deg)!important;
+}
+.page-home .reference-card-reviewer:hover,
+.page-home .reference-card-reviewer:focus-visible,
+.page-home .reference-card-reviewer.is-active{
+  transform:translateY(3px) rotate(3.5deg)!important;
+}
+.page-home .reference-search{
+  transform:none!important;
+}
+.page-home .interactive-stack[data-active="source"] .reference-search{
+  transform:scale(1.1)!important;
+}
+.page-home .stack-insight{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  background:rgba(255,255,255,.985)!important;
+}
+
+/* HOW IT WORKS: retain precise absolute positioning and the centre-card anchor.
+   Depth now comes from bevel/highlight/hard-offset shadow rather than X/Y card
+   perspective, which avoids connector drift and transform snapping. */
+.page-how-it-works .how-hero-visual,
+.page-how-it-works .how-review-wrap{
+  perspective:none!important;
+}
+.page-how-it-works .how-input,
+.page-how-it-works .how-review-card,
+.page-how-it-works .how-findings,
+.page-how-it-works .how-insight{
+  transform-style:flat!important;
+}
+.page-how-it-works .how-input-pdf{
+  transform:rotate(2.2deg)!important;
+}
+.page-how-it-works .how-input-tb{
+  transform:rotate(-1deg)!important;
+}
+.page-how-it-works .how-review-card{
+  transform:translateX(-50%) rotate(.35deg)!important;
+}
+.page-how-it-works .how-findings{
+  transform:rotate(.45deg)!important;
+}
+.page-how-it-works .how-insight{
+  transform:rotate(-.45deg)!important;
+}
+.page-how-it-works .how-input-pdf:hover,
+.page-how-it-works .how-input-pdf:focus-visible,
+.page-how-it-works .how-input-pdf.is-active{
+  transform:translateY(-6px) rotate(2.2deg)!important;
+}
+.page-how-it-works .how-input-tb:hover,
+.page-how-it-works .how-input-tb:focus-visible,
+.page-how-it-works .how-input-tb.is-active{
+  transform:translateY(-6px) rotate(-1deg)!important;
+}
+.page-how-it-works .how-review-card:hover,
+.page-how-it-works .how-review-card:focus-visible,
+.page-how-it-works .how-review-card.is-active{
+  transform:translateX(-50%) translateY(-7px) rotate(.35deg)!important;
+}
+.page-how-it-works .how-findings:hover,
+.page-how-it-works .how-findings:focus-visible,
+.page-how-it-works .how-findings.is-active{
+  transform:translateY(-6px) rotate(.45deg)!important;
+}
+.page-how-it-works .how-insight:hover,
+.page-how-it-works .how-insight:focus-visible,
+.page-how-it-works .how-insight.is-active{
+  transform:translateY(-5px) rotate(-.45deg)!important;
+}
+
+/* Avoid the small one-shot icon animations flickering when hover/focus states
+   switch quickly; the card lift itself remains the interaction feedback. */
+.page-how-it-works .how-input-pdf:hover .how-doc-icon::before,
+.page-how-it-works .how-input-pdf:focus-visible .how-doc-icon::before,
+.page-how-it-works .how-input-pdf.is-active .how-doc-icon::before,
+.page-how-it-works .how-input-tb:hover .how-table-icon::before,
+.page-how-it-works .how-input-tb:focus-visible .how-table-icon::before,
+.page-how-it-works .how-input-tb.is-active .how-table-icon::before,
+.page-how-it-works .how-review-card:hover .how-shield,
+.page-how-it-works .how-review-card:focus-visible .how-shield,
+.page-how-it-works .how-review-card.is-active .how-shield,
+.page-how-it-works .how-findings:hover b,
+.page-how-it-works .how-findings:focus-visible b,
+.page-how-it-works .how-findings.is-active b,
+.page-how-it-works .how-insight:hover i,
+.page-how-it-works .how-insight:focus-visible i,
+.page-how-it-works .how-insight.is-active i{
+  animation:none!important;
+}
+
+/* Mobile/coarse-pointer correction: never discard the centre card's anchor. */
+@media(max-width:860px), (hover:none) and (pointer:coarse){
+  .page-home .reference-card-accounts{transform:rotate(2deg)!important}
+  .page-home .reference-card-source{transform:rotate(1deg)!important}
+  .page-home .reference-card-reviewer{transform:rotate(1.5deg)!important}
+  .page-home .reference-card-accounts.is-active{transform:translateY(-4px) rotate(2deg)!important}
+  .page-home .reference-card-source.is-active{transform:translateY(-3px) rotate(1deg)!important}
+  .page-home .reference-card-reviewer.is-active{transform:translateY(2px) rotate(1.5deg)!important}
+
+  .page-how-it-works .how-input-pdf{transform:rotate(1.2deg)!important}
+  .page-how-it-works .how-input-tb{transform:rotate(-.65deg)!important}
+  .page-how-it-works .how-review-card{transform:translateX(-50%)!important}
+  .page-how-it-works .how-findings{transform:rotate(.25deg)!important}
+  .page-how-it-works .how-insight{transform:rotate(-.25deg)!important}
+  .page-how-it-works .how-review-card.is-active,
+  .page-how-it-works .how-review-card:focus-visible{
+    transform:translateX(-50%) translateY(-4px)!important;
+  }
+}
+
+/* ========================================================================== 
+   Illustration refinement — v4
+   Addresses reviewer-card false double-layer + richer How it works content.
+   ========================================================================== */
+
+/* HOME — the previous hard-offset shadow on the black reviewer card read as
+   another hidden card. Keep a crisp extrusion only at the lower edge and use
+   a soft contact shadow for depth. */
+.page-home .reference-card-reviewer{
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.10) inset,
+    0 19px 28px rgba(16,16,18,.21)!important;
+}
+.page-home .reference-card-reviewer:hover,
+.page-home .reference-card-reviewer:focus-visible,
+.page-home .reference-card-reviewer.is-active{
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.10) inset,
+    0 22px 31px rgba(16,16,18,.24)!important;
+}
+
+/* HOW IT WORKS — increase information density without reverting to flat UI. */
+.page-how-it-works .how-input{
+  height:122px!important;
+  padding:17px 14px!important;
+  grid-template-columns:42px minmax(0,1fr)!important;
+}
+.page-how-it-works .how-input-copy{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  min-width:0;
+  padding-right:24px;
+}
+.page-how-it-works .how-input-copy strong{
+  font-size:.79rem!important;
+  line-height:1.18!important;
+}
+.page-how-it-works .how-input-copy small{
+  color:#7b7f80;
+  font-size:.56rem;
+  line-height:1.35;
+  font-weight:500;
+}
+
+.page-how-it-works .how-review-card{
+  width:184px!important;
+  height:204px!important;
+  padding:17px 15px 15px!important;
+  justify-content:flex-start!important;
+}
+.page-how-it-works .how-shield{
+  width:27px!important;
+  height:32px!important;
+  margin:0 0 8px!important;
+  flex:0 0 auto;
+}
+.page-how-it-works .how-review-card>strong{
+  font-size:.9rem!important;
+  line-height:1.15!important;
+  margin-bottom:11px;
+}
+.page-how-it-works .how-check-list{
+  width:100%;
+  display:grid;
+  gap:6px;
+}
+.page-how-it-works .how-check-list span{
+  min-height:25px;
+  padding:6px 7px 6px 22px;
+  display:flex;
+  align-items:center;
+  position:relative;
+  border:1px solid #e5e5e0;
+  border-radius:6px;
+  background:linear-gradient(180deg,#fff,#fafaf7);
+  color:#555a5d;
+  font-size:.52rem;
+  line-height:1.15;
+  text-align:left;
+  font-weight:600;
+}
+.page-how-it-works .how-check-list span::before{
+  content:'✓';
+  position:absolute;
+  left:7px;
+  top:50%;
+  transform:translateY(-51%);
+  color:#df6514;
+  font-size:.55rem;
+  font-weight:800;
+}
+.page-how-it-works .how-review-base.base-back{top:242px!important}
+.page-how-it-works .how-review-base.base-front{top:254px!important}
+
+.page-how-it-works .how-findings{
+  height:256px!important;
+  padding:18px 16px 12px!important;
+}
+.page-how-it-works .how-findings-head{
+  margin-bottom:10px;
+}
+.page-how-it-works .how-findings-head strong{
+  display:block;
+  margin:0 0 4px!important;
+  color:#242424;
+  font-size:.86rem;
+}
+.page-how-it-works .how-findings-head small{
+  display:block;
+  color:#888c8d;
+  font-size:.51rem;
+  line-height:1.3;
+}
+.page-how-it-works .how-findings>div:not(.how-findings-head){
+  min-height:43px!important;
+}
+.page-how-it-works .how-materiality{
+  display:block;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid #ecece7;
+  color:#8a8e90;
+  font-size:.48rem;
+  line-height:1.3;
+}
+
+.page-how-it-works .how-insight{
+  min-height:250px!important;
+  padding:20px 17px 18px 25px!important;
+  align-items:flex-start!important;
+}
+.page-how-it-works .how-insight i{top:20px!important;bottom:20px!important}
+.page-how-it-works .how-insight-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  min-width:0;
+  padding-top:2px;
+}
+.page-how-it-works .how-insight-kicker{
+  margin-bottom:11px;
+  color:#df6514;
+  font-family:'Manrope',sans-serif;
+  font-size:.48rem;
+  line-height:1;
+  font-weight:750;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.page-how-it-works .how-insight-copy strong{
+  color:#262629;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.76rem;
+  line-height:1.25;
+  font-weight:650;
+}
+.page-how-it-works .how-insight-copy p{
+  margin:10px 0 0!important;
+  color:#65696c!important;
+  font-size:.59rem!important;
+  line-height:1.58!important;
+}
+.page-how-it-works .how-insight-copy>small{
+  display:inline-flex;
+  align-items:center;
+  min-height:22px;
+  margin-top:13px;
+  padding:4px 7px;
+  border:1px solid #e1e1dc;
+  border-radius:999px;
+  background:#fbfbf8;
+  color:#74787a;
+  font-size:.47rem;
+  line-height:1;
+  font-weight:650;
+}
+
+/* Keep the richer cards comfortably inside the scene. */
+.page-how-it-works .how-hero-visual{min-height:470px!important}
+.page-how-it-works .how-input-pdf{top:62px!important}
+.page-how-it-works .how-input-tb{top:242px!important}
+.page-how-it-works .how-review-wrap{top:66px!important;height:330px!important}
+.page-how-it-works .how-findings{top:78px!important}
+.page-how-it-works .how-insight{top:80px!important}
+
+@media(max-width:980px){
+  .page-how-it-works .how-hero-visual{min-height:460px!important}
+}
+@media(max-width:700px){
+  .page-how-it-works .how-input-copy small,
+  .page-how-it-works .how-findings-head small,
+  .page-how-it-works .how-materiality,
+  .page-how-it-works .how-insight-copy>small{font-size:.5rem!important}
+  .page-how-it-works .how-check-list span{font-size:.51rem!important}
+  .page-how-it-works .how-insight-copy p{font-size:.57rem!important}
+}
+
+/* ========================================================================== 
+   Crisp rendering patch — v5
+   Keep illustration content sharp at rest. Text-bearing cards no longer sit
+   on rotated/scaled compositor layers; depth is carried by bevels, hard-offset
+   shadows and background geometry instead. This prevents the common Chromium
+   behaviour where idle transformed layers look soft until hover re-rasterizes.
+   ========================================================================== */
+
+/* Never pre-promote illustration cards to low-resolution compositor textures. */
+.premium-scroll-illustration,
+.premium-scroll-illustration svg,
+.premium-interactive-card,
+.page-home .reference-card,
+.page-home .reference-card *,
+.page-what-it-checks #wic-page-hero .wicp-card,
+.page-what-it-checks #wic-page-hero .wicp-card *,
+.page-what-it-checks #wic-page-hero .wicp-ai,
+.page-what-it-checks #wic-page-hero .wicp-result,
+.page-what-it-checks #wic-page-hero .wicp-result *,
+.page-how-it-works .how-input,
+.page-how-it-works .how-input *,
+.page-how-it-works .how-review-card,
+.page-how-it-works .how-review-card *,
+.page-how-it-works .how-findings,
+.page-how-it-works .how-findings *,
+.page-how-it-works .how-insight,
+.page-how-it-works .how-insight *{
+  will-change:auto!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+
+.premium-scroll-illustration{
+  -webkit-font-smoothing:antialiased!important;
+  -moz-osx-font-smoothing:grayscale!important;
+}
+.premium-scroll-illustration svg{
+  shape-rendering:geometricPrecision!important;
+  text-rendering:optimizeLegibility!important;
+}
+
+/* HOME — remove the parent zoom and card rotations that were rasterizing copy.
+   The existing surface gradients + offset shadows preserve the dimensional read. */
+@media (min-width:601px){
+  .page-home .reference-match-visual{
+    transform:none!important;
+    perspective:none!important;
+  }
+}
+.page-home .reference-card,
+.page-home .reference-card-accounts,
+.page-home .reference-card-source,
+.page-home .reference-card-reviewer{
+  transform:none!important;
+  transform-style:flat!important;
+}
+.page-home .reference-card-source .layer-icon,
+.page-home .reference-card-source .layer-copy,
+.page-home .reference-card-source .layer-tag{
+  transform:none!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+.page-home .reference-card-accounts:hover,
+.page-home .reference-card-accounts:focus-visible,
+.page-home .reference-card-accounts.is-active{
+  transform:translateY(-7px)!important;
+}
+.page-home .reference-card-source:hover,
+.page-home .reference-card-source:focus-visible,
+.page-home .reference-card-source.is-active{
+  transform:translateY(-6px)!important;
+}
+.page-home .reference-card-reviewer:hover,
+.page-home .reference-card-reviewer:focus-visible,
+.page-home .reference-card-reviewer.is-active{
+  transform:translateY(3px)!important;
+}
+.page-home .reference-search,
+.page-home .stack-insight{
+  backface-visibility:visible!important;
+  will-change:auto!important;
+}
+
+/* WHAT IT CHECKS — crisp cards at rest on desktop/tablet. Decorative paper and
+   floor layers may remain angled because they contain no readable text. */
+@media (min-width:601px){
+  .page-what-it-checks #wic-page-hero .wicp-visual{
+    transform:none!important;
+    perspective:none!important;
+  }
+}
+.page-what-it-checks #wic-page-hero .wicp-card,
+.page-what-it-checks #wic-page-hero .wicp-exact,
+.page-what-it-checks #wic-page-hero .wicp-assisted,
+.page-what-it-checks #wic-page-hero .wicp-ai,
+.page-what-it-checks #wic-page-hero .wicp-result{
+  transform:none!important;
+  transform-style:flat!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-exact:hover,
+.page-what-it-checks #wic-page-hero .wicp-exact:focus-visible,
+.page-what-it-checks #wic-page-hero .wicp-exact.is-active,
+.page-what-it-checks #wic-page-hero .wicp-assisted:hover,
+.page-what-it-checks #wic-page-hero .wicp-assisted:focus-visible,
+.page-what-it-checks #wic-page-hero .wicp-assisted.is-active,
+.page-what-it-checks #wic-page-hero .wicp-ai:hover,
+.page-what-it-checks #wic-page-hero .wicp-ai:focus-visible,
+.page-what-it-checks #wic-page-hero .wicp-ai.is-active,
+.page-what-it-checks #wic-page-hero .wicp-result:hover,
+.page-what-it-checks #wic-page-hero .wicp-result:focus-visible,
+.page-what-it-checks #wic-page-hero .wicp-result.is-active{
+  transform:translateY(-6px)!important;
+}
+
+/* HOW IT WORKS — all copy-bearing surfaces are pixel aligned at rest. The
+   centre card is anchored by left rather than translateX, so even that card's
+   text does not live inside a transformed layer. */
+.page-how-it-works .how-hero-visual,
+.page-how-it-works .how-review-wrap{
+  perspective:none!important;
+}
+.page-how-it-works .how-input,
+.page-how-it-works .how-input-pdf,
+.page-how-it-works .how-input-tb,
+.page-how-it-works .how-findings,
+.page-how-it-works .how-insight{
+  transform:none!important;
+  transform-style:flat!important;
+}
+.page-how-it-works .how-review-card{
+  left:calc(50% - 92px)!important;
+  transform:none!important;
+  transform-style:flat!important;
+}
+.page-how-it-works .how-doc-icon,
+.page-how-it-works .how-table-icon{
+  transform:none!important;
+  transform-style:flat!important;
+}
+.page-how-it-works .how-input-pdf:hover,
+.page-how-it-works .how-input-pdf:focus-visible,
+.page-how-it-works .how-input-pdf.is-active,
+.page-how-it-works .how-input-tb:hover,
+.page-how-it-works .how-input-tb:focus-visible,
+.page-how-it-works .how-input-tb.is-active,
+.page-how-it-works .how-findings:hover,
+.page-how-it-works .how-findings:focus-visible,
+.page-how-it-works .how-findings.is-active,
+.page-how-it-works .how-insight:hover,
+.page-how-it-works .how-insight:focus-visible,
+.page-how-it-works .how-insight.is-active{
+  transform:translateY(-6px)!important;
+}
+.page-how-it-works .how-review-card:hover,
+.page-how-it-works .how-review-card:focus-visible,
+.page-how-it-works .how-review-card.is-active{
+  transform:translateY(-7px)!important;
+}
+
+/* SECURITY — CSS filters force the whole SVG group through an off-screen
+   bitmap. Remove them so vector edges remain vector-sharp even before hover. */
+.page-security .security-vector-illustration,
+.page-security .security-v-card,
+.page-security .security-v-shield,
+.page-security .security-v-note,
+.page-security .security-v-platform,
+.page-security .security-v-card:hover,
+.page-security .security-v-card.is-active,
+.page-security .security-v-shield:hover,
+.page-security .security-v-shield.is-active,
+.page-security .security-v-note:hover,
+.page-security .security-v-note.is-active{
+  filter:none!important;
+  will-change:auto!important;
+}
+.page-security .security-vector-illustration{
+  shape-rendering:geometricPrecision!important;
+  text-rendering:optimizeLegibility!important;
+}
+
+/* On mobile the authored scene needs scaling to fit. Keep that only at the
+   scene-container level; never apply an extra transform to the cards inside. */
+@media (max-width:600px){
+  .page-home .reference-card,
+  .page-home .reference-card-accounts,
+  .page-home .reference-card-source,
+  .page-home .reference-card-reviewer,
+  .page-what-it-checks #wic-page-hero .wicp-card,
+  .page-what-it-checks #wic-page-hero .wicp-ai,
+  .page-what-it-checks #wic-page-hero .wicp-result,
+  .page-how-it-works .how-input,
+  .page-how-it-works .how-findings,
+  .page-how-it-works .how-insight{
+    transform:none!important;
+  }
+  .page-how-it-works .how-review-card{
+    left:calc(50% - 92px)!important;
+    transform:none!important;
+  }
+}
+
+/* ========================================================================== 
+   Crisp rendering patch — v6 / all remaining illustration systems
+   Keep readable surfaces on the normal layout raster at ALL times. Interaction
+   changes borders, shadows and non-text icons instead of translating/scaling
+   whole text-bearing cards. This avoids Chromium re-rasterising a softened
+   compositor texture only after pointer interaction.
+   ========================================================================== */
+
+/* Use the browser's native text rasterisation rather than forcing thin
+   antialiased compositor text on these small diagram labels. */
+.premium-scroll-illustration,
+.context-visual,
+.context-visual *{
+  -webkit-font-smoothing:auto!important;
+  -moz-osx-font-smoothing:auto!important;
+  text-rendering:optimizeLegibility;
+}
+
+/* Generic contextual illustrations used for the late-adjustment, compact
+   review-flow and beta-call diagrams. Never move the entire card on hover. */
+.context-visual,
+.context-visual:hover,
+.context-visual:focus-within{
+  transform:none!important;
+  filter:none!important;
+  will-change:auto!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+@media(hover:hover) and (pointer:fine){
+  .context-visual{
+    transition:box-shadow .2s ease,border-color .2s ease!important;
+  }
+  .context-visual:hover{
+    transform:none!important;
+    box-shadow:0 16px 34px rgba(20,20,18,.065)!important;
+    border-color:#cfcfc8!important;
+  }
+}
+.context-visual .cv-sheet,
+.context-visual .cv-lane,
+.context-visual .flow-doc,
+.context-visual .flow-engine,
+.context-visual .flow-output,
+.context-visual .secure-node,
+.context-visual .cv-faq,
+.context-visual .founder-monogram,
+.context-visual .calendar-mini,
+.context-visual .beta-brief{
+  transform:none!important;
+  filter:none!important;
+  will-change:auto!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+
+/* WHAT IT CHECKS — readable cards never translate/scale as a unit. Keep the
+   interaction in their edge/shadow/icon treatment so idle and active text use
+   the exact same rasterisation path. */
+.page-what-it-checks #wic-page-hero .wicp-card,
+.page-what-it-checks #wic-page-hero .wicp-exact,
+.page-what-it-checks #wic-page-hero .wicp-assisted,
+.page-what-it-checks #wic-page-hero .wicp-result,
+.page-what-it-checks #wic-page-hero .wicp-ai{
+  transform:none!important;
+  filter:none!important;
+  will-change:auto!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-card{
+  transition:box-shadow .2s ease,border-color .18s ease!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-exact:hover,
+.page-what-it-checks #wic-page-hero .wicp-exact:focus-visible,
+.page-what-it-checks #wic-page-hero .wicp-exact.is-active,
+.page-what-it-checks #wic-page-hero .wicp-assisted:hover,
+.page-what-it-checks #wic-page-hero .wicp-assisted:focus-visible,
+.page-what-it-checks #wic-page-hero .wicp-assisted.is-active{
+  transform:none!important;
+  border-color:#c9c9c4!important;
+  box-shadow:0 1px 0 #fff inset,6px 8px 0 #e9e9e4,0 20px 29px rgba(24,24,26,.11)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-ai{
+  transition:box-shadow .2s ease,border-color .18s ease!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-ai:hover,
+.page-what-it-checks #wic-page-hero .wicp-ai:focus-visible,
+.page-what-it-checks #wic-page-hero .wicp-ai.is-active{
+  transform:none!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.1) inset,5px 7px 0 #202023,0 21px 30px rgba(18,18,20,.23)!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-result{
+  transition:box-shadow .2s ease,border-color .18s ease!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-result:hover,
+.page-what-it-checks #wic-page-hero .wicp-result:focus-visible,
+.page-what-it-checks #wic-page-hero .wicp-result.is-active{
+  transform:none!important;
+  border-color:#d0d0cb!important;
+  box-shadow:-5px 7px 0 #e9e9e4,0 20px 28px rgba(24,24,26,.095)!important;
+}
+
+/* SECURITY — do not transform the SVG groups that contain text. Small icon
+   animations can still run because they live in nested, text-free groups. */
+.page-security .security-vector-illustration{
+  filter:none!important;
+  will-change:auto!important;
+  shape-rendering:geometricPrecision!important;
+  text-rendering:optimizeLegibility!important;
+}
+.page-security .security-v-card,
+.page-security .security-v-note,
+.page-security .security-v-card:hover,
+.page-security .security-v-card.is-active,
+.page-security .security-v-note:hover,
+.page-security .security-v-note.is-active{
+  transform:none!important;
+  filter:none!important;
+  will-change:auto!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+.page-security .security-v-card,
+.page-security .security-v-note{
+  transition:opacity .18s ease!important;
+}
+.page-security .security-v-card:hover>rect:first-child,
+.page-security .security-v-card.is-active>rect:first-child{
+  stroke:#c8c8c2!important;
+  stroke-width:1.45!important;
+}
+.page-security .security-v-note:hover>g:first-child rect,
+.page-security .security-v-note.is-active>g:first-child rect{
+  stroke:#c8c8c2!important;
+  stroke-width:1.45!important;
+}
+
+/* Avoid forcing text-bearing diagram surfaces through a new compositor layer. */
+.context-visual,
+.context-visual *,
+.page-what-it-checks #wic-page-hero .wicp-card *,
+.page-what-it-checks #wic-page-hero .wicp-result *,
+.page-security .security-v-card,
+.page-security .security-v-note{
+  perspective:none!important;
+  transform-style:flat!important;
+}
+
+/* Security v7 previously lowered the entire SVG with transform:translateY(48px),
+   which can soften all SVG text while idle. Preserve the same visual offset with
+   normal positioning so the vector stays on its native raster path. */
+@media (min-width:901px){
+  .page-security .security-hero-visual{
+    transform:none!important;
+    top:48px!important;
+    perspective:none!important;
+  }
+}
+
+
+/* ========================================================================== 
+   Directional connector motion — v7
+   Lightweight motion lives only on connector strokes, dots and decorative
+   rings. Text-bearing cards stay completely stationary/pixel aligned.
+   Animation is viewport-gated by the existing is-illustration-active class.
+   ========================================================================== */
+
+/* HOME — directional dash travel through the authored connector paths. */
+.page-home .reference-path path{
+  stroke-dasharray:6 8!important;
+  stroke-dashoffset:0;
+}
+.page-home .reference-match-visual.is-illustration-active .path-accounts{
+  animation:accHomeFlow 1.55s linear infinite!important;
+}
+.page-home .reference-match-visual.is-illustration-active .path-source{
+  animation:accHomeFlow 1.55s linear -.42s infinite!important;
+}
+.page-home .reference-match-visual.is-illustration-active .path-reviewer{
+  animation:accHomeFlow 1.55s linear -.82s infinite!important;
+}
+@keyframes accHomeFlow{to{stroke-dashoffset:-28}}
+.page-home .reference-match-visual.is-illustration-active .reference-search i{
+  animation:accSearchPulse 2.15s ease-in-out infinite!important;
+}
+@keyframes accSearchPulse{
+  0%,100%{opacity:.62;transform:scale(.82)}
+  50%{opacity:1;transform:scale(1.28)}
+}
+
+/* WHAT IT CHECKS — exact/assisted inputs move into AI; final connector moves
+   from AI toward the result card. Re-enable only the low-cost stroke motion. */
+.page-what-it-checks #wic-page-hero .wicp-visual.is-illustration-active .wicp-flow-path{
+  animation:wicFlow 1.48s linear infinite!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-visual.is-illustration-active .wicp-flow-b{
+  animation-delay:-.38s!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-visual.is-illustration-active .wicp-flow-c{
+  animation-delay:-.76s!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-visual.is-illustration-active .wicp-junction{
+  animation:wicJunction 1.8s ease-in-out infinite!important;
+}
+
+/* HOW IT WORKS — dashed inputs travel toward Review checks, dashed outputs
+   travel from Findings toward reviewer control. The three review rings radiate
+   outward in a restrained staggered sequence. */
+.page-how-it-works .how-hero-visual.is-illustration-active .how-flow-path:not(.how-line-strong){
+  animation:howFlow 1.55s linear infinite!important;
+}
+.page-how-it-works .how-hero-visual.is-illustration-active .how-flow-input-b{
+  animation-delay:-.34s!important;
+}
+.page-how-it-works .how-hero-visual.is-illustration-active .how-flow-output-a{
+  animation-delay:-.68s!important;
+}
+.page-how-it-works .how-hero-visual.is-illustration-active .how-flow-output-b{
+  animation-delay:-1.02s!important;
+}
+.page-how-it-works .how-hero-visual.is-illustration-active .how-line-strong{
+  animation:howStrongPulse 1.95s ease-in-out infinite!important;
+}
+.page-how-it-works .how-hero-visual.is-illustration-active .orbit-a{
+  animation:howOrbitA 3.05s ease-out infinite!important;
+}
+.page-how-it-works .how-hero-visual.is-illustration-active .orbit-b{
+  animation:howOrbitB 3.05s ease-out .72s infinite!important;
+}
+.page-how-it-works .how-hero-visual.is-illustration-active .orbit-c{
+  animation:howOrbitC 3.05s ease-out 1.44s infinite!important;
+}
+
+/* SECURITY — connector dashes advance toward the shield/note and the orbital
+   rings expand from the protected centre. Only SVG stroke/geometry animates. */
+.page-security .security-hero-visual.is-illustration-active .security-flow-line{
+  animation:securityFlow 1.65s linear infinite!important;
+}
+.page-security .security-hero-visual.is-illustration-active .security-orbit-line{
+  animation-delay:-.48s!important;
+}
+.page-security .security-hero-visual.is-illustration-active .security-note-line{
+  animation-delay:-.96s!important;
+}
+.page-security .security-hero-visual.is-illustration-active .security-orbits circle:nth-child(1){
+  animation:securityRing 3.6s ease-out infinite!important;
+}
+.page-security .security-hero-visual.is-illustration-active .security-orbits circle:nth-child(2){
+  animation:securityRing 3.6s ease-out .84s infinite!important;
+}
+.page-security .security-hero-visual.is-illustration-active .security-orbits circle:nth-child(3){
+  animation:securityRing 3.6s ease-out 1.68s infinite!important;
+}
+
+/* Accessibility + battery/performance guard. */
+@media(prefers-reduced-motion:reduce){
+  .page-home .reference-match-visual .reference-path path,
+  .page-home .reference-match-visual .reference-search i,
+  .page-what-it-checks #wic-page-hero .wicp-flow-path,
+  .page-what-it-checks #wic-page-hero .wicp-junction,
+  .page-how-it-works .how-flow-path,
+  .page-how-it-works .how-line-strong,
+  .page-how-it-works .how-orbit,
+  .page-security .security-flow-line,
+  .page-security .security-orbits circle{
+    animation:none!important;
+  }
+}
+
+/* ========================================================================== 
+   Luminous connector pass — v8
+   Make directional/radiating geometry easier to read without introducing a
+   new palette. Uses a brighter amber-orange derived from the existing accent.
+   Glow is intentionally tight and applied only to decorative lines/rings so
+   card text remains crisp and rendering stays lightweight.
+   ========================================================================== */
+:root{
+  --acc-line-neon:#ff7a18;
+  --acc-line-neon-hot:#ff9b45;
+  --acc-line-neon-glow:rgba(255,122,24,.46);
+  --acc-line-neon-halo:rgba(255,122,24,.18);
+}
+
+/* HOME — bright moving route with a compact halo. */
+.page-home .reference-path{
+  filter:drop-shadow(0 0 2px var(--acc-line-neon-glow)) drop-shadow(0 0 5px var(--acc-line-neon-halo));
+}
+.page-home .reference-path path{
+  stroke:var(--acc-line-neon)!important;
+  stroke-width:1.85!important;
+  opacity:.96!important;
+}
+.page-home .reference-search{
+  border-color:rgba(255,122,24,.72)!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.9),0 0 8px rgba(255,122,24,.16)!important;
+}
+.page-home .reference-search i{
+  background:var(--acc-line-neon)!important;
+  box-shadow:0 0 5px rgba(255,122,24,.5)!important;
+}
+
+/* WHAT IT CHECKS — all three directional paths share the same warm neon core. */
+.page-what-it-checks #wic-page-hero .wicp-paths{
+  filter:drop-shadow(0 0 2px var(--acc-line-neon-glow)) drop-shadow(0 0 5px var(--acc-line-neon-halo));
+}
+.page-what-it-checks #wic-page-hero .wicp-flow-path{
+  stroke:var(--acc-line-neon)!important;
+  stroke-width:1.9!important;
+  opacity:.98!important;
+}
+.page-what-it-checks #wic-page-hero .wicp-junction{
+  fill:var(--acc-line-neon-hot)!important;
+  stroke:#fff7f0!important;
+  stroke-width:1.15!important;
+  filter:drop-shadow(0 0 3px rgba(255,122,24,.58));
+}
+
+/* HOW IT WORKS — brighter input/output flow; centre hand-off gets a slightly
+   hotter core. The radiating rings use the same hue at lower intensity. */
+.page-how-it-works .how-flow-lines{
+  filter:drop-shadow(0 0 2px var(--acc-line-neon-glow)) drop-shadow(0 0 5px var(--acc-line-neon-halo));
+}
+.page-how-it-works .how-flow-lines .how-flow-path{
+  stroke:var(--acc-line-neon)!important;
+  stroke-width:1.9!important;
+  opacity:.98!important;
+}
+.page-how-it-works .how-flow-lines .how-line-strong{
+  stroke:var(--acc-line-neon-hot)!important;
+  stroke-width:2.15!important;
+}
+.page-how-it-works .how-orbit{
+  border-color:rgba(255,122,24,.54)!important;
+  box-shadow:0 0 5px rgba(255,122,24,.13),inset 0 0 4px rgba(255,122,24,.08)!important;
+}
+@keyframes howStrongPulse{
+  0%,100%{stroke:#ff8727;stroke-width:1.95;opacity:.88}
+  50%{stroke:#ffad63;stroke-width:2.35;opacity:1}
+}
+@keyframes howOrbitA{
+  0%{opacity:.88;transform:translate(-50%,-50%) scale(.88)}
+  68%{opacity:.3;transform:translate(-50%,-50%) scale(1.1)}
+  100%{opacity:.07;transform:translate(-50%,-50%) scale(1.16)}
+}
+@keyframes howOrbitB{
+  0%{opacity:.68;transform:translate(-50%,-50%) scale(.9)}
+  68%{opacity:.22;transform:translate(-50%,-50%) scale(1.07)}
+  100%{opacity:.055;transform:translate(-50%,-50%) scale(1.12)}
+}
+@keyframes howOrbitC{
+  0%{opacity:.46;transform:translate(-50%,-50%) scale(.92)}
+  68%{opacity:.16;transform:translate(-50%,-50%) scale(1.045)}
+  100%{opacity:.04;transform:translate(-50%,-50%) scale(1.08)}
+}
+
+/* SECURITY — do NOT filter the whole SVG because it contains text. Glow only
+   the connector paths and orbital circles. */
+.page-security .security-flow-line{
+  stroke:var(--acc-line-neon)!important;
+  stroke-width:1.85!important;
+  opacity:.96!important;
+  filter:drop-shadow(0 0 2px var(--acc-line-neon-glow)) drop-shadow(0 0 4px var(--acc-line-neon-halo));
+}
+.page-security .security-orbits circle{
+  stroke:var(--acc-line-neon)!important;
+  stroke-width:1.15!important;
+  filter:drop-shadow(0 0 2px rgba(255,122,24,.32))!important;
+}
+@keyframes securityRing{
+  0%{opacity:.76;transform:scale(.985)}
+  68%{opacity:.24;transform:scale(1.045)}
+  100%{opacity:.055;transform:scale(1.065)}
+}
+
+/* Keep the neon legible but calmer on smaller screens. */
+@media(max-width:700px){
+  .page-home .reference-path,
+  .page-what-it-checks #wic-page-hero .wicp-paths,
+  .page-how-it-works .how-flow-lines{
+    filter:drop-shadow(0 0 2px rgba(255,122,24,.34));
+  }
+  .page-home .reference-path path,
+  .page-what-it-checks #wic-page-hero .wicp-flow-path,
+  .page-how-it-works .how-flow-lines .how-flow-path,
+  .page-security .security-flow-line{stroke-width:1.7!important}
+}
+
+/* Reduced motion keeps the brighter lines but removes travel/radiation. */
+@media(prefers-reduced-motion:reduce){
+  .page-how-it-works .how-orbit,
+  .page-security .security-orbits circle{opacity:.42!important}
+}
