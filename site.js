@@ -534,3 +534,78 @@
     visual.addEventListener('keydown',function(e){if(e.key==='Escape'&&pinned){activate(pinned,false);pinned=null;}});
   });
 })();
+
+/* v9: mobile-only scroll reveal. Uses a lightweight scroll check so it also works
+   reliably inside iOS/WhatsApp in-app browsers where observer timing can be eager. */
+(function(){
+  if(!window.matchMedia || !window.matchMedia('(max-width: 700px)').matches) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var selectors=[
+    '.page-hero > .container > *',
+    '.page-home .reference-match-main > *:not(.reference-match-visual)',
+    '.page-home .reference-benefits > *',
+    'main > .section > .container > *',
+    'main > .section .editorial-copy > *',
+    'main > .section .attio-steps > article',
+    'main > .section .audience-grid > *',
+    'main > .section .check-split > *',
+    'main > .section .security-facts > *',
+    'main > .section .faq-list > *',
+    'main > .section .founder-copy > *',
+    'main > .section .beta-panel > *',
+    'main > .section .legal-shell > *'
+  ];
+
+  var items=[];
+  selectors.forEach(function(selector){
+    document.querySelectorAll(selector).forEach(function(el){
+      if(items.indexOf(el)!==-1) return;
+      if(el.matches('.reference-match-visual,.wicp-visual,.how-hero-visual,.security-hero-visual,.security-vector-illustration,.premium-scroll-illustration,.context-visual')) return;
+      if(el.closest('.site-header,.site-footer')) return;
+      items.push(el);
+    });
+  });
+  if(!items.length) return;
+
+  items.forEach(function(el,index){
+    el.classList.add('mobile-scroll-reveal');
+    var mode=index%3;
+    el.classList.add(mode===0?'mobile-from-left':mode===1?'mobile-from-right':'mobile-from-up');
+    el.style.setProperty('--mobile-reveal-delay',((index%2)*55)+'ms');
+    /* Existing desktop reveal may already have declared the item visible. The
+       mobile class above intentionally overrides that until our own trigger fires. */
+  });
+
+  document.documentElement.classList.add('mobile-motion-ready');
+
+  var raf=0;
+  var started=false;
+  function check(){
+    raf=0;
+    var vh=window.innerHeight || document.documentElement.clientHeight;
+    var trigger=vh*0.88;
+    items.forEach(function(el){
+      if(el.classList.contains('mobile-visible')) return;
+      var rect=el.getBoundingClientRect();
+      if(rect.top < trigger && rect.bottom > 0){
+        el.classList.add('mobile-visible');
+      }
+    });
+  }
+  function requestCheck(){
+    if(!raf) raf=requestAnimationFrame(check);
+  }
+
+  window.addEventListener('scroll',requestCheck,{passive:true});
+  window.addEventListener('resize',requestCheck,{passive:true});
+  window.addEventListener('orientationchange',requestCheck,{passive:true});
+
+  /* Give Safari one paint with the hidden/offset state first. This guarantees the
+     first reveal transition is visible rather than collapsing into the initial paint. */
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      setTimeout(function(){started=true;check();},90);
+    });
+  });
+})();
