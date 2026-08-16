@@ -12,8 +12,15 @@
   <meta property="og:image" content="images/og-image.png">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="mobile-responsive.css">
+  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="stylesheet" href="mobile-responsive.css?v=16">
+  <style id="mobile-marker-final-v16">
+@media (max-width:767px){
+  body main p::before,body main p::after,body main li::before,body main li::after,body main strong::before,body main strong::after{content:none!important;display:none!important;width:0!important;height:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+  body main li{list-style:none!important;list-style-type:none!important}
+  body main li::marker{content:none!important;color:transparent!important;font-size:0!important}
+}
+  </style>
 </head>
 <body class="page-beta">
 <header class="site-header">
@@ -43,6 +50,6 @@
     </nav>
   </div>
 </footer>
-<script src="site.js" defer></script>
+<script src="site.js?v=16" defer></script>
 </body>
 </html>

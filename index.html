@@ -12,57 +12,7 @@
   <meta property="og:image" content="images/og-image.png">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css">
-<style id="wic-home-text-layout">
-/* Home-page What it checks summary: text only.
-   The full Exact / AI-assisted illustration lives on what-it-checks.html. */
-#wic-hero {
-  width:min(calc(100% - 64px),1420px);
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(320px,.72fr);
-  gap:72px;
-  align-items:end;
-  min-height:auto;
-  padding:4px 0 42px;
-}
-#wic-hero .wic-home-heading{max-width:760px}
-#wic-hero .reference-kicker{margin-bottom:22px}
-#wic-hero .wic-hero-heading{
-  margin:0;
-  max-width:12ch;
-  color:#171719;
-  font-family:'Space Grotesk',ui-sans-serif,sans-serif;
-  font-size:clamp(3rem,4.15vw,4.35rem);
-  line-height:.995;
-  letter-spacing:-.052em;
-  font-weight:600;
-}
-#wic-hero .wic-hero-heading .hero-sentence{display:block}
-#wic-hero .wic-hero-heading .hero-secondary-sentence{margin-top:.18em;color:#5e5e61;font-weight:500}
-#wic-hero .wic-hero-heading em{color:#d86818;font-style:normal;font-weight:600}
-#wic-hero .wic-hero-copytext{
-  margin:0 0 4px;
-  max-width:58ch;
-  color:#5e5e63;
-  font-size:.91rem;
-  line-height:1.72;
-}
-.feature-band .feature-grid{margin-top:0}
-.feature-band #wic-hero + .section-link{margin-top:0;padding-top:18px}
-@media(max-width:900px){
-  #wic-hero{width:min(calc(100% - 44px),1240px);grid-template-columns:1fr;gap:24px;padding:8px 0 34px;align-items:start}
-  #wic-hero .wic-hero-heading{font-size:clamp(2.8rem,7vw,3.9rem);max-width:12ch}
-  #wic-hero .wic-hero-copytext{max-width:64ch}
-}
-@media(max-width:600px){
-  #wic-hero{width:calc(100% - 30px);gap:20px;padding:4px 0 28px}
-  #wic-hero .reference-kicker{font-size:.61rem;flex-wrap:wrap;margin-bottom:17px}
-  #wic-hero .wic-hero-heading{font-size:clamp(2.35rem,11vw,3.15rem);max-width:11ch}
-  #wic-hero .wic-hero-copytext{font-size:.84rem;line-height:1.65}
-}
-</style>
-
-
+  <link rel="stylesheet" href="styles.css?v=16">
 <style id="homepage-repeated-illustration-cleanup">
 /* Repeated mid-page illustrations removed: the same information now appears once,
    in the site's established editorial/card layouts. */
@@ -76,93 +26,145 @@
 }
 </style>
 
-<style id="wic-times-layout-refinement">
-/* Refined for the Times New Roman display treatment: keep the same words,
-   but rebalance the title/copy so the serif does not create an oversized,
-   empty-feeling block on wide screens. */
-#wic-hero{
-  width:min(calc(100% - 96px),1546px);
-  grid-template-columns:minmax(560px,760px) minmax(390px,520px);
-  justify-content:space-between;
-  gap:clamp(56px,7vw,132px);
-  align-items:center;
-  padding:20px 0 58px;
-}
-#wic-hero .wic-home-heading{
-  max-width:760px;
-}
-#wic-hero .reference-kicker{
-  margin-bottom:26px;
-}
-#wic-hero .wic-hero-heading{
-  max-width:none;
-  font-family:var(--font-editorial)!important;
-  font-size:clamp(3.7rem,4.35vw,5rem);
-  line-height:.9!important;
-  letter-spacing:-.058em!important;
-  font-weight:700!important;
-}
-#wic-hero .wic-hero-heading .hero-sentence{display:block}
-#wic-hero .wic-hero-heading .hero-secondary-sentence{
-  margin-top:.32em;
-  color:#666669;
-  font-size:.92em;
-  line-height:.94;
-  font-weight:400!important;
-  letter-spacing:-.052em;
-}
-#wic-hero .wic-hero-heading .secondary-line{
-  display:block;
-  width:max-content;
-  max-width:100%;
-}
-#wic-hero .wic-hero-heading em.secondary-line{
-  margin-top:.08em;
-  color:#d86818;
-  font-style:normal;
-  font-weight:700!important;
-}
-#wic-hero .wic-hero-copytext{
-  align-self:center;
-  margin:66px 0 0;
-  max-width:500px;
-  color:#55555a;
-  font-family:var(--font-editorial);
-  font-size:1.02rem;
-  line-height:1.58;
-  letter-spacing:.001em;
-}
-@media(max-width:1120px){
-  #wic-hero{
-    width:min(calc(100% - 64px),1240px);
-    grid-template-columns:minmax(0,1.08fr) minmax(330px,.82fr);
-    gap:52px;
+<link rel="stylesheet" href="illustrations-3d.css?v=16">
+  <link rel="stylesheet" href="mobile-responsive.css?v=16">
+  <style id="home-checks-final-layout-v16">
+/* FINAL source-of-truth for the Home "What it checks" section.
+   This sits after every stylesheet so no legacy grid can squeeze the content. */
+@media (min-width:901px){
+  body.page-home .feature-band > #wic-hero.container{
+    display:block!important;
+    width:min(calc(100% - 96px),1546px)!important;
+    max-width:1546px!important;
+    min-height:0!important;
+    margin:0 auto!important;
+    padding:38px 0 48px!important;
   }
-  #wic-hero .wic-hero-heading{font-size:clamp(3.45rem,5.5vw,4.45rem)}
-  #wic-hero .wic-hero-copytext{margin-top:54px;font-size:.98rem}
-}
-@media(max-width:900px){
-  #wic-hero{
-    width:min(calc(100% - 44px),780px);
-    grid-template-columns:1fr;
-    gap:30px;
-    padding:12px 0 40px;
-    align-items:start;
+  body.page-home #wic-hero > .wic-home-heading{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 30px!important;
   }
-  #wic-hero .wic-home-heading{max-width:720px}
-  #wic-hero .wic-hero-heading{font-size:clamp(3rem,8.5vw,4.2rem)}
-  #wic-hero .wic-hero-copytext{margin:0;max-width:62ch;font-size:.97rem;line-height:1.62}
+  body.page-home #wic-hero .wic-hero-heading{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    font-size:clamp(3.3rem,4.1vw,4.75rem)!important;
+    line-height:.95!important;
+  }
+  body.page-home #wic-hero > .home-check-split{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.5fr) minmax(360px,.72fr)!important;
+    gap:0!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    position:static!important;
+    float:none!important;
+    transform:none!important;
+    border:1px solid #d7d7d3!important;
+    border-radius:10px!important;
+    overflow:hidden!important;
+    background:#fff!important;
+  }
+  body.page-home #wic-hero > .home-check-split > .check-group{
+    display:block!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:28px 30px!important;
+    position:relative!important;
+    transform:none!important;
+  }
+  body.page-home #wic-hero > .home-check-split > .check-group + .check-group{
+    border-left:1px solid #d9d9d5!important;
+  }
+  body.page-home #wic-hero .check-list,
+  body.page-home #wic-hero .check-list li{
+    width:100%!important;
+    max-width:none!important;
+  }
+  body.page-home #wic-hero > .home-working{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:22px 0 0!important;
+    padding:20px 22px!important;
+    position:static!important;
+    transform:none!important;
+  }
+  body.page-home #wic-hero > .home-working ul{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:8px 24px!important;
+    width:100%!important;
+    margin:.75rem 0 0!important;
+    padding-left:1rem!important;
+  }
+  body.page-home #wic-hero > .closing-line{
+    display:block!important;
+    width:100%!important;
+    max-width:1050px!important;
+    margin:30px 0 0!important;
+  }
+  body.page-home .feature-band > .section-link.container{
+    width:min(calc(100% - 96px),1546px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
 }
-@media(max-width:600px){
-  #wic-hero{width:calc(100% - 30px);gap:24px;padding:4px 0 32px}
-  #wic-hero .reference-kicker{margin-bottom:18px}
-  #wic-hero .wic-hero-heading{font-size:clamp(2.65rem,12.2vw,3.45rem);line-height:.92!important}
-  #wic-hero .wic-hero-heading .hero-secondary-sentence{margin-top:.3em;font-size:.88em;line-height:.96}
-  #wic-hero .wic-hero-copytext{font-size:.92rem;line-height:1.58}
+
+/* FINAL mobile marker cleanup. These are decorative artefacts only; numbered
+   steps remain because they are real content, not pseudo/list markers. */
+@media (max-width:767px){
+  body main p::before,
+  body main p::after,
+  body main li::before,
+  body main li::after,
+  body main strong::before,
+  body main strong::after,
+  body.page-home .attio-steps p::before,
+  body.page-home .attio-steps p::after,
+  body.page-home .check-list li::before,
+  body.page-home .check-list li::after,
+  body.page-what-it-checks .check-list li::before,
+  body.page-what-it-checks .check-list li::after{
+    content:none!important;
+    display:none!important;
+    inline-size:0!important;
+    block-size:0!important;
+    width:0!important;
+    height:0!important;
+    background:transparent!important;
+    border:0!important;
+    box-shadow:none!important;
+  }
+  body main li,
+  body.page-home .check-list li,
+  body.page-what-it-checks .check-list li{
+    list-style:none!important;
+    list-style-type:none!important;
+    display:block!important;
+  }
+  body main li::marker,
+  body.page-home .check-list li::marker,
+  body.page-what-it-checks .check-list li::marker{
+    content:none!important;
+    color:transparent!important;
+    font-size:0!important;
+  }
+  body.page-home .check-list,
+  body.page-home .home-working ul,
+  body.page-what-it-checks .check-list,
+  body.page-what-it-checks .working ul{
+    list-style:none!important;
+    padding-left:0!important;
+  }
 }
-</style>
-  <link rel="stylesheet" href="illustrations-3d.css">
-  <link rel="stylesheet" href="mobile-responsive.css">
+  </style>
 </head>
 <body class="page-home">
 <header class="site-header">
@@ -334,6 +336,6 @@
     <nav class="footer-links" aria-label="Footer navigation"><a href="what-it-checks.html">What it checks</a><a href="security.html">Security</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="beta.html">Beta</a></nav>
   </div>
 </footer>
-<script src="site.js" defer></script>
+<script src="site.js?v=16" defer></script>
 </body>
 </html>

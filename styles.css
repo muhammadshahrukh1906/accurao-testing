@@ -5383,7 +5383,15 @@ html.acc-motion-ready .acc-reveal.acc-visible{
   }
   html.acc-motion-ready .acc-reveal.acc-visible{left:0;top:0}
 }
-\n\n/* Copy-fidelity cleanup: decorative eyebrow/kicker labels were removed from markup.\n   Collapse the grid tracks they previously occupied so no blank columns/rows remain. */\nbody .page-hero > .container > h1{grid-row:1!important;margin-top:0!important}\nbody.page-home .editorial-head > h2{grid-row:1!important;margin-top:0!important}\nbody .section-label{grid-template-columns:minmax(0,1fr)!important;gap:0!important}\nbody .section-label > .measure{grid-column:1!important;max-width:920px!important}\nbody.page-home .final-cta h2{grid-row:1 / span 5!important;margin-top:0!important}\n
+
+
+/* Copy-fidelity cleanup: decorative eyebrow/kicker labels were removed from markup.
+   Collapse the grid tracks they previously occupied so no blank columns/rows remain. */
+body .page-hero > .container > h1{grid-row:1!important;margin-top:0!important}
+body.page-home .editorial-head > h2{grid-row:1!important;margin-top:0!important}
+body .section-label{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+body .section-label > .measure{grid-column:1!important;max-width:920px!important}
+body.page-home .final-cta h2{grid-row:1 / span 5!important;margin-top:0!important}\n
 /* ========================================================================== 
    Home / What it checks — desktop layout repair
    The approved content stays unchanged; only the desktop composition changes.
