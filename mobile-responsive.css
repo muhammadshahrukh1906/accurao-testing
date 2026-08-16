@@ -689,3 +689,467 @@
   .page-how-it-works .how-hero h1{font-size:clamp(2.5rem,11.5vw,3.2rem)!important;line-height:.96!important}
   .page-security .security-hero h1{font-size:clamp(2.5rem,11.5vw,3.2rem)!important;line-height:.96!important}
 }
+
+/* ========================================================================== 
+   Mobile v3 — deliberately simple phone layout.
+   Desktop/tablet rules remain untouched. This final phone-only layer removes
+   decorative illustration canvases and prioritises readable content density.
+   ========================================================================== */
+@media (max-width:767px){
+  :root{
+    --mobile-header-height:88px;
+    --mobile-page-offset:98px;
+    --mobile-gutter:16px;
+  }
+
+  html{scroll-padding-top:104px!important}
+  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+  body{
+    padding-top:var(--mobile-page-offset)!important;
+    font-size:16px!important;
+    line-height:1.58!important;
+    background:#fff!important;
+  }
+  main{width:100%!important;max-width:100%!important;overflow:visible!important}
+  .container,
+  body:not(.page-home) .container,
+  .page-home .container{
+    width:calc(100% - 32px)!important;
+    max-width:none!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+
+  /* Compact permanent header: one utility row + one all-visible nav row. */
+  .site-header,
+  .site-header.scrolled{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    height:var(--mobile-header-height)!important;
+    margin:0!important;
+    transform:none!important;
+    border:0!important;
+    border-bottom:1px solid #ddddda!important;
+    border-radius:0!important;
+    background:rgba(255,255,255,.98)!important;
+    box-shadow:0 5px 18px rgba(20,20,20,.07)!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+    overflow:hidden!important;
+    z-index:1000!important;
+  }
+  .header-inner{
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    padding:6px 12px 7px!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:38px 34px!important;
+    gap:3px 8px!important;
+    align-items:center!important;
+  }
+  .brand{grid-column:1!important;grid-row:1!important;min-width:0!important}
+  .brand-fallback{font-size:1.18rem!important;line-height:1!important;padding:0 0 5px!important}
+  .brand-fallback::after{width:58px!important;border-bottom-width:1.5px!important}
+  .nav-toggle{display:none!important}
+  .nav-cta{
+    display:inline-flex!important;
+    grid-column:2!important;
+    grid-row:1!important;
+    min-height:34px!important;
+    height:34px!important;
+    padding:0 11px!important;
+    border-radius:7px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    font-size:.7rem!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+    box-shadow:none!important;
+  }
+  .main-nav,
+  .main-nav.open{
+    grid-column:1 / -1!important;
+    grid-row:2!important;
+    position:static!important;
+    inset:auto!important;
+    display:grid!important;
+    grid-template-columns:.66fr 1.42fr 1.36fr .88fr .55fr .7fr!important;
+    grid-template-rows:34px!important;
+    width:100%!important;
+    height:34px!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:0!important;
+    gap:2px!important;
+    overflow:visible!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    transform:none!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  .main-nav a,
+  .main-nav.open a,
+  .main-nav a[aria-current="page"],
+  .main-nav.open a[aria-current="page"]{
+    width:100%!important;
+    min-width:0!important;
+    height:34px!important;
+    min-height:34px!important;
+    margin:0!important;
+    padding:0 2px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    border:0!important;
+    border-radius:6px!important;
+    background:transparent!important;
+    color:#55585b!important;
+    font-family:var(--font-ui)!important;
+    font-size:clamp(.69rem,3vw,.76rem)!important;
+    line-height:1!important;
+    font-weight:650!important;
+    letter-spacing:-.01em!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+    box-shadow:none!important;
+    transform:none!important;
+  }
+  .main-nav a[aria-current="page"],
+  .main-nav.open a[aria-current="page"]{
+    background:#f1f1ef!important;
+    color:#171719!important;
+    font-weight:760!important;
+  }
+  .main-nav a::before,.main-nav a::after{display:none!important}
+  .main-nav .mobile-only{display:none!important}
+  body.mobile-nav-open{overflow-y:auto!important;touch-action:auto!important}
+
+  /* Remove every large decorative/interactive illustration on phones. */
+  .page-home .reference-match-visual,
+  .page-what-it-checks .wicp-visual,
+  .page-how-it-works .how-hero-visual,
+  .page-security .security-hero-visual,
+  .page-security .security-vector-illustration,
+  .premium-scroll-illustration,
+  .context-visual{
+    display:none!important;
+  }
+
+  /* Global phone typography and rhythm. */
+  .section,
+  body:not(.page-home) main>.section,
+  .page-home main>.section{padding:2.15rem 0!important}
+  .section.compact{padding:1.8rem 0!important}
+  .section.alt{background:#fbfbfa!important}
+  .page-hero,
+  body:not(.page-home) .page-hero{padding:1.45rem 0 1.8rem!important}
+  h1,.page-hero h1{
+    font-size:clamp(2.35rem,10.8vw,2.85rem)!important;
+    line-height:.96!important;
+    letter-spacing:-.045em!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  h2{
+    font-size:clamp(1.75rem,8vw,2.1rem)!important;
+    line-height:1.04!important;
+    letter-spacing:-.035em!important;
+    max-width:100%!important;
+  }
+  h3{font-size:1.08rem!important;line-height:1.24!important}
+  .eyebrow,.side-label{font-size:.7rem!important;letter-spacing:.08em!important}
+  .lede,
+  .how-hero-lede,
+  .security-hero-lede{
+    font-size:.98rem!important;
+    line-height:1.58!important;
+    max-width:none!important;
+    margin-top:14px!important;
+  }
+  p,li{font-size:1rem!important;line-height:1.6!important;max-width:100%!important;overflow-wrap:break-word!important;word-break:normal!important}
+  .token{overflow-wrap:anywhere!important;word-break:break-word!important}
+  .measure,.editorial-copy,.founder-copy,.beta-copy,.legal-shell,.faq-answer-inner{width:100%!important;max-width:none!important;min-width:0!important}
+
+  /* Flatten desktop editorial grids into a natural reading flow. */
+  .editorial-head,
+  .feature-heading,
+  .section-label,
+  .about-grid,
+  .beta-panel,
+  .final-cta-inner,
+  .check-split,
+  .security-facts,
+  .attio-steps,
+  .audience-grid,
+  .steps{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    grid-template-columns:none!important;
+    gap:0!important;
+    border-left:0!important;
+    border-right:0!important;
+    box-shadow:none!important;
+  }
+  .section-label .side-label{position:static!important;margin:0 0 12px!important}
+  .editorial-head>.eyebrow,.editorial-head>h2,.editorial-head>.editorial-copy,
+  .final-cta .eyebrow,.final-cta h2,.final-cta p,.final-cta .hero-actions,.final-cta .hero-note{
+    grid-column:auto!important;grid-row:auto!important;
+  }
+
+  /* HOME: copy first, key principles, then simple editorial sections. */
+  .page-home .reference-match-hero{padding:0!important;overflow:visible!important}
+  .page-home .reference-match-main{
+    display:block!important;
+    width:calc(100% - 32px)!important;
+    min-height:0!important;
+    padding:1.55rem 0 1.25rem!important;
+  }
+  .page-home .reference-match-copy{width:100%!important;max-width:none!important}
+  .page-home .reference-kicker{margin-bottom:14px!important;font-size:.69rem!important;line-height:1.35!important}
+  .page-home .reference-kicker b{width:auto!important;padding-left:0!important}
+  .page-home .reference-match-copy h1{
+    font-size:clamp(2.42rem,10.9vw,2.9rem)!important;
+    line-height:.96!important;
+    max-width:100%!important;
+  }
+  .page-home .reference-match-sub{margin-top:16px!important;font-size:.98rem!important;line-height:1.58!important}
+  .page-home .reference-match-actions{
+    margin-top:18px!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  .page-home .reference-match-actions .button{width:100%!important;min-height:43px!important}
+  .page-home .reference-match-link{min-height:38px!important;justify-content:flex-start!important;font-size:.83rem!important}
+  .page-home .reference-beta-note{margin-top:12px!important;font-size:.78rem!important;line-height:1.45!important}
+  .page-home .reference-benefits{
+    display:block!important;
+    width:calc(100% - 32px)!important;
+    margin:0 auto!important;
+    border-top:1px solid #dfdfdc!important;
+    border-bottom:1px solid #dfdfdc!important;
+  }
+  .page-home .reference-benefits>div{
+    min-height:0!important;
+    padding:12px 0 12px 17px!important;
+    border:0!important;
+    border-bottom:1px solid #ecece9!important;
+    background:transparent!important;
+  }
+  .page-home .reference-benefits>div:last-child{border-bottom:0!important}
+  .page-home .reference-benefits i{left:0!important;top:18px!important;width:5px!important;height:5px!important}
+  .page-home .reference-benefits strong{font-size:.9rem!important;margin:0 0 2px!important}
+  .page-home .reference-benefits span{font-size:.83rem!important;line-height:1.45!important}
+
+  .page-home .editorial-head{padding:0!important;border:0!important}
+  .page-home .editorial-head h2{margin:8px 0 18px!important;font-size:2rem!important;max-width:none!important}
+  .page-home .editorial-copy{padding:0!important}
+  .page-home .editorial-copy p{
+    margin:0 0 15px!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    color:#55585b!important;
+    font-size:.98rem!important;
+    line-height:1.62!important;
+  }
+  .page-home .editorial-copy p::before{display:none!important}
+  .page-home .editorial-copy .pitch{
+    margin-top:18px!important;
+    padding:13px 14px!important;
+    border:0!important;
+    border-left:3px solid var(--accent)!important;
+    border-radius:0!important;
+    background:#fff9f4!important;
+    color:#242424!important;
+    font-weight:650!important;
+  }
+  .page-home #wic-hero{
+    display:block!important;
+    width:calc(100% - 32px)!important;
+    padding:0!important;
+  }
+  .page-home #wic-hero .wic-hero-heading{font-size:2rem!important;line-height:1!important;max-width:none!important}
+  .page-home #wic-hero .wic-hero-copytext{margin-top:14px!important;font-size:.98rem!important;line-height:1.62!important}
+  .page-home .section-link{margin-top:18px!important}
+
+  .page-home .feature-heading{margin-bottom:16px!important}
+  .page-home .feature-heading h2{margin:8px 0 0!important;font-size:2rem!important;max-width:none!important}
+  .page-home .feature-heading>p{margin:14px 0 0!important;padding:0!important;font-size:.95rem!important;line-height:1.58!important}
+  .page-home .attio-steps{border-top:1px solid #d8d8d4!important}
+  .page-home .attio-steps article{
+    position:relative!important;
+    min-height:0!important;
+    padding:17px 0 18px 42px!important;
+    border:0!important;
+    border-bottom:1px solid #e2e2df!important;
+    border-radius:0!important;
+    background:transparent!important;
+  }
+  .page-home .attio-steps article+article{border-left:0!important;border-top:0!important}
+  .page-home .attio-steps article::after{display:none!important}
+  .page-home .step-num{
+    position:absolute!important;left:0!important;top:18px!important;margin:0!important;
+    color:var(--accent)!important;font-size:.74rem!important;font-weight:700!important;
+  }
+  .page-home .attio-steps h3{margin:0 0 7px!important;font-size:1.12rem!important;max-width:none!important}
+  .page-home .attio-steps p{margin:0!important;font-size:.92rem!important;line-height:1.57!important}
+  .page-home .quiet-block{
+    margin-top:18px!important;padding:13px 14px!important;border:0!important;border-left:3px solid #222!important;border-radius:0!important;background:#f8f8f6!important;
+  }
+  .page-home .quiet-block p{font-size:.92rem!important;line-height:1.56!important}
+  .page-home .audience-grid{border-top:1px solid #d8d8d4!important}
+  .page-home .audience-item{
+    min-height:0!important;padding:16px 0!important;border:0!important;border-bottom:1px solid #e2e2df!important;border-radius:0!important;background:transparent!important;
+  }
+  .page-home .audience-item+.audience-item{border-left:0!important;border-top:0!important}
+  .page-home .audience-item p{margin:8px 0 0!important;font-size:.94rem!important;line-height:1.58!important}
+  .page-home .audience-item strong{font-size:1.1rem!important;margin-bottom:4px!important}
+  .page-home .final-cta{padding:2.5rem 0!important}
+  .page-home .final-cta-inner{text-align:left!important;align-items:stretch!important}
+  .page-home .final-cta h2{margin:8px 0 14px!important;font-size:2rem!important}
+  .page-home .final-cta p{margin:0 0 12px!important;font-size:.96rem!important;line-height:1.58!important}
+  .page-home .final-cta .hero-actions{width:100%!important;max-width:none!important;margin-top:8px!important}
+  .page-home .final-cta .button{width:100%!important}
+
+  /* WHAT IT CHECKS: no illustration, two clean content sections. */
+  .page-what-it-checks #wic-page-hero{
+    display:block!important;width:calc(100% - 32px)!important;min-height:0!important;padding:0!important;
+  }
+  .page-what-it-checks #wic-page-hero h1{font-size:2.6rem!important;line-height:.96!important}
+  .page-what-it-checks #wic-page-hero .lede{margin-top:15px!important}
+  .page-what-it-checks .check-split{border:0!important;background:transparent!important}
+  .page-what-it-checks .check-group{
+    padding:18px 0 0!important;margin:0 0 26px!important;border:0!important;border-top:2px solid #222!important;background:transparent!important;
+  }
+  .page-what-it-checks .check-group+.check-group{border-left:0!important;border-top:2px solid var(--accent)!important}
+  .page-what-it-checks .check-group::before{display:none!important}
+  .page-what-it-checks .check-group h2{font-size:1.55rem!important;margin:0 0 5px!important}
+  .page-what-it-checks .group-note{margin:0 0 13px!important;font-size:.88rem!important;line-height:1.5!important}
+  .page-what-it-checks .check-list li{padding:13px 0!important;font-size:.94rem!important;line-height:1.6!important}
+  .page-what-it-checks .working{margin-top:14px!important;padding:14px!important;border-radius:0!important}
+  .page-what-it-checks .working li{font-size:.92rem!important}
+  .page-what-it-checks .closing-line{font-size:1.35rem!important;line-height:1.3!important;margin-top:24px!important}
+  .page-what-it-checks .quiet-block{margin-top:0!important;padding:14px!important}
+
+  /* HOW IT WORKS: illustration removed; the three steps become the visual direction. */
+  .page-how-it-works .how-hero>.how-hero-grid{
+    display:block!important;width:calc(100% - 32px)!important;min-height:0!important;padding:0!important;
+  }
+  .page-how-it-works .how-hero h1{font-size:2.6rem!important;line-height:.96!important}
+  .page-how-it-works .steps{border-top:1px solid #d8d8d4!important;border-bottom:0!important}
+  .page-how-it-works .step{
+    display:grid!important;
+    grid-template-columns:34px minmax(0,1fr)!important;
+    gap:10px!important;
+    padding:17px 0 18px!important;
+    border:0!important;
+    border-bottom:1px solid #e2e2df!important;
+    background:transparent!important;
+  }
+  .page-how-it-works .step-number{padding-top:2px!important;color:var(--accent)!important;font-size:.76rem!important;font-weight:700!important}
+  .page-how-it-works .step h2{font-size:1.15rem!important;line-height:1.22!important;margin:0 0 7px!important}
+  .page-how-it-works .step p{font-size:.94rem!important;line-height:1.58!important}
+  .page-how-it-works .section-label{display:block!important}
+  .page-how-it-works .section-label h2{font-size:1.75rem!important;margin:0 0 12px!important}
+  .page-how-it-works .section-label p,.page-how-it-works .section-label li{font-size:.96rem!important;line-height:1.62!important}
+  .page-how-it-works .section-label ul{padding-left:22px!important;margin:12px 0 18px!important}
+  .page-how-it-works .quiet-block{margin:0!important;padding:14px!important;border-radius:0!important}
+
+  /* SECURITY: illustration removed; concise posture summary carries the direction. */
+  .page-security .security-hero>.security-hero-grid{
+    display:block!important;width:calc(100% - 32px)!important;min-height:0!important;padding:0!important;
+  }
+  .page-security .security-hero h1{font-size:2.6rem!important;line-height:.96!important}
+  .page-security .security-quick-read{margin-top:20px!important;padding:0!important;border-top:1px solid #d8d8d4!important}
+  .page-security .security-quick-heading{padding:10px 0 7px!important;font-size:.68rem!important}
+  .page-security .security-quick-item{
+    display:grid!important;grid-template-columns:28px 90px minmax(0,1fr)!important;gap:7px!important;align-items:center!important;
+    min-height:44px!important;border-top:1px solid #ecece9!important;
+  }
+  .page-security .security-quick-item>span{font-size:.7rem!important}.page-security .security-quick-item>b{font-size:.8rem!important}.page-security .security-quick-item>em{font-size:.78rem!important;line-height:1.35!important}
+  .page-security .section-label{display:block!important}
+  .page-security .section-label h2{font-size:1.9rem!important;margin:0 0 12px!important}
+  .page-security .section-label p{font-size:.97rem!important;line-height:1.62!important}
+  .page-security .security-facts{border-top:1px solid #d8d8d4!important;border-bottom:1px solid #d8d8d4!important;background:transparent!important}
+  .page-security .fact{padding:15px 0!important;border:0!important;border-bottom:1px solid #ecece9!important;background:transparent!important}
+  .page-security .fact:last-child{border-bottom:0!important}
+  .page-security .fact+.fact{border-left:0!important;border-top:0!important}
+  .page-security .fact h3{font-size:1rem!important;margin:0 0 5px!important}
+  .page-security .fact p{font-size:.92rem!important;line-height:1.58!important}
+
+  /* FAQ: tighter accordion, larger tap titles, less card chrome. */
+  .page-faq .faq-list{width:100%!important;max-width:none!important;border-top:1px solid #222!important}
+  .page-faq .faq-item,.page-faq .faq-item.enhanced{padding:0!important;border-bottom:1px solid #deded9!important;background:transparent!important}
+  .page-faq .faq-question{
+    min-height:58px!important;padding:15px 0!important;grid-template-columns:minmax(0,1fr) 28px!important;gap:12px!important;
+    font-size:1.12rem!important;line-height:1.2!important;
+  }
+  .page-faq .faq-plus{width:28px!important;height:28px!important}
+  .page-faq .faq-plus::before,.page-faq .faq-plus::after{left:7px!important;right:7px!important;top:13px!important}
+  .page-faq .faq-answer-inner{padding-right:0!important}
+  .page-faq .faq-item.is-open .faq-answer-inner{padding:0 0 18px!important}
+  .page-faq .faq-answer-inner p,.page-faq .faq-answer-inner li{font-size:.94rem!important;line-height:1.62!important}
+
+  /* ABOUT: compact founder treatment rather than a huge empty photo block. */
+  .page-about .about-grid{display:block!important}
+  .page-about .founder-photo{
+    width:150px!important;max-width:150px!important;aspect-ratio:1/1!important;margin:0 0 22px!important;padding:10px!important;
+    font-size:.67rem!important;line-height:1.35!important;
+  }
+  .page-about .founder-copy h2{font-size:2rem!important;line-height:1.02!important;margin:8px 0 16px!important}
+  .page-about .founder-copy p{font-size:.97rem!important;line-height:1.62!important}
+  .page-about .editorial-placeholder{margin:20px 0!important;padding:14px!important;font-size:.88rem!important;line-height:1.55!important}
+
+  /* BETA / legal pages: compact and full-width. */
+  .page-beta .beta-panel{display:block!important;border-top:1px solid #222!important;padding-top:16px!important}
+  .page-beta .beta-panel h2{max-width:none!important;font-size:1.75rem!important;margin:0 0 16px!important}
+  .page-beta .beta-copy{border:0!important;padding:0!important}
+  .page-beta .beta-copy p{font-size:.96rem!important;line-height:1.6!important;margin:0 0 12px!important}
+  .page-beta .beta-copy>.button{width:100%!important;margin-top:6px!important}
+  .page-beta .booking-shell{padding-top:14px!important;min-height:0!important}
+  .page-beta .booking-placeholder{min-height:220px!important;padding:16px!important}
+  .page-privacy .legal-shell,.page-terms .legal-shell{width:100%!important;max-width:none!important}
+
+  /* Footer: compact, no oversized terminal space. */
+  .site-footer{padding:1.7rem 0 2rem!important}
+  .footer-rule{display:block!important;padding-top:14px!important}
+  .footer-brand{font-size:.82rem!important;margin-bottom:12px!important}
+  .footer-links{display:flex!important;gap:16px!important;font-size:.78rem!important}
+}
+
+@media (max-width:390px){
+  .main-nav a,.main-nav.open a,.main-nav a[aria-current="page"]{font-size:.68rem!important}
+  .nav-cta{font-size:.66rem!important;padding:0 9px!important}
+  h1,.page-hero h1{font-size:2.3rem!important}
+  .page-home .reference-match-copy h1{font-size:2.36rem!important}
+}
+
+/* Final mobile nav tap-size refinement. */
+@media (max-width:767px){
+  :root{--mobile-header-height:92px;--mobile-page-offset:102px}
+  .header-inner{grid-template-rows:39px 38px!important;padding:6px 12px!important}
+  .main-nav,.main-nav.open{grid-template-rows:38px!important;height:38px!important}
+  .main-nav a,.main-nav.open a,.main-nav a[aria-current="page"],.main-nav.open a[aria-current="page"]{
+    height:38px!important;min-height:38px!important;font-size:clamp(.72rem,3.05vw,.78rem)!important
+  }
+}
+@media (max-width:390px){
+  .main-nav a,.main-nav.open a,.main-nav a[aria-current="page"]{font-size:.7rem!important}
+}
