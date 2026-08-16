@@ -167,9 +167,7 @@
   });
 })();
 
-/* Unified scroll-reveal system and reading progress — v10.
-   One observer drives desktop + mobile. The reveal intentionally avoids blur
-   filters, scale transforms and transforms on individual illustration cards. */
+/* Unified scroll reveal + reading progress. One observer for desktop and mobile. */
 (function(){
   var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -197,73 +195,92 @@
 
   var items=[];
   function add(el,dir,delay){
-    if(!el || items.indexOf(el)!==-1) return;
+    if(!el||items.indexOf(el)!==-1) return;
+    /* Never animate the individual interactive cards: their own transforms stay independent. */
     if(el.matches('.premium-interactive-card,.interactive-layer,.reference-card,.how-input,.how-review-card,.how-findings,.how-insight,.wicp-card,.wicp-ai,.wicp-result,.security-v-card')) return;
-    el.classList.add('scroll-reveal',dir==='right'?'reveal-right':dir==='up'?'reveal-up':'reveal-left');
-    el.style.setProperty('--reveal-delay',(delay||0)+'ms');
+    el.classList.remove('scroll-reveal','reveal-left','reveal-right','reveal-up','is-visible','mobile-scroll-reveal','mobile-from-left','mobile-from-right','mobile-from-up','mobile-visible');
+    el.classList.add('acc-reveal',dir==='right'?'acc-from-right':dir==='up'?'acc-from-up':'acc-from-left');
+    el.style.setProperty('--acc-delay',(delay||0)+'ms');
     items.push(el);
   }
-  function addAll(selector,pattern){
-    var dirs=pattern||['left','right','up'];
+  function addAll(selector,dirs,baseDelay){
+    var pattern=dirs||['left','right'];
     document.querySelectorAll(selector).forEach(function(el,i){
-      add(el,dirs[i%dirs.length],Math.min((i%3)*70,140));
+      add(el,pattern[i%pattern.length],(baseDelay||0)+Math.min((i%3)*70,140));
     });
   }
 
-  /* Home: the scrolling sections use the shared reveal language. The main hero
-     headline is handled by the compositor-safe headline system below. */
-  addAll('.page-home .reference-kicker, .page-home .reference-match-sub, .page-home .reference-match-actions, .page-home .reference-beta-note',['left','left','up','up']);
-  addAll('.page-home .intro-section .editorial-head > *',['left','right','up']);
-  addAll('.page-home #wic-hero > *',['left','right']);
-  addAll('.page-home .feature-band .section-link',['right']);
-  addAll('.page-home .steps-section .feature-heading > *',['left','right']);
-  addAll('.page-home .steps-section .attio-steps > article',['left','right','left']);
-  addAll('.page-home .steps-section .quiet-block',['up']);
-  addAll('.page-home .audience-section .feature-heading > *',['left','right']);
-  addAll('.page-home .audience-section .audience-item',['left','right','left']);
-  addAll('.page-home .final-cta .final-cta-inner > *',['up','left','right']);
+  /* HOME HERO — title explicitly included. */
+  addAll('.page-home .reference-kicker',['left'],0);
+  addAll('.page-home .reference-match-copy h1',['left'],55);
+  addAll('.page-home .reference-match-sub',['left'],115);
+  addAll('.page-home .reference-match-actions',['up'],165);
+  addAll('.page-home .reference-beta-note',['up'],205);
+  addAll('.page-home .reference-match-visual',['right'],85);
 
-  /* Hero display type is deliberately excluded from transform-based scroll reveal.
-     Large serif/sans display glyphs were being rasterised as dark rectangles in
-     Chromium/WebKit. Eyebrows and body copy can still slide normally. */
-  addAll('.page-what-it-checks #wic-page-hero .wicp-copy > .eyebrow, .page-what-it-checks #wic-page-hero .wicp-copy > .lede',['left','left']);
-  addAll('.page-what-it-checks #wic-page-hero .wicp-visual',['right']);
+  /* HOME CONTENT. */
+  addAll('.page-home .intro-section .editorial-head > .eyebrow, .page-home .intro-section .editorial-head > h2',['left'],0);
+  addAll('.page-home .intro-section .context-visual, .page-home .intro-section .editorial-copy',['right'],70);
+  addAll('.page-home #wic-hero > :not(.wicp-visual)',['left'],0);
+  addAll('.page-home #wic-hero > .wicp-visual',['right'],70);
+  addAll('.page-home .feature-band .section-link',['right'],90);
+  addAll('.page-home .steps-section .feature-heading > *',['left','right'],0);
+  addAll('.page-home .steps-section .attio-steps > article',['left','right','left'],40);
+  addAll('.page-home .steps-section .quiet-block',['up'],80);
+  addAll('.page-home .audience-section .feature-heading > *',['left','right'],0);
+  addAll('.page-home .audience-section .audience-item',['left','right'],40);
+  addAll('.page-home .final-cta .final-cta-inner > *',['up','left','right'],0);
 
-  addAll('.page-how-it-works .how-hero-copy > .eyebrow, .page-how-it-works .how-hero-copy > .how-hero-lede',['left','left']);
-  addAll('.page-how-it-works .how-hero-visual',['right']);
+  /* WHAT IT CHECKS HERO — title explicitly included. */
+  addAll('.page-what-it-checks #wic-page-hero .eyebrow',['left'],0);
+  addAll('.page-what-it-checks #wic-page-hero h1',['left'],60);
+  addAll('.page-what-it-checks #wic-page-hero .lede',['left'],120);
+  addAll('.page-what-it-checks #wic-page-hero .wicp-visual, .page-what-it-checks #wic-page-hero .context-visual',['right'],70);
 
-  addAll('.page-security .security-hero-copy > .eyebrow, .page-security .security-hero-copy > .security-hero-lede',['left','left']);
-  addAll('.page-security .security-quick-read',['left']);
-  addAll('.page-security .security-hero-visual',['right']);
+  /* HOW IT WORKS HERO — title explicitly included. */
+  addAll('.page-how-it-works .how-hero-copy .eyebrow',['left'],0);
+  addAll('.page-how-it-works .how-hero-copy h1',['left'],60);
+  addAll('.page-how-it-works .how-hero-copy .how-hero-lede',['left'],120);
+  addAll('.page-how-it-works .how-hero-visual',['right'],70);
 
-  /* Shared inner-page content. */
-  addAll('body:not(.page-home) main > .section .check-group',['left','right']);
-  addAll('body:not(.page-home) main > .section .working',['left']);
-  addAll('body:not(.page-home) main > .section .closing-line',['right']);
-  addAll('body:not(.page-home) main > .section .quiet-block',['up']);
-  addAll('body:not(.page-home) main > .section .step',['left','right','left']);
-  addAll('body:not(.page-home) main > .section .fact',['left','right','left']);
-  addAll('body:not(.page-home) main > .section .faq-item',['left','right']);
-  addAll('body:not(.page-home) main > .section .founder-photo',['left']);
-  addAll('body:not(.page-home) main > .section .founder-copy > *',['right','up']);
-  addAll('body:not(.page-home) main > .section .beta-panel > *',['left','right']);
-  addAll('body:not(.page-home) main > .section .booking-shell',['up']);
-  addAll('body:not(.page-home) main > .section .legal-shell > *',['left','right','up']);
-  addAll('body:not(.page-home) main > .section .section-label > *',['left','right']);
-  addAll('body:not(.page-home) main > .section .editorial-placeholder',['right']);
+  /* SECURITY HERO — title explicitly included. */
+  addAll('.page-security .security-hero-copy .eyebrow',['left'],0);
+  addAll('.page-security .security-hero-copy h1',['left'],60);
+  addAll('.page-security .security-hero-copy .security-hero-lede',['left'],120);
+  addAll('.page-security .security-quick-read',['left'],160);
+  addAll('.page-security .security-hero-visual',['right'],70);
+
+  /* SHARED INNER-PAGE GROUPS. */
+  addAll('body:not(.page-home) main > .section .section-label > .side-label',['left'],0);
+  addAll('body:not(.page-home) main > .section .section-label > .measure',['right'],45);
+  addAll('body:not(.page-home) main > .section .check-group',['left','right'],0);
+  addAll('body:not(.page-home) main > .section .working',['left'],0);
+  addAll('body:not(.page-home) main > .section .closing-line',['right'],40);
+  addAll('body:not(.page-home) main > .section .quiet-block',['up'],40);
+  addAll('body:not(.page-home) main > .section .step',['left','right'],0);
+  addAll('body:not(.page-home) main > .section .fact',['left','right'],0);
+  addAll('body:not(.page-home) main > .section .faq-item',['left','right'],0);
+  addAll('body:not(.page-home) main > .section .founder-photo',['left'],0);
+  addAll('body:not(.page-home) main > .section .founder-copy',['right'],50);
+  addAll('body:not(.page-home) main > .section .beta-panel > *',['left','right'],0);
+  addAll('body:not(.page-home) main > .section .booking-shell',['up'],40);
+  addAll('body:not(.page-home) main > .section .legal-shell > *',['left','right','up'],0);
+  addAll('body:not(.page-home) main > .section .editorial-placeholder',['right'],40);
 
   if(!items.length) return;
-  document.documentElement.classList.add('motion-ready');
+  document.documentElement.classList.remove('motion-ready','mobile-motion-ready');
+  document.documentElement.classList.add('acc-motion-ready');
 
-  function reveal(el){el.classList.add('is-visible');}
-  if(!('IntersectionObserver' in window)){items.forEach(reveal);return;}
+  function show(el){el.classList.add('acc-visible');}
+  if(!('IntersectionObserver' in window)){items.forEach(show);return;}
 
   var observer=new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
-      if(entry.isIntersecting){reveal(entry.target);observer.unobserve(entry.target);}
+      if(entry.isIntersecting){show(entry.target);observer.unobserve(entry.target);}
     });
-  },{threshold:.10,rootMargin:'0px 0px -7% 0px'});
+  },{threshold:.08,rootMargin:'0px 0px -6% 0px'});
 
+  /* Two frames allow the hidden start state to paint before visible items enter. */
   requestAnimationFrame(function(){
     requestAnimationFrame(function(){items.forEach(function(el){observer.observe(el);});});
   });

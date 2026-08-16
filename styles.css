@@ -153,7 +153,6 @@ p{margin:0 0 1.15rem;max-width:var(--measure)}
   .hero-centered>*{opacity:0;transform:translateY(14px);animation:accEnter .72s cubic-bezier(.16,1,.3,1) forwards}
   .hero-centered>*:nth-child(1){animation-delay:.04s}.hero-centered>*:nth-child(2){animation-delay:.10s}.hero-centered>*:nth-child(3){animation-delay:.17s}.hero-centered>*:nth-child(4){animation-delay:.24s}.hero-centered>*:nth-child(5){animation-delay:.31s}
   .product-stage{opacity:0;transform:translateY(24px) scale(.992);animation:accStage .95s .34s cubic-bezier(.16,1,.3,1) forwards}
-  .page-hero>.container>*{opacity:0;transform:translateY(12px);animation:accEnter .68s cubic-bezier(.16,1,.3,1) forwards}.page-hero>.container>*:nth-child(2){animation-delay:.07s}.page-hero>.container>*:nth-child(3){animation-delay:.14s}
   .status-dot{animation:statusPulse 2.8s ease-in-out infinite}
   .signal-led{animation:signalPulse 2.6s ease-in-out infinite}
 }
@@ -859,34 +858,6 @@ main > .final-cta::before{border-top-color:var(--accent)}
   transition:width .08s linear;
 }
 
-/* Directional scroll reveals. JS only adds these classes after load, so no-JS remains readable. */
-.scroll-reveal{
-  --reveal-x:0px;
-  --reveal-y:0px;
-  --reveal-delay:0ms;
-}
-.motion-ready .scroll-reveal{
-  opacity:0;
-  transform:translate3d(var(--reveal-x),var(--reveal-y),0);
-  filter:blur(2.5px);
-  transition:
-    opacity .72s cubic-bezier(.16,1,.3,1) var(--reveal-delay),
-    transform .78s cubic-bezier(.16,1,.3,1) var(--reveal-delay),
-    filter .62s ease var(--reveal-delay),
-    background .22s ease,
-    border-color .22s ease,
-    box-shadow .22s ease;
-  will-change:opacity,transform,filter;
-}
-.motion-ready .scroll-reveal.reveal-left{--reveal-x:-46px}
-.motion-ready .scroll-reveal.reveal-right{--reveal-x:46px}
-.motion-ready .scroll-reveal.reveal-up{--reveal-y:24px}
-.motion-ready .scroll-reveal.is-visible{
-  opacity:1;
-  transform:translate3d(0,0,0);
-  filter:blur(0);
-}
-
 /* Subtle heading rule reveal reinforces the corporate rhythm. */
 .feature-heading h2,.editorial-head h2{
   position:relative;
@@ -911,20 +882,11 @@ main > .final-cta::before{border-top-color:var(--accent)}
 @media(max-width:700px){
   main > .section::before,.page-hero::after{left:14px;width:58px}
   .intro-section .editorial-head{padding:26px 0 26px 18px}
-  .motion-ready .scroll-reveal.reveal-left{--reveal-x:-28px}
-  .motion-ready .scroll-reveal.reveal-right{--reveal-x:28px}
-  .motion-ready .scroll-reveal.reveal-up{--reveal-y:18px}
   .feature-grid,.attio-steps,.audience-grid,.check-split,.security-facts{box-shadow:none}
 }
 
 @media(prefers-reduced-motion:reduce){
   .scroll-progress{display:none}
-  .motion-ready .scroll-reveal{
-    opacity:1!important;
-    transform:none!important;
-    filter:none!important;
-    transition:none!important;
-  }
 }
 
 /* ==========================================================================\n   Refinement v4 — denser spatial system + heading hover highlight\n   ========================================================================== */
@@ -1071,38 +1033,34 @@ main > .section::before{width:64px}
 .final-cta .hero-note{grid-column:2;color:#8a8a8a;text-align:left;margin-top:.25rem}
 .final-cta .token{color:var(--accent)}
 
-/* Major headings become a black highlighted block on hover, not whole sections. */
+/* Major heading interaction — accent underline only.
+   The old black fill could hide page-specific title colours and also collided
+   visually with scroll reveals. */
 :where(.hero-centered,.page-hero,.editorial-head,.feature-heading,.section-label,.check-group,.founder-copy,.beta-panel,.final-cta-inner) :is(h1,h2){
   width:fit-content;
   padding:.08em .16em .12em;
   margin-left:-.16em;
-  background-image:linear-gradient(#191919,#191919);
+  background-image:linear-gradient(var(--accent),var(--accent));
   background-repeat:no-repeat;
   background-position:0 100%;
-  background-size:100% 0%;
-  border-radius:2px;
-  transition:background-size .34s cubic-bezier(.16,1,.3,1),color .24s ease,box-shadow .3s ease,transform .3s cubic-bezier(.16,1,.3,1);
+  background-size:0 2px;
+  border-radius:0;
+  box-shadow:none;
+  transition:background-size .52s cubic-bezier(.22,1,.36,1),color .22s ease;
 }
-:where(.hero-centered,.page-hero,.editorial-head,.feature-heading,.section-label,.check-group,.founder-copy,.beta-panel,.final-cta-inner) :is(h1,h2):hover{
-  background-size:100% 100%;
-  color:#fff;
-  box-shadow:0 10px 24px rgba(20,20,20,.11);
-  transform:translateX(3px);
+:where(.hero-centered,.page-hero,.editorial-head,.feature-heading,.section-label,.check-group,.founder-copy,.beta-panel,.final-cta-inner) :is(h1,h2):hover,
+:where(.hero-centered,.page-hero,.editorial-head,.feature-heading,.section-label,.check-group,.founder-copy,.beta-panel,.final-cta-inner) :is(h1,h2):focus-within{
+  background-size:100% 2px;
+  color:inherit;
+  box-shadow:none;
+  transform:none;
 }
-/* Keep the hero's grey emphasis readable when the heading is highlighted. */
-.hero-centered h1:hover span{color:#d5d5d2}
-.feature-heading h2:hover::after,.editorial-head h2:hover::after{border-bottom-color:#fff}
 
 /* Slightly more purposeful surface changes on hover. */
 .feature-card:hover,.audience-item:hover,.attio-steps article:hover,.fact:hover,.check-group:hover{
   box-shadow:0 14px 34px rgba(20,20,20,.055);
   z-index:2;
 }
-
-/* Reduce the reveal travel now that sections are denser. */
-.motion-ready .scroll-reveal.reveal-left{--reveal-x:-34px}
-.motion-ready .scroll-reveal.reveal-right{--reveal-x:34px}
-.motion-ready .scroll-reveal.reveal-up{--reveal-y:18px}
 
 @media(max-width:1050px){
   .hero-centered{grid-template-columns:minmax(0,1fr) minmax(310px,.72fr);gap:0 44px}
@@ -3541,28 +3499,6 @@ body:not(.page-home) .page-hero{
 .feature-heading h2,
 .editorial-head h2{padding-bottom:0!important}
 
-/* 4) More visible entrance animation: still directional, but the fade is now a\n      core part of the motion rather than a subtle side effect. */
-.motion-ready .scroll-reveal{
-  opacity:0!important;
-  transform:translate3d(var(--reveal-x),var(--reveal-y),0) scale(.982)!important;
-  filter:blur(7px)!important;
-  transition:
-    opacity .9s cubic-bezier(.16,1,.3,1) var(--reveal-delay),
-    transform 1s cubic-bezier(.16,1,.3,1) var(--reveal-delay),
-    filter .84s cubic-bezier(.16,1,.3,1) var(--reveal-delay),
-    background .22s ease,
-    border-color .22s ease,
-    box-shadow .22s ease!important;
-}
-.motion-ready .scroll-reveal.reveal-left{--reveal-x:-68px!important;--reveal-y:10px!important}
-.motion-ready .scroll-reveal.reveal-right{--reveal-x:68px!important;--reveal-y:10px!important}
-.motion-ready .scroll-reveal.reveal-up{--reveal-y:34px!important}
-.motion-ready .scroll-reveal.is-visible{
-  opacity:1!important;
-  transform:translate3d(0,0,0) scale(1)!important;
-  filter:blur(0)!important;
-}
-
 /* Softer visual continuity between neighbouring blocks: cards remain cards,\n   but the page itself no longer announces a new section with a hard edge. */
 .page-home .feature-heading,
 .page-home .editorial-head,
@@ -3576,18 +3512,9 @@ body:not(.page-home) .page-hero{
   .page-home main > .section,
   body:not(.page-home) main > .section{padding:1.75rem 0!important}
   body:not(.page-home) .page-hero{padding:1.45rem 0 1.25rem!important}
-  .motion-ready .scroll-reveal.reveal-left{--reveal-x:-36px!important}
-  .motion-ready .scroll-reveal.reveal-right{--reveal-x:36px!important}
-  .motion-ready .scroll-reveal.reveal-up{--reveal-y:24px!important}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .motion-ready .scroll-reveal{
-    opacity:1!important;
-    transform:none!important;
-    filter:none!important;
-    transition:none!important;
-  }
 }
 
 /* ==========================================================================
@@ -5400,181 +5327,86 @@ main li,
   -webkit-backface-visibility:visible!important;
 }
 
-/* ========================================================================== 
-   v10 — stable unified scroll reveal (desktop + mobile)
-   ========================================================================== */
 
-/* Stop the older direct-child page-load animation from competing with the
-   scroll observer on the three illustrated inner-page heroes. */
-body.page-what-it-checks .page-hero > .container > *,
-body.page-how-it-works .page-hero > .container > *,
-body.page-security .page-hero > .container > *{
-  animation:none!important;
-  opacity:1!important;
-  transform:none!important;
-  filter:none!important;
+
+/* ==========================================================================\n   Unified reveal system — single source of truth\n   Desktop + mobile. Opacity + individual translate only; no blur, scale,\n   filters, background fills or transform overrides.\n   ========================================================================== */
+.acc-reveal{
+  --acc-rx:0px;
+  --acc-ry:0px;
+  --acc-delay:0ms;
 }
-
-/* Stable reveal: opacity + small 2D translation only. No blur, no scale, no
-   forced compositor layer. This prevents the black-rectangle artefact on large
-   headings while keeping the same side-entry character as the web design. */
-html.motion-ready body main .scroll-reveal{
-  --reveal-x:0px;
-  --reveal-y:0px;
-  opacity:0!important;
-  transform:translate(var(--reveal-x),var(--reveal-y))!important;
-  filter:none!important;
+html.acc-motion-ready .acc-reveal{
+  opacity:0;
+  translate:var(--acc-rx) var(--acc-ry);
   transition:
-    opacity .68s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms),
-    transform .76s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms)!important;
-  will-change:auto!important;
-  backface-visibility:visible!important;
+    opacity .88s cubic-bezier(.22,1,.36,1) var(--acc-delay),
+    translate 1.02s cubic-bezier(.22,1,.36,1) var(--acc-delay);
 }
-html.motion-ready body main .scroll-reveal.reveal-left{--reveal-x:-44px;--reveal-y:4px}
-html.motion-ready body main .scroll-reveal.reveal-right{--reveal-x:44px;--reveal-y:4px}
-html.motion-ready body main .scroll-reveal.reveal-up{--reveal-x:0px;--reveal-y:24px}
-html.motion-ready body main .scroll-reveal.is-visible{
-  opacity:1!important;
-  transform:translate(0,0)!important;
-  filter:none!important;
+html.acc-motion-ready .acc-reveal.acc-from-left{--acc-rx:-34px;--acc-ry:0px}
+html.acc-motion-ready .acc-reveal.acc-from-right{--acc-rx:34px;--acc-ry:0px}
+html.acc-motion-ready .acc-reveal.acc-from-up{--acc-rx:0px;--acc-ry:22px}
+html.acc-motion-ready .acc-reveal.acc-visible{
+  opacity:1;
+  translate:0 0;
 }
-
-/* The illustration scenes animate only as whole wrappers. Their cards, paths,
-   hover transforms and vector geometry remain independent. */
-html.motion-ready body.page-what-it-checks #wic-page-hero .wicp-visual.scroll-reveal,
-html.motion-ready body.page-how-it-works .how-hero-visual.scroll-reveal,
-html.motion-ready body.page-security .security-hero-visual.scroll-reveal{
-  transform:translate(var(--reveal-x),var(--reveal-y))!important;
-}
-html.motion-ready body.page-what-it-checks #wic-page-hero .wicp-visual.scroll-reveal.is-visible,
-html.motion-ready body.page-how-it-works .how-hero-visual.scroll-reveal.is-visible,
-html.motion-ready body.page-security .security-hero-visual.scroll-reveal.is-visible{
-  transform:translate(0,0)!important;
-}
-
-@media(max-width:700px){
-  html.motion-ready body main .scroll-reveal.reveal-left{--reveal-x:-24px;--reveal-y:3px}
-  html.motion-ready body main .scroll-reveal.reveal-right{--reveal-x:24px;--reveal-y:3px}
-  html.motion-ready body main .scroll-reveal.reveal-up{--reveal-x:0px;--reveal-y:16px}
-}
-
-@media(prefers-reduced-motion:reduce){
-  html.motion-ready body main .scroll-reveal{
-    opacity:1!important;
-    transform:none!important;
-    filter:none!important;
-    transition:none!important;
-  }
-}
-
-/* ========================================================================== 
-   v11 — compositor-safe display-title reveal + smoother shared scroll motion
-   ========================================================================== */
-
-/* Large hero titles must never be transform/filter composited. That is the
-   source of the persistent dark backing rectangles seen in Chromium/WebKit. */
+/* Titles remain transparent throughout; the reveal never paints behind them. */
 .page-home .reference-match-copy h1,
 .page-what-it-checks #wic-page-hero h1,
 .page-how-it-works .how-hero-copy h1,
 .page-security .security-hero-copy h1{
-  background:transparent!important;
   background-color:transparent!important;
   box-shadow:none!important;
   filter:none!important;
-  transform:none!important;
-  will-change:auto!important;
-  isolation:auto!important;
-  -webkit-backface-visibility:visible!important;
-  backface-visibility:visible!important;
-  position:relative;
 }
-
-/* If an older reveal class was attached by cached JS, neutralise it on titles. */
-html.motion-ready body main .page-home .reference-match-copy h1.scroll-reveal,
-html.motion-ready body main .page-what-it-checks #wic-page-hero h1.scroll-reveal,
-html.motion-ready body main .page-how-it-works .how-hero-copy h1.scroll-reveal,
-html.motion-ready body main .page-security .security-hero-copy h1.scroll-reveal{
-  opacity:1!important;
-  transform:none!important;
-  filter:none!important;
-  transition:none!important;
-}
-
-/* Smooth display-title entrance using layout-position (left) rather than
-   transform. It is slightly slower than the cards and remains crisp. */
-@media (prefers-reduced-motion:no-preference){
-  .page-home .reference-match-copy h1,
-  .page-what-it-checks #wic-page-hero h1,
-  .page-how-it-works .how-hero-copy h1,
-  .page-security .security-hero-copy h1{
-    opacity:0;
-    left:-24px;
-    animation:accHeadlineSafe 1.08s .14s cubic-bezier(.22,1,.36,1) forwards!important;
-  }
-
-  /* Home already has two semantic lines, so give the second line a subtle
-     counter-directional entrance without compositing the whole headline. */
-  .page-home .reference-match-copy h1 .hero-sentence{
-    position:relative;
-    opacity:0;
-    left:-18px;
-    animation:accHeadlineLineLeft .98s .18s cubic-bezier(.22,1,.36,1) forwards;
-  }
-  .page-home .reference-match-copy h1 .hero-secondary-sentence{
-    left:18px;
-    animation-name:accHeadlineLineRight;
-    animation-delay:.34s;
-  }
-}
-
-@keyframes accHeadlineSafe{
-  0%{opacity:0;left:-24px}
-  42%{opacity:.62}
-  100%{opacity:1;left:0}
-}
-@keyframes accHeadlineLineLeft{
-  0%{opacity:0;left:-18px}
-  100%{opacity:1;left:0}
-}
-@keyframes accHeadlineLineRight{
-  0%{opacity:0;left:18px}
-  100%{opacity:1;left:0}
-}
-
-/* Make the rest of the reveal language calmer and less abrupt. */
-html.motion-ready body main .scroll-reveal{
-  transition:
-    opacity .92s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms),
-    transform 1.04s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms)!important;
-}
-html.motion-ready body main .scroll-reveal.reveal-left{--reveal-x:-34px;--reveal-y:3px}
-html.motion-ready body main .scroll-reveal.reveal-right{--reveal-x:34px;--reveal-y:3px}
-html.motion-ready body main .scroll-reveal.reveal-up{--reveal-x:0px;--reveal-y:20px}
-
 @media(max-width:700px){
-  html.motion-ready body main .scroll-reveal.reveal-left{--reveal-x:-18px;--reveal-y:2px}
-  html.motion-ready body main .scroll-reveal.reveal-right{--reveal-x:18px;--reveal-y:2px}
-  html.motion-ready body main .scroll-reveal.reveal-up{--reveal-x:0px;--reveal-y:12px}
-  @media (prefers-reduced-motion:no-preference){
-    .page-home .reference-match-copy h1,
-    .page-what-it-checks #wic-page-hero h1,
-    .page-how-it-works .how-hero-copy h1,
-    .page-security .security-hero-copy h1{
-      left:-14px;
-      animation-duration:.92s!important;
-      animation-delay:.10s!important;
-    }
+  html.acc-motion-ready .acc-reveal{
+    transition-duration:.78s,.9s;
+  }
+  html.acc-motion-ready .acc-reveal.acc-from-left{--acc-rx:-18px}
+  html.acc-motion-ready .acc-reveal.acc-from-right{--acc-rx:18px}
+  html.acc-motion-ready .acc-reveal.acc-from-up{--acc-ry:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  html.acc-motion-ready .acc-reveal{
+    opacity:1!important;
+    translate:none!important;
+    transition:none!important;
   }
 }
 
-@media(prefers-reduced-motion:reduce){
-  .page-home .reference-match-copy h1,
-  .page-home .reference-match-copy h1 .hero-sentence,
-  .page-what-it-checks #wic-page-hero h1,
-  .page-how-it-works .how-hero-copy h1,
-  .page-security .security-hero-copy h1{
-    opacity:1!important;
-    left:0!important;
-    animation:none!important;
+/* Hero-title interaction consistency: same subtle accent sweep on Home,
+   What it checks, How it works and Security. This intentionally never fills
+   the title background or changes the title text colour. */
+.page-home .reference-match-copy h1,
+.page-what-it-checks #wic-page-hero h1,
+.page-how-it-works .how-hero-copy h1,
+.page-security .security-hero-copy h1{
+  background-image:linear-gradient(var(--accent),var(--accent))!important;
+  background-repeat:no-repeat!important;
+  background-position:0 100%!important;
+  background-size:0 2px!important;
+  transition:background-size .52s cubic-bezier(.22,1,.36,1),opacity .88s cubic-bezier(.22,1,.36,1),translate 1.02s cubic-bezier(.22,1,.36,1)!important;
+}
+.page-home .reference-match-copy h1:hover,
+.page-what-it-checks #wic-page-hero h1:hover,
+.page-how-it-works .how-hero-copy h1:hover,
+.page-security .security-hero-copy h1:hover{
+  background-size:100% 2px!important;
+  color:inherit!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+/* Keep page-specific accent spans intact while the title is hovered. */
+.page-home .reference-match-copy h1:hover .hero-secondary-sentence{color:#5e5e61!important}
+.page-home .reference-match-copy h1:hover em{color:var(--accent)!important}
+.page-how-it-works .how-hero-copy h1:hover span{color:#c45508!important}
+
+@supports not (translate: 1px 0px){
+  html.acc-motion-ready .acc-reveal{
+    position:relative;
+    left:var(--acc-rx);
+    top:var(--acc-ry);
+    transition:opacity .88s cubic-bezier(.22,1,.36,1) var(--acc-delay),left 1.02s cubic-bezier(.22,1,.36,1) var(--acc-delay),top 1.02s cubic-bezier(.22,1,.36,1) var(--acc-delay);
   }
+  html.acc-motion-ready .acc-reveal.acc-visible{left:0;top:0}
 }
