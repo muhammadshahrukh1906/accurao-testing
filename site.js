@@ -164,10 +164,8 @@
   });
 })();
 
-/* Unified scroll reveal + reading progress. One observer for desktop and mobile. */
+/* Reading progress. Motion is handled by the content-only system at the end of this file. */
 (function(){
-  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   var progress=document.querySelector('.scroll-progress');
   if(!progress){
     progress=document.createElement('div');
@@ -187,98 +185,6 @@
   updateProgress();
   window.addEventListener('scroll',requestProgressUpdate,{passive:true});
   window.addEventListener('resize',requestProgressUpdate,{passive:true});
-
-  if(reduceMotion) return;
-
-  var items=[];
-  function add(el,dir,delay){
-    if(!el||items.indexOf(el)!==-1) return;
-    /* Never animate the individual interactive cards: their own transforms stay independent. */
-    if(el.matches('.premium-interactive-card,.interactive-layer,.reference-card,.how-input,.how-review-card,.how-findings,.how-insight,.wicp-card,.wicp-ai,.wicp-result,.security-v-card')) return;
-    el.classList.remove('scroll-reveal','reveal-left','reveal-right','reveal-up','is-visible','mobile-scroll-reveal','mobile-from-left','mobile-from-right','mobile-from-up','mobile-visible');
-    el.classList.add('acc-reveal',dir==='right'?'acc-from-right':dir==='up'?'acc-from-up':'acc-from-left');
-    el.style.setProperty('--acc-delay',(delay||0)+'ms');
-    items.push(el);
-  }
-  function addAll(selector,dirs,baseDelay){
-    var pattern=dirs||['left','right'];
-    document.querySelectorAll(selector).forEach(function(el,i){
-      add(el,pattern[i%pattern.length],(baseDelay||0)+Math.min((i%3)*70,140));
-    });
-  }
-
-  /* HOME HERO — title explicitly included. */
-  addAll('.page-home .reference-kicker',['left'],0);
-  addAll('.page-home .reference-match-copy h1',['left'],55);
-  addAll('.page-home .reference-match-sub',['left'],115);
-  addAll('.page-home .reference-match-actions',['up'],165);
-  addAll('.page-home .reference-beta-note',['up'],205);
-  addAll('.page-home .reference-match-visual',['right'],85);
-
-  /* HOME CONTENT. */
-  addAll('.page-home .intro-section .editorial-head > .eyebrow, .page-home .intro-section .editorial-head > h2',['left'],0);
-  addAll('.page-home .intro-section .context-visual, .page-home .intro-section .editorial-copy',['right'],70);
-  addAll('.page-home #wic-hero > :not(.wicp-visual)',['left'],0);
-  addAll('.page-home #wic-hero > .wicp-visual',['right'],70);
-  addAll('.page-home .feature-band .section-link',['right'],90);
-  addAll('.page-home .steps-section .feature-heading > *',['left','right'],0);
-  addAll('.page-home .steps-section .attio-steps > article',['left','right','left'],40);
-  addAll('.page-home .steps-section .quiet-block',['up'],80);
-  addAll('.page-home .audience-section .feature-heading > *',['left','right'],0);
-  addAll('.page-home .audience-section .audience-item',['left','right'],40);
-  addAll('.page-home .final-cta .final-cta-inner > *',['up','left','right'],0);
-
-  /* WHAT IT CHECKS HERO — title explicitly included. */
-  addAll('.page-what-it-checks #wic-page-hero .eyebrow',['left'],0);
-  addAll('.page-what-it-checks #wic-page-hero h1',['left'],60);
-  addAll('.page-what-it-checks #wic-page-hero .lede',['left'],120);
-  addAll('.page-what-it-checks #wic-page-hero .wicp-visual, .page-what-it-checks #wic-page-hero .context-visual',['right'],70);
-
-  /* HOW IT WORKS HERO — title explicitly included. */
-  addAll('.page-how-it-works .how-hero-copy .eyebrow',['left'],0);
-  addAll('.page-how-it-works .how-hero-copy h1',['left'],60);
-  addAll('.page-how-it-works .how-hero-copy .how-hero-lede',['left'],120);
-  addAll('.page-how-it-works .how-hero-visual',['right'],70);
-
-  /* SECURITY HERO — title explicitly included. */
-  addAll('.page-security .security-hero-copy .eyebrow',['left'],0);
-  addAll('.page-security .security-hero-copy h1',['left'],60);
-  addAll('.page-security .security-hero-copy .security-hero-lede',['left'],120);
-  addAll('.page-security .security-quick-read',['left'],160);
-  addAll('.page-security .security-hero-visual',['right'],70);
-
-  /* SHARED INNER-PAGE GROUPS. */
-  addAll('body:not(.page-home) main > .section .section-label > .side-label',['left'],0);
-  addAll('body:not(.page-home) main > .section .section-label > .measure',['right'],45);
-  addAll('body:not(.page-home) main > .section .check-group',['left','right'],0);
-  addAll('body:not(.page-home) main > .section .working',['left'],0);
-  addAll('body:not(.page-home) main > .section .closing-line',['right'],40);
-  addAll('body:not(.page-home) main > .section .quiet-block',['up'],40);
-  addAll('body:not(.page-home) main > .section .step',['left','right'],0);
-  addAll('body:not(.page-home) main > .section .fact',['left','right'],0);
-  addAll('body:not(.page-home) main > .section .faq-item',['left','right'],0);
-  addAll('body:not(.page-home) main > .section .beta-panel > *',['left','right'],0);
-  addAll('body:not(.page-home) main > .section .booking-shell',['up'],40);
-  addAll('body:not(.page-home) main > .section .legal-shell > *',['left','right','up'],0);
-  addAll('body:not(.page-home) main > .section .editorial-placeholder',['right'],40);
-
-  if(!items.length) return;
-  document.documentElement.classList.remove('motion-ready','mobile-motion-ready');
-  document.documentElement.classList.add('acc-motion-ready');
-
-  function show(el){el.classList.add('acc-visible');}
-  if(!('IntersectionObserver' in window)){items.forEach(show);return;}
-
-  var observer=new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){show(entry.target);observer.unobserve(entry.target);}
-    });
-  },{threshold:.08,rootMargin:'0px 0px -6% 0px'});
-
-  /* Two frames allow the hidden start state to paint before visible items enter. */
-  requestAnimationFrame(function(){
-    requestAnimationFrame(function(){items.forEach(function(el){observer.observe(el);});});
-  });
 })();
 
 /* Refinement v5: supporting-copy presentation is handled in CSS. */
@@ -511,4 +417,284 @@
     });
     visual.addEventListener('keydown',function(e){if(e.key==='Escape'&&pinned){activate(pinned,false);pinned=null;}});
   });
+})();
+
+/* v25: content-only scroll motion.
+   Headings remain completely static; supporting copy, lists, actions and visuals animate.
+   Uses individual CSS translate so existing 3D / hover transforms remain untouched. */
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items=[];
+  var seen=[];
+  var headingSelector='h1,h2,h3,h4,h5,h6,.eyebrow,.reference-kicker,.side-label';
+
+  function register(selector,dir,baseDelay,step,parallax){
+    var nodes=Array.prototype.slice.call(document.querySelectorAll(selector));
+    nodes.forEach(function(el,i){
+      if(!el || el.matches(headingSelector) || seen.indexOf(el)!==-1) return;
+      /* Never animate the internal cards that already have their own transform / hover system. */
+      if(el.matches('.premium-interactive-card,.interactive-layer,.reference-card,.how-input,.how-review-card,.how-findings,.how-insight,.wicp-card,.wicp-ai,.wicp-result,.security-v-card')) return;
+      seen.push(el);
+      var d=dir;
+      if(Array.isArray(dir)) d=dir[i%dir.length];
+      d=d||'up';
+      el.classList.add('content-motion','content-from-'+d);
+      el.style.setProperty('--content-delay',Math.max(0,(baseDelay||0)+(step||0)*i)+'ms');
+      if(parallax) el.setAttribute('data-content-parallax','true');
+      items.push(el);
+    });
+  }
+
+  /* Hero supporting content — headings intentionally excluded. */
+  register('.page-home .reference-match-sub','left',20,0,false);
+  register('.page-home .reference-match-actions > *','up',90,70,false);
+  register('.page-home .reference-beta-note','up',210,0,false);
+  register('.page-home .reference-match-visual','right',90,0,true);
+  register('.page-home .reference-benefits > div',['left','up','up','right'],35,55,false);
+
+  register('.page-what-it-checks #wic-page-hero .lede','left',25,0,false);
+  register('.page-what-it-checks #wic-page-hero .wicp-visual','right',90,0,true);
+  register('.page-how-it-works .how-hero-lede','left',25,0,false);
+  register('.page-how-it-works .how-hero-visual','right',90,0,true);
+  register('.page-security .security-hero-lede','left',25,0,false);
+  register('.page-security .security-quick-item','up',105,65,false);
+  register('.page-security .security-hero-visual','right',90,0,true);
+  register('.page-hero .lede','left',25,0,false);
+  register('.page-hero .hero-actions > *','up',90,70,false);
+
+  /* Home page content. */
+  register('.page-home .intro-section .editorial-copy > p','right',30,85,false);
+  register('.page-home .intro-section .context-visual','left',70,0,true);
+  register('.page-home .feature-band .check-group > .group-note',['left','right'],25,0,false);
+  register('.page-home .feature-band .check-group > .check-list > li',['left','left','left','right','right','right'],65,62,false);
+  register('.page-home .feature-band .working > ul > li','up',30,55,false);
+  register('.page-home .feature-band .closing-line','up',70,0,false);
+  register('.page-home .feature-band .section-link > a','right',70,0,false);
+  register('.page-home .steps-section .feature-heading > p','right',30,0,false);
+  register('.page-home .steps-section .feature-heading > .context-visual','left',70,0,true);
+  register('.page-home .steps-section .attio-steps article .step-num','up',25,65,false);
+  register('.page-home .steps-section .attio-steps article > p','up',80,70,false);
+  register('.page-home .steps-section .quiet-block > p','up',30,0,false);
+  register('.page-home .audience-section .audience-item > p',['left','right'],35,60,false);
+  register('.page-home .final-cta-inner > p','up',25,65,false);
+  register('.page-home .final-cta-inner > .context-visual','right',80,0,true);
+  register('.page-home .final-cta-inner > .hero-actions > *','up',165,45,false);
+
+  /* What it checks content. */
+  register('.page-what-it-checks main > .section .check-group > .group-note',['left','right'],20,0,false);
+  register('.page-what-it-checks main > .section .check-group > .check-list > li',['left','left','left','right','right','right'],55,58,false);
+  register('.page-what-it-checks main > .section .working > ul > li','up',30,55,false);
+  register('.page-what-it-checks main > .section .closing-line','up',70,0,false);
+  register('.page-what-it-checks main > .section .quiet-block > p','up',35,0,false);
+
+  /* How it works content. */
+  register('.page-how-it-works .steps .step > .step-number','left',15,55,false);
+  register('.page-how-it-works .steps .step > div > p','right',55,65,false);
+  register('.page-how-it-works .section-label .measure > ul > li','up',25,55,false);
+  register('.page-how-it-works .section-label .measure > p','up',115,0,false);
+  register('.page-how-it-works .quiet-block > p','up',30,0,false);
+
+  /* Security, About, Beta, FAQ and 404 supporting content. */
+  register('.page-security .security-overview-section .measure > p','right',25,80,false);
+  register('.page-security .security-facts .fact > p',['left','right'],30,55,false);
+  register('.page-about .editorial-copy > p','right',25,80,false);
+  register('.page-about .security-facts .fact > p',['left','right'],30,55,false);
+  register('.page-about .quiet-block > p','up',25,0,false);
+  register('.page-beta .beta-copy > p','right',25,70,false);
+  register('.page-beta .beta-copy > button','up',135,0,false);
+  register('.page-beta .security-facts .fact > p',['left','right'],30,55,false);
+  register('.page-beta .booking-placeholder > p','up',25,0,false);
+  register('.page-faq .faq-answer-inner > p','up',20,55,false);
+  register('.page-not-found .hero-actions > *','up',75,45,false);
+
+  if(!items.length) return;
+
+  /* Reduced-motion users receive the complete static layout. */
+  if(reduce){
+    items.forEach(function(el){el.classList.add('is-content-visible','content-motion-settled');});
+    return;
+  }
+
+  document.documentElement.classList.add('content-motion-ready');
+
+  function reveal(el){
+    if(el.classList.contains('is-content-visible')) return;
+    el.classList.add('is-content-visible');
+    var delay=parseInt(el.style.getPropertyValue('--content-delay'),10)||0;
+    window.setTimeout(function(){
+      el.classList.add('content-motion-settled');
+      requestParallax();
+    },delay+980);
+  }
+
+  if('IntersectionObserver' in window){
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){reveal(entry.target);observer.unobserve(entry.target);}
+      });
+    },{threshold:.1,rootMargin:'0px 0px -7% 0px'});
+    requestAnimationFrame(function(){requestAnimationFrame(function(){items.forEach(function(el){observer.observe(el);});});});
+  }else{
+    items.forEach(reveal);
+  }
+
+  /* Very light scroll-synchronised drift for illustrations only. */
+  var parallaxItems=items.filter(function(el){return el.hasAttribute('data-content-parallax');});
+  var parallaxRaf=0;
+  function updateParallax(){
+    parallaxRaf=0;
+    if(!parallaxItems.length) return;
+    var vw=window.innerWidth||document.documentElement.clientWidth;
+    var vh=window.innerHeight||document.documentElement.clientHeight;
+    var amp=vw<=520?5:vw<=800?8:14;
+    parallaxItems.forEach(function(el){
+      if(!el.classList.contains('content-motion-settled')) return;
+      var r=el.getBoundingClientRect();
+      if(r.bottom<-80||r.top>vh+80) return;
+      var center=r.top+r.height/2;
+      var normalized=(center-vh/2)/Math.max(vh,.001);
+      var y=Math.max(-amp,Math.min(amp,-normalized*amp*1.7));
+      el.style.setProperty('--content-parallax-y',y.toFixed(2)+'px');
+    });
+  }
+  function requestParallax(){if(!parallaxRaf) parallaxRaf=requestAnimationFrame(updateParallax);}
+  requestParallax();
+  window.addEventListener('scroll',requestParallax,{passive:true});
+  window.addEventListener('resize',requestParallax,{passive:true});
+})();
+
+
+/* v26: interactive focus layer for supporting content only.
+   - Desktop: hover focus + tiny cursor-follow movement.
+   - Touch: short press state, tap-to-focus, clear on scroll/tap elsewhere.
+   - Headings and all illustration systems are intentionally excluded. */
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer=window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var headingSelector='h1,h2,h3,h4,h5,h6,.eyebrow,.reference-kicker,.side-label';
+  var illustrationSelector='[data-premium-illustration],[data-content-parallax],[data-illustration-card],[data-layer-stack],.premium-scroll-illustration,.premium-interactive-card,.interactive-layer,.reference-card,.context-visual,.reference-match-visual,.how-hero-visual,.wicp-visual,.security-hero-visual,.product-preview';
+  var interactive=[];
+  var magnetic=[];
+  var activeTouch=null;
+  var touchStart=null;
+  var scrollStart=0;
+
+  function eligible(el){
+    if(!el || !el.matches) return false;
+    if(el.matches(headingSelector) || el.closest(headingSelector)) return false;
+    if(el.matches(illustrationSelector) || el.closest(illustrationSelector)) return false;
+    if(el.closest('header,footer,nav')) return false;
+    return true;
+  }
+
+  function addInteractive(el){
+    if(!eligible(el) || interactive.indexOf(el)!==-1) return;
+    /* Avoid nested focus surfaces: the smaller text leaf wins. */
+    if(el.querySelector&&el.querySelector('p,li')) return;
+    el.classList.add('content-interactive');
+    interactive.push(el);
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll('main p, main li, main .reference-benefits > div, main .security-quick-item, main .steps .step-number')).forEach(addInteractive);
+
+  /* If a parent owns two or more direct content surfaces, hovering one softly
+     de-emphasises its siblings to create a clear focus state. */
+  var parents=[];
+  interactive.forEach(function(el){if(el.parentElement&&parents.indexOf(el.parentElement)===-1) parents.push(el.parentElement);});
+  parents.forEach(function(parent){
+    var direct=Array.prototype.filter.call(parent.children,function(child){return child.classList&&child.classList.contains('content-interactive');});
+    if(direct.length>1) parent.classList.add('content-focus-group');
+  });
+
+  /* CTAs keep their existing visual hover treatment; only their movement is
+     shared with the content system. */
+  Array.prototype.slice.call(document.querySelectorAll('main a.button, main .hero-actions a, main .section-link a, main button:not(.nav-toggle):not(.faq-question)')).forEach(function(el){
+    if(!eligible(el) || el.closest(illustrationSelector)) return;
+    if(magnetic.indexOf(el)!==-1) return;
+    el.classList.add('content-magnetic');
+    magnetic.push(el);
+  });
+
+  function setFocused(el,on){
+    if(!el) return;
+    el.classList.toggle('is-content-focused',!!on);
+    var group=el.parentElement&&el.parentElement.classList.contains('content-focus-group')?el.parentElement:null;
+    if(group) group.classList.toggle('is-content-focusing',!!on);
+  }
+  function clearTouchFocus(except){
+    if(activeTouch&&activeTouch!==except) setFocused(activeTouch,false);
+    if(!except) activeTouch=null;
+  }
+
+  interactive.forEach(function(el){
+    el.addEventListener('mouseenter',function(){
+      if(!finePointer) return;
+      setFocused(el,true);
+    });
+    el.addEventListener('mouseleave',function(){
+      if(!finePointer) return;
+      setFocused(el,false);
+      el.style.setProperty('--mag-x','0px');
+      el.style.setProperty('--mag-y','0px');
+    });
+    el.addEventListener('pointerdown',function(e){
+      if(e.pointerType==='touch'||e.pointerType==='pen'){
+        touchStart={x:e.clientX,y:e.clientY,el:el};
+        scrollStart=window.scrollY;
+        el.classList.add('is-content-pressed');
+      }
+    });
+    el.addEventListener('pointerup',function(e){
+      if(e.pointerType!=='touch'&&e.pointerType!=='pen') return;
+      el.classList.remove('is-content-pressed');
+      if(!touchStart||touchStart.el!==el) return;
+      var moved=Math.hypot(e.clientX-touchStart.x,e.clientY-touchStart.y);
+      var scrolled=Math.abs(window.scrollY-scrollStart);
+      touchStart=null;
+      if(moved>11||scrolled>7) return;
+      var wasActive=activeTouch===el&&el.classList.contains('is-content-focused');
+      clearTouchFocus(el);
+      if(wasActive){setFocused(el,false);activeTouch=null;}
+      else{setFocused(el,true);activeTouch=el;}
+    });
+    el.addEventListener('pointercancel',function(){el.classList.remove('is-content-pressed');touchStart=null;});
+  });
+
+  /* Tiny cursor-follow movement is deliberately capped to 2.4px / 1.8px. */
+  if(finePointer&&!reduce){
+    interactive.concat(magnetic).forEach(function(el){
+      var raf=0;
+      el.addEventListener('pointermove',function(e){
+        if(raf) cancelAnimationFrame(raf);
+        raf=requestAnimationFrame(function(){
+          raf=0;
+          var r=el.getBoundingClientRect();
+          if(!r.width||!r.height) return;
+          var nx=((e.clientX-r.left)/r.width)-.5;
+          var ny=((e.clientY-r.top)/r.height)-.5;
+          el.style.setProperty('--mag-x',(nx*4.8).toFixed(2)+'px');
+          el.style.setProperty('--mag-y',(ny*3.6).toFixed(2)+'px');
+        });
+      });
+      el.addEventListener('pointerleave',function(){
+        if(raf){cancelAnimationFrame(raf);raf=0;}
+        el.style.setProperty('--mag-x','0px');
+        el.style.setProperty('--mag-y','0px');
+      });
+    });
+  }
+
+  magnetic.forEach(function(el){
+    el.addEventListener('pointerdown',function(e){if(e.pointerType==='touch'||e.pointerType==='pen') el.classList.add('is-content-pressed');});
+    ['pointerup','pointercancel','pointerleave'].forEach(function(type){el.addEventListener(type,function(){el.classList.remove('is-content-pressed');});});
+  });
+
+  document.addEventListener('pointerdown',function(e){
+    if(e.pointerType!=='touch'&&e.pointerType!=='pen') return;
+    if(activeTouch&&!activeTouch.contains(e.target)) clearTouchFocus(null);
+  },true);
+  window.addEventListener('scroll',function(){
+    if(activeTouch&&Math.abs(window.scrollY-scrollStart)>7) clearTouchFocus(null);
+  },{passive:true});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') clearTouchFocus(null);});
 })();

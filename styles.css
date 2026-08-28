@@ -5477,3 +5477,190 @@ body.page-home .final-cta h2{grid-row:1 / span 5!important;margin-top:0!importan
     margin-right:auto!important;
   }
 }
+
+
+/* ==========================================================================
+   v25 — Content-only motion system
+   Headings are intentionally excluded. Uses CSS individual translate so it
+   never replaces existing transform-based illustration/hover geometry.
+   ========================================================================== */
+.content-motion{
+  --content-x:0px;
+  --content-y:0px;
+  --content-parallax-y:0px;
+  --content-delay:0ms;
+}
+html.content-motion-ready .content-motion{
+  opacity:0;
+  translate:var(--content-x) calc(var(--content-y) + var(--content-parallax-y));
+  transition:
+    opacity .74s cubic-bezier(.22,1,.36,1) var(--content-delay),
+    translate .92s cubic-bezier(.22,1,.36,1) var(--content-delay);
+  will-change:opacity,translate;
+}
+html.content-motion-ready .content-motion.content-from-left{--content-x:-32px}
+html.content-motion-ready .content-motion.content-from-right{--content-x:32px}
+html.content-motion-ready .content-motion.content-from-up{--content-y:20px}
+html.content-motion-ready .content-motion.is-content-visible{
+  opacity:1;
+  --content-x:0px;
+  --content-y:0px;
+}
+html.content-motion-ready .content-motion.content-motion-settled{
+  transition:none;
+  will-change:auto;
+}
+/* Absolute guarantee: headings never participate in the content motion system. */
+html.content-motion-ready h1,
+html.content-motion-ready h2,
+html.content-motion-ready h3,
+html.content-motion-ready h4,
+html.content-motion-ready h5,
+html.content-motion-ready h6{
+  opacity:1!important;
+  translate:none!important;
+}
+@media(max-width:800px){
+  html.content-motion-ready .content-motion{
+    transition-duration:.66s,.8s;
+  }
+  html.content-motion-ready .content-motion.content-from-left{--content-x:-17px}
+  html.content-motion-ready .content-motion.content-from-right{--content-x:17px}
+  html.content-motion-ready .content-motion.content-from-up{--content-y:13px}
+}
+@media(max-width:480px){
+  html.content-motion-ready .content-motion.content-from-left{--content-x:-13px}
+  html.content-motion-ready .content-motion.content-from-right{--content-x:13px}
+  html.content-motion-ready .content-motion.content-from-up{--content-y:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .content-motion,
+  html.content-motion-ready .content-motion{
+    opacity:1!important;
+    translate:none!important;
+    transition:none!important;
+    will-change:auto!important;
+  }
+}
+
+/* ==========================================================================
+   v26 — Interactive content focus layer
+   Supporting copy becomes responsive to hover, focus and touch without
+   turning the page into a grid of cards. Headings and illustrations remain
+   completely outside this system.
+   ========================================================================== */
+.content-interactive{
+  --mag-x:0px;
+  --mag-y:0px;
+  --focus-opacity:1;
+  position:relative;
+  z-index:0;
+  transform:translate3d(var(--mag-x),var(--mag-y),0);
+  opacity:var(--focus-opacity);
+  transition:
+    transform .22s cubic-bezier(.16,1,.3,1),
+    opacity .24s ease;
+}
+.content-interactive::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-6px -9px;
+  border:1px solid rgba(26,26,24,.055);
+  border-radius:8px;
+  background:rgba(255,255,255,.58);
+  box-shadow:0 7px 20px rgba(24,24,22,.025);
+  opacity:0;
+  transform:scale(.986);
+  transform-origin:center;
+  transition:
+    opacity .24s ease,
+    transform .32s cubic-bezier(.16,1,.3,1),
+    border-color .24s ease,
+    background-color .24s ease;
+  pointer-events:none;
+}
+.content-interactive::after{
+  content:"";
+  position:absolute;
+  left:-10px;
+  top:.12em;
+  bottom:.12em;
+  width:2px;
+  border-radius:999px;
+  background:var(--accent,#c45508);
+  opacity:0;
+  transform:scaleY(.15);
+  transform-origin:center;
+  transition:
+    opacity .18s ease,
+    transform .34s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;
+}
+.content-interactive.is-content-focused::before,
+.content-interactive.is-content-pressed::before{
+  opacity:1;
+  transform:scale(1);
+}
+.content-interactive.is-content-focused::after,
+.content-interactive.is-content-pressed::after{
+  opacity:.84;
+  transform:scaleY(1);
+}
+.content-focus-group.is-content-focusing > .content-interactive:not(.is-content-focused):not(.is-content-pressed){
+  --focus-opacity:.78;
+}
+
+/* Existing motion-reveal elements regain only the transitions needed by this
+   interaction layer after they have settled. Scroll-linked translate remains
+   unanimated, so illustration parallax stays precise. */
+html.content-motion-ready .content-motion.content-motion-settled.content-interactive{
+  transition:
+    transform .22s cubic-bezier(.16,1,.3,1),
+    opacity .24s ease;
+}
+
+/* Native CTAs keep their own visual design but receive the same tiny magnetic
+   response on precise pointers. */
+.content-magnetic{
+  --mag-x:0px;
+  --mag-y:0px;
+  transform:translate3d(var(--mag-x),var(--mag-y),0);
+  transition:transform .22s cubic-bezier(.16,1,.3,1);
+  will-change:transform;
+}
+.content-magnetic.is-content-pressed{
+  transform:translate3d(var(--mag-x),calc(var(--mag-y) + 1px),0) scale(.992);
+}
+
+@media (hover:hover) and (pointer:fine){
+  .content-interactive:hover::before{opacity:1;transform:scale(1)}
+  .content-interactive:hover::after{opacity:.84;transform:scaleY(1)}
+  .content-focus-group:hover > .content-interactive:not(:hover):not(.is-content-focused){--focus-opacity:.84}
+}
+
+@media (max-width:800px){
+  .content-interactive::before{inset:-5px -7px;border-radius:7px;box-shadow:0 5px 15px rgba(24,24,22,.02)}
+  .content-interactive::after{left:-7px;width:1.5px}
+  .content-focus-group.is-content-focusing > .content-interactive:not(.is-content-focused):not(.is-content-pressed){--focus-opacity:.9}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .content-interactive,
+  .content-magnetic{
+    --mag-x:0px!important;
+    --mag-y:0px!important;
+    transform:none!important;
+    transition:none!important;
+  }
+  .content-interactive::before,
+  .content-interactive::after{transition:none!important}
+}
+/* Compose existing button lift/press motion with the magnetic offset. */
+.button.content-magnetic:hover{
+  transform:translate3d(var(--mag-x),calc(var(--mag-y) - 2px),0);
+}
+.button.content-magnetic:active,
+.button.content-magnetic.is-content-pressed{
+  transform:translate3d(var(--mag-x),var(--mag-y),0) scale(.985);
+}
