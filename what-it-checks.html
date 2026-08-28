@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>What it checks — Accurao Reviewer</title>
-  <meta name="description" content="See the exact arithmetic and matching checks and the separate AI-assisted disclosure assessment used by Accurao Reviewer.">
+  <meta name="description" content="See how Accurao Reviewer checks FRS 102 disclosures, trial balance mapping, supporting schedules, prior-year consistency, casting and arithmetic.">
   <meta name="robots" content="index,follow">
   <meta property="og:type" content="website">
   <meta property="og:title" content="What it checks — Accurao Reviewer">
-  <meta property="og:description" content="See the exact arithmetic and matching checks and the separate AI-assisted disclosure assessment used by Accurao Reviewer.">
+  <meta property="og:description" content="See how Accurao Reviewer checks FRS 102 disclosures, trial balance mapping, supporting schedules, prior-year consistency, casting and arithmetic.">
   <meta property="og:image" content="images/og-image.png">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="stylesheet" href="styles.css?v=19">
 
 <style id="what-it-checks-baked-hero">
 /* Baked-in What it checks hero. This is deliberately independent of site.js. */
@@ -168,9 +168,10 @@
 }
 @media(prefers-reduced-motion:reduce){#wic-page-hero .wicp-card,#wic-page-hero .wicp-ai{transition:none!important}}
 </style>
-  <link rel="stylesheet" href="illustrations-3d.css?v=16">
-  <link rel="stylesheet" href="mobile-responsive.css?v=16">
-  <style id="mobile-marker-final-v16">
+  <link rel="stylesheet" href="illustrations-3d.css?v=17">
+  <link rel="stylesheet" href="mobile-responsive.css?v=19">
+    <link rel="stylesheet" href="layout-polish.css?v=4">
+<style id="mobile-marker-final-v16">
 @media (max-width:767px){
   body main p::before,body main p::after,body main li::before,body main li::after,body main strong::before,body main strong::after{content:none!important;display:none!important;width:0!important;height:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
   body main li{list-style:none!important;list-style-type:none!important}
@@ -182,11 +183,12 @@
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="Accurao Reviewer home">
+      <img class="brand-logo" src="images/accurao-logo-primary.svg" alt="">
       <span class="brand-fallback">Accurao</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
     <nav class="main-nav" id="primary-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="what-it-checks.html" aria-current="page">What it checks</a><a href="how-it-works.html">How it works</a><a href="security.html">Security</a><a href="faq.html">FAQ</a><a href="about.html">About</a></nav>
-    <a class="nav-cta" href="https://cal.eu/momina.athar/free-consultation" target="_blank" rel="noopener">Book a beta call</a>
+    <a class="nav-cta" href="beta.html">Book a beta call</a>
   </div>
 </header>
 <main>
@@ -196,10 +198,10 @@
     <div class="wicp-copy">
       
       <h1>What it checks</h1>
-      <p class="lede">The complete review is split deliberately between deterministic arithmetic and matching, and AI-assisted disclosure presence detection. They are not the same kind of finding.</p>
+      <p class="lede">A connected review of disclosures, figures and supporting information. Each finding is surfaced for a qualified reviewer to assess.</p>
     </div>
 
-    <div class="wicp-visual premium-scroll-illustration" data-premium-illustration="checks" role="group" aria-label="Exact checks and AI-assisted disclosure checks flow through Accurao Reviewer to surface findings across numbers and disclosures">
+    <div class="wicp-visual premium-scroll-illustration" data-premium-illustration="checks" role="group" aria-label="Structured checks and AI-assisted mapping flow through Accurao Reviewer to surface findings across figures, disclosures and supporting information">
       <svg class="wicp-paths" viewBox="0 0 700 430" preserveAspectRatio="none" aria-hidden="true" shape-rendering="geometricPrecision">
         <path class="wicp-flow-path wicp-flow-a" d="M345 101 C387 101 400 143 430 176" />
         <path class="wicp-flow-path wicp-flow-b" d="M365 276 C404 276 410 222 430 204" />
@@ -210,47 +212,47 @@
 
       <div class="wicp-card wicp-exact premium-interactive-card" tabindex="0" data-illustration-card="exact">
         <span class="wicp-icon" aria-hidden="true">✓</span>
-        <span><strong>Exact checks</strong><small>Arithmetic and matching</small></span>
+        <span><strong>Structured checks</strong><small>Arithmetic and consistency</small></span>
       </div>
 
       <div class="wicp-card wicp-assisted premium-interactive-card" tabindex="0" data-illustration-card="assisted">
         <span class="wicp-icon" aria-hidden="true"></span>
-        <span><strong>AI-assisted checks</strong><small>Presence detection</small></span>
+        <span><strong>AI-assisted mapping</strong><small>Trial balance and disclosures</small></span>
       </div>
 
       <div class="wicp-ai premium-interactive-card" tabindex="0" data-illustration-card="ai" aria-label="AI-assisted review">AI</div>
 
       <div class="wicp-result premium-interactive-card" tabindex="0" data-illustration-card="result">
         <span class="wicp-result-icon" aria-hidden="true"></span>
-        <strong>Prompts to confirm. Reviewer decides.</strong>
+        <strong>Findings with context for reviewer assessment.</strong>
       </div>
     </div>
   </div>
 </section>
 <section class="section"><div class="container">
   <div class="check-split">
-    <section class="check-group" aria-labelledby="exact-full"><h2 id="exact-full">Exact checks</h2><p class="group-note">Arithmetic and matching. Deterministic — same inputs, same result, every time. How the AI is used: extraction is AI-assisted, comparison is deterministic. The model reads figures out of the document. Every comparison and every arithmetic check is then performed in code, server-side. The model is not asked to decide whether two numbers agree.</p>
-      <ul class="check-list"><li><strong>Trial balance tie-out</strong> — every line in the accounts traced back to the trial balance, with the difference shown</li><li><strong>Internal consistency</strong> — the balance sheet foots, notes agree to the face of the balance sheet, the fixed asset note casts</li><li><strong>Fixed asset register cross-match</strong> — your uploaded register against the fixed-asset note</li><li><strong>Prior-year comparatives</strong> — checked against the actual prior-year accounts filed at Companies House, or a copy you upload</li><li><strong>Identifier consistency</strong> — company name, registered number and director names used consistently throughout the document</li></ul>
+    <section class="check-group" aria-labelledby="disclosure-full"><h2 id="disclosure-full">Disclosures and supporting evidence</h2><p class="group-note">Checks whether applicable information appears present and whether disclosure notes agree with the information supporting them.</p>
+      <ul class="check-list"><li><strong>Disclosure verification and completeness</strong> — checks applicable FRS 102 Section 1A disclosure requirements and flags potential omissions for review</li><li><strong>Disclosure note-to-schedule agreement</strong> — compares disclosure notes with their underlying schedules and surfaces differences</li><li><strong>Identifier consistency</strong> — checks the company name, registered number and director names throughout the financial statements</li></ul>
     </section>
-    <section class="check-group" aria-labelledby="ai-full"><h2 id="ai-full" class="ai-label">AI-assisted checks</h2><p class="group-note">Presence detection, not certainty. Treat these as prompts to confirm.</p><ul class="check-list"><li><strong>Disclosure assessment</strong> — <span class="token">{{DISCLOSURE_COUNT}}</span> FRS 102 Section 1A disclosure requirements, each returned with the specific text found in your document as evidence, so you can judge it yourself rather than trust a tick</li></ul></section>
+    <section class="check-group" aria-labelledby="consistency-full"><h2 id="consistency-full" class="ai-label">Mapping and consistency</h2><p class="group-note">Connects financial statement information to its underlying and comparative sources.</p><ul class="check-list"><li><strong>AI-assisted trial balance mapping</strong> — maps the trial balance to the financial statements and highlights potential gaps and omissions</li><li><strong>Prior-year consistency</strong> — retrieves prior-year statutory accounts directly from Companies House and checks current and comparative information throughout</li><li><strong>Casting and arithmetical accuracy</strong> — checks totals, subtotals, aggregate roll-ups, note-to-face agreement and other arithmetical relationships</li></ul></section>
   </div>
   <div class="working"><h3>Working through it</h3><ul><li>Materiality threshold you set</li><li>Confirm, dismiss or correct each finding</li><li>Per-section sign-off with an audit trail</li><li>Read-only view of the accounts PDF with findings anchored to the relevant text</li></ul></div>
-  <p class="closing-line">It won't catch everything, and it doesn't replace your review. It catches the class of error that survives a careful read.</p>
+  <p class="closing-line">Findings identify matters for review; they are not asserted as errors and do not replace professional judgement.</p>
 </div></section>
-<section class="section alt"><div class="container"><div class="quiet-block"><p>It does not prepare, edit, export or file statutory accounts. There is no iXBRL output and no filing capability. It reviews the finished accounts you've already produced, in whatever software you produce them in. The document view is read-only, deliberately. Findings are for a qualified reviewer to judge; the tool does not substitute for professional judgement.</p></div></div></section>
+<section class="section alt"><div class="container"><div class="quiet-block"><p>Accurao Reviewer does not prepare, edit, export or file statutory accounts. It does not produce iXBRL, perform an audit or assurance engagement, certify compliance, or replace accounts-production systems and professional judgement. The financial statement view is read-only.</p></div></div></section>
 
 </main>
 <footer class="site-footer">
   <div class="container footer-rule">
-    <div class="footer-brand">Accurao Reviewer</div>
+    <div class="footer-identity"><div class="footer-brand">Accurao Reviewer</div><p class="footer-company">A product of Accurao Limited · Company 17421054 · Registered in England and Wales<br><a href="mailto:info@accurao.com">info@accurao.com</a></p></div>
     <nav class="footer-links" aria-label="Footer navigation">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      
+      
       <a href="beta.html">Beta</a>
     </nav>
   </div>
 </footer>
-<script src="site.js?v=16" defer></script>
+<script src="site.js?v=19" defer></script>
 
 </body>
 </html>

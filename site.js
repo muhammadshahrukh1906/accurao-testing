@@ -135,10 +135,7 @@
       booking.innerHTML='';booking.appendChild(iframe);booking.dataset.loaded='true';
     }
     if(trigger) trigger.addEventListener('click',loadCal);
-    if('IntersectionObserver' in window && calUrl && calUrl.indexOf('{{')===-1){
-      var observer=new IntersectionObserver(function(entries){if(entries[0].isIntersecting){loadCal();observer.disconnect();}},{rootMargin:'180px'});
-      observer.observe(booking);
-    }
+    /* The external booking provider is loaded only after an explicit click. */
   }
 })();
 
@@ -260,8 +257,6 @@
   addAll('body:not(.page-home) main > .section .step',['left','right'],0);
   addAll('body:not(.page-home) main > .section .fact',['left','right'],0);
   addAll('body:not(.page-home) main > .section .faq-item',['left','right'],0);
-  addAll('body:not(.page-home) main > .section .founder-photo',['left'],0);
-  addAll('body:not(.page-home) main > .section .founder-copy',['right'],50);
   addAll('body:not(.page-home) main > .section .beta-panel > *',['left','right'],0);
   addAll('body:not(.page-home) main > .section .booking-shell',['up'],40);
   addAll('body:not(.page-home) main > .section .legal-shell > *',['left','right','up'],0);
@@ -311,13 +306,13 @@
             <path class="checks-path checks-path-result" d="M458 190 C485 190 500 190 520 190" />\
           </svg>\
           <div class="checks-paper-stack" aria-hidden="true"><i></i><i></i></div>\
-          <button class="checks-layer checks-layer-exact" type="button" data-checks-layer="exact" aria-label="Exact checks: deterministic arithmetic and matching">\
-            <span class="checks-status exact-status">✓</span><span class="checks-layer-copy"><strong>Exact checks</strong><small>Arithmetic and matching</small></span>\
+          <button class="checks-layer checks-layer-exact" type="button" data-checks-layer="exact" aria-label="Structured checks: arithmetic and consistency">\
+            <span class="checks-status exact-status">✓</span><span class="checks-layer-copy"><strong>Structured checks</strong><small>Arithmetic and consistency</small></span>\
           </button>\
-          <button class="checks-layer checks-layer-assisted" type="button" data-checks-layer="assisted" aria-label="AI-assisted checks: disclosure presence with evidence to confirm">\
-            <span class="checks-status assisted-status"></span><span class="checks-layer-copy"><strong>AI-assisted checks</strong><small>Presence detection</small></span>\
+          <button class="checks-layer checks-layer-assisted" type="button" data-checks-layer="assisted" aria-label="AI-assisted mapping: trial balance and disclosures">\
+            <span class="checks-status assisted-status"></span><span class="checks-layer-copy"><strong>AI-assisted mapping</strong><small>Trial balance and disclosures</small></span>\
           </button>\
-          <button class="checks-ai-core" type="button" data-checks-layer="reviewer" aria-label="Accurao Reviewer combines exact checks and AI-assisted disclosure assessment"><span>AI</span></button>\
+          <button class="checks-ai-core" type="button" data-checks-layer="reviewer" aria-label="Accurao Reviewer connects structured checks and AI-assisted mapping"><span>AI</span></button>\
           <div class="checks-stack-insight" aria-live="polite">\
             <span class="checks-insight-icon" aria-hidden="true"></span>\
             <div><strong data-checks-insight-title>Prompts to confirm</strong><p data-checks-insight-body>Reviewer decides.</p></div>\
@@ -331,9 +326,9 @@
         <div class="cv-caption">Same inputs → same exact result. Disclosure evidence → reviewer confirms.</div>';
     } else if(type==='flow'){
       el.innerHTML='\        <div class="cv-flow">\
-          <div class="flow-inputs"><div class="flow-doc"><b>PDF</b><span>Finished accounts</span></div><div class="flow-doc"><b>TB</b><span>Trial balance</span></div></div>\
+          <div class="flow-inputs"><div class="flow-doc"><b>PDF</b><span>Financial statements</span></div><div class="flow-doc"><b>TB</b><span>Trial balance</span></div></div>\
           <div class="flow-arrow">→</div>\
-          <div class="flow-engine"><span></span><b>Review checks</b><small>arithmetic · consistency · disclosure</small></div>\
+          <div class="flow-engine"><span></span><b>Review checks</b><small>disclosures · mapping · consistency</small></div>\
           <div class="flow-arrow">→</div>\
           <div class="flow-output"><b>Findings</b><span>Confirm</span><span>Dismiss</span><span>Correct</span></div>\
         </div>';
@@ -349,17 +344,12 @@
       el.innerHTML='\        <div class="cv-faq">\
           <div><span>01</span><b>Client data</b><i>+</i></div>\
           <div><span>02</span><b>Your review</b><i>+</i></div>\
-          <div><span>03</span><b>Files & software</b><i>+</i></div>\
-        </div>';
-    } else if(type==='founder'){
-      el.innerHTML='\        <div class="cv-founder">\
-          <div class="founder-monogram">MA</div>\
-          <div><b>Momina Athar</b><span>ACA · Chartered Accountant</span><small>Independent review of finished accounts.</small></div>\
+          <div><span>03</span><b>Files & systems</b><i>+</i></div>\
         </div>';
     } else if(type==='beta'){
       el.innerHTML='\        <div class="cv-beta">\
           <div class="calendar-mini"><div></div><b>20</b><span>MIN</span></div>\
-          <div class="beta-brief"><b>Run reviewed files</b><span>Tell us what it found.</span><span>Tell us what it missed.</span><small>Call with Momina</small></div>\
+          <div class="beta-brief"><b>Review selected files</b><span>Assess useful findings.</span><span>Identify what is missing.</span><small>Closed beta conversation</small></div>\
         </div>';
     }
     return el;
@@ -378,7 +368,7 @@
 
   document.querySelectorAll('.page-home .feature-heading').forEach(function(box){
     var heading=(box.querySelector('h2')||{}).textContent||'';
-    if(/Finished accounts in\. Findings out/i.test(heading)) addContext(box,'flow',box.querySelector(':scope > p'));
+    if(/Financial statements in\. Structured findings out/i.test(heading)) addContext(box,'flow',box.querySelector(':scope > p'));
     /* The audience section already has its own two content panels. */
   });
 
@@ -409,16 +399,16 @@
   var title=stack.querySelector('[data-stack-insight-title]');
   var body=stack.querySelector('[data-stack-insight-body]');
   var copy={
-    accounts:{title:'Read-only finished accounts',body:'The signed or draft accounts are reviewed as a PDF. Accurao does not edit the document.'},
-    source:{title:'Tie every figure back to the trial balance',body:'Every financial-statement line is traced back to the trial balance, with the difference shown.'},
-    reviewer:{title:'AI-assisted; reviewer decides',body:'Exact checks are deterministic. Disclosure presence is returned with evidence for you to confirm.'}
+    accounts:{title:'Read-only financial statements',body:'The statutory financial statements are reviewed as a PDF. Accurao Reviewer does not edit the document.'},
+    source:{title:'Map the trial balance to the statements',body:'AI-assisted mapping highlights potential gaps and omissions for review.'},
+    reviewer:{title:'Connected financial statement review',body:'Disclosures, schedules, comparative information and arithmetic are reviewed together.'}
   };
   var pinned=null;
   function activate(key){
     stack.dataset.active=key||'';
     cards.forEach(function(card){card.classList.toggle('is-active',card.dataset.layer===key);});
     if(key&&copy[key]){if(title) title.textContent=copy[key].title;if(body) body.textContent=copy[key].body;}
-    else{if(title) title.textContent='Read-only review';if(body) body.textContent='The accounts stay read-only. You decide what happens to every finding.';}
+    else{if(title) title.textContent='Connected review';if(body) body.textContent='Review figures, disclosures and supporting information together.';}
   }
   cards.forEach(function(card){
     var key=card.dataset.layer;
@@ -444,9 +434,9 @@
   var title=stack.querySelector('[data-checks-insight-title]');
   var body=stack.querySelector('[data-checks-insight-body]');
   var copy={
-    exact:{title:'Deterministic arithmetic and matching',body:'The same inputs give the same result every time.'},
-    assisted:{title:'Presence detection, not certainty',body:'Disclosure evidence is returned for you to confirm.'},
-    reviewer:{title:'Independent review layer',body:'Accurao combines both kinds of check without changing the finished accounts or replacing your judgement.'}
+    exact:{title:'Structured arithmetic and consistency checks',body:'Casting, roll-ups and cross-statement relationships are checked consistently.'},
+    assisted:{title:'AI-assisted mapping',body:'Trial balance and disclosure information is mapped to surface potential gaps.'},
+    reviewer:{title:'Structured review findings',body:'Accurao Reviewer connects the checks without changing the financial statements or replacing professional judgement.'}
   };
   var pinned=null;
   function activate(key){

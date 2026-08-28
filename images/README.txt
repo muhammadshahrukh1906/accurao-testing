@@ -1,4 +1,6 @@
-Before publishing, add:
-- acc-plain-300.png   (the existing approved ledger-rule wordmark)
-- momina-athar.jpg    (the approved founder photograph)
-- replace og-image.png with a final Open Graph graphic using the approved wordmark
+Included brand assets:
+- accurao-logo-primary.svg — approved horizontal Accurao Reviewer mark used in the site header
+- og-image.png — final social-sharing image
+- og-image-source.svg — editable source for the social-sharing image
+
+No founder photograph is required. The About page is product-led.

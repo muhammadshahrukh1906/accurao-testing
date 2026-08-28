@@ -1,0 +1,27 @@
+ACCURAO REVIEWER — HOSTINGER PACKAGE
+====================================
+
+LOCAL PREVIEW
+-------------
+1. Extract the ZIP completely before opening it.
+2. Keep index.html, the CSS files, site.js and the images folder together.
+3. Double-click index.html. The site is packaged to work directly from your laptop.
+
+HOSTINGER UPLOAD
+----------------
+1. Back up the current public_html folder.
+2. Upload the CONTENTS of this package directly into public_html.
+3. Include the hidden .htaccess file.
+4. Make sure index.html is directly inside public_html, not in another folder.
+5. Clear Hostinger and CDN caches after uploading.
+
+THIS VERSION
+------------
+- Accurao Limited, company number 17421054
+- Registered in England and Wales
+- Contact: info@accurao.com
+- Free invitation-only beta: 1–30 September 2026
+- No automatic conversion to a paid service
+- Privacy, Terms and Data Processing pages are intentionally not included
+
+The website is static and requires no Node.js, PHP, database or environment file.

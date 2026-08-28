@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="400" viewBox="0 0 1600 400">
+  <title>Accurao Reviewer</title>
+  <g fill="#000000">
+    <circle cx="210" cy="200" r="94" fill="none" stroke="#000000" stroke-width="34"/>
+    <rect x="286" y="89" width="34" height="222" rx="17"/>
+    <rect x="145" y="174" width="108" height="15" rx="7.5"/>
+    <rect x="145" y="211" width="108" height="15" rx="7.5"/>
+    <text x="390" y="235" font-family="Nimbus Sans, Arial, sans-serif" font-size="164" font-weight="700" letter-spacing="-5">accurao</text>
+    <text x="400" y="305" font-family="Nimbus Sans, Arial, sans-serif" font-size="44" font-weight="400" letter-spacing="20">REVIEWER</text>
+  </g>
+</svg>

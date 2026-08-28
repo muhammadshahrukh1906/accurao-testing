@@ -1,0 +1,911 @@
+/* ========================================================================== 
+   Accurao Reviewer — layout polish
+   Layout-only overrides. No copy/content changes.
+   Loaded after styles.css and mobile-responsive.css so these rules are the
+   final source of truth for the sections refined in the August 2026 review.
+   ========================================================================== */
+
+/* Prevent page copy from showing through the sticky navigation while scrolling. */
+.site-header{
+  background:#fff!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+/* Keep supporting-page copy from inheriting narrow document measures. */
+.page-what-it-checks .check-list li,
+.page-how-it-works .section-label .measure,
+.page-how-it-works .section-label .measure > *,
+.page-security .section-label .measure,
+.page-security .section-label .measure > *,
+.page-about .editorial-copy,
+.page-about .editorial-copy > p,
+.page-beta .beta-copy,
+.page-beta .beta-copy > p,
+.page-beta .booking-placeholder p{
+  max-width:none!important;
+  min-width:0!important;
+}
+
+@media (min-width:901px){
+  /* A wider inner-page canvas makes deliberate use of the blank desktop space. */
+  body.page-what-it-checks main > .section > .container,
+  body.page-how-it-works main > .section > .container,
+  body.page-security main > .section > .container,
+  body.page-about main > .section > .container,
+  body.page-beta main > .section > .container,
+  body.page-about .page-hero > .container,
+  body.page-beta .page-hero > .container{
+    width:min(calc(100% - 112px),1480px)!important;
+    max-width:1480px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+
+  /* -----------------------------------------------------------------------
+     WHAT IT CHECKS — balanced split, generous copy width.
+     ----------------------------------------------------------------------- */
+  .page-what-it-checks .check-split{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.42fr) minmax(380px,.78fr)!important;
+    width:100%!important;
+    max-width:none!important;
+    gap:0!important;
+    align-items:stretch!important;
+  }
+  .page-what-it-checks .check-group{
+    min-width:0!important;
+    padding:26px 30px 28px!important;
+  }
+  .page-what-it-checks .check-group + .check-group{
+    border-left:1px solid var(--rule)!important;
+  }
+  .page-what-it-checks .group-note{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .page-what-it-checks .check-list li{
+    width:100%!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  .page-what-it-checks .working{
+    width:100%!important;
+    max-width:none!important;
+  }
+
+  /* -----------------------------------------------------------------------
+     HOW IT WORKS — "What you need" uses all three available reading columns.
+     ----------------------------------------------------------------------- */
+  .page-how-it-works .section-label{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  .page-how-it-works .section-label > .measure{
+    display:grid!important;
+    grid-template-columns:minmax(220px,.68fr) minmax(320px,1fr) minmax(360px,1.12fr)!important;
+    grid-template-rows:auto!important;
+    column-gap:clamp(40px,4vw,72px)!important;
+    row-gap:0!important;
+    width:100%!important;
+    max-width:none!important;
+    align-items:start!important;
+  }
+  .page-how-it-works .section-label > .measure > h2{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%!important;
+    max-width:9ch!important;
+    margin:0!important;
+  }
+  .page-how-it-works .section-label > .measure > ul{
+    grid-column:2!important;
+    grid-row:1!important;
+    width:100%!important;
+    margin:0!important;
+    padding-left:1.2rem!important;
+  }
+  .page-how-it-works .section-label > .measure > p{
+    grid-column:3!important;
+    grid-row:1!important;
+    width:100%!important;
+    margin:0!important;
+  }
+
+  /* -----------------------------------------------------------------------
+     SECURITY — the two policy paragraphs read as a balanced editorial spread.
+     ----------------------------------------------------------------------- */
+  .page-security .section-label{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  .page-security .section-label > .measure{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:clamp(42px,5vw,82px)!important;
+    width:100%!important;
+    max-width:none!important;
+    align-items:start!important;
+  }
+  .page-security .section-label > .measure > p{
+    width:100%!important;
+    margin:0!important;
+  }
+  .page-security .section-label > .measure > p + p{
+    padding-left:clamp(26px,3vw,46px)!important;
+    border-left:1px solid var(--rule)!important;
+  }
+
+  /* -----------------------------------------------------------------------
+     ABOUT — hero and body use the empty right side instead of narrow columns.
+     ----------------------------------------------------------------------- */
+  .page-about .page-hero > .container{
+    display:grid!important;
+    grid-template-columns:minmax(320px,.72fr) minmax(480px,1.28fr)!important;
+    gap:clamp(54px,6vw,100px)!important;
+    align-items:end!important;
+    text-align:left!important;
+  }
+  .page-about .page-hero h1{
+    grid-column:1!important;
+    width:100%!important;
+    max-width:12ch!important;
+    margin:0!important;
+  }
+  .page-about .page-hero .lede{
+    grid-column:2!important;
+    width:100%!important;
+    max-width:720px!important;
+    margin:0 0 .15rem!important;
+  }
+  .page-about .editorial-head{
+    display:grid!important;
+    grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr)!important;
+    gap:clamp(54px,6vw,100px)!important;
+    width:100%!important;
+    max-width:none!important;
+    align-items:start!important;
+  }
+  .page-about .editorial-head > h2{
+    grid-column:1!important;
+    width:100%!important;
+    max-width:11ch!important;
+    margin:0!important;
+  }
+  .page-about .editorial-copy{
+    grid-column:2!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:clamp(36px,4vw,64px)!important;
+    row-gap:22px!important;
+    width:100%!important;
+    padding:0!important;
+  }
+  .page-about .editorial-copy > p{
+    width:100%!important;
+    margin:0!important;
+  }
+  .page-about .editorial-copy > p:nth-child(3){
+    grid-column:1 / -1!important;
+    max-width:76ch!important;
+    padding-top:20px!important;
+    border-top:1px solid var(--rule)!important;
+  }
+
+  /* -----------------------------------------------------------------------
+     BETA / BOOK A BETA CALL — no crowding, no header bleed-through, clean flow.
+     ----------------------------------------------------------------------- */
+  .page-beta .page-hero > .container{
+    display:grid!important;
+    grid-template-columns:minmax(320px,.72fr) minmax(480px,1.28fr)!important;
+    grid-template-rows:auto auto!important;
+    gap:7px clamp(54px,6vw,100px)!important;
+    align-items:start!important;
+    text-align:left!important;
+  }
+  .page-beta .page-hero .eyebrow{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%!important;
+    margin:0 0 5px!important;
+  }
+  .page-beta .page-hero h1{
+    grid-column:1!important;
+    grid-row:2!important;
+    width:100%!important;
+    max-width:10ch!important;
+    margin:0!important;
+  }
+  .page-beta .page-hero .lede{
+    grid-column:2!important;
+    grid-row:1 / span 2!important;
+    align-self:center!important;
+    width:100%!important;
+    max-width:720px!important;
+    margin:0!important;
+  }
+  .page-beta .beta-panel{
+    display:grid!important;
+    grid-template-columns:minmax(300px,.68fr) minmax(0,1.32fr)!important;
+    gap:clamp(54px,6vw,96px)!important;
+    width:100%!important;
+    max-width:none!important;
+    align-items:start!important;
+  }
+  .page-beta .beta-panel > div:first-child{
+    min-width:0!important;
+  }
+  .page-beta .beta-panel h2{
+    width:100%!important;
+    max-width:11ch!important;
+    margin:0!important;
+  }
+  .page-beta .beta-copy{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:clamp(34px,4vw,62px)!important;
+    row-gap:18px!important;
+    width:100%!important;
+    padding-top:22px!important;
+  }
+  .page-beta .beta-copy > p{
+    width:100%!important;
+    margin:0!important;
+  }
+  .page-beta .beta-copy > p:first-child{
+    grid-column:1 / -1!important;
+  }
+  .page-beta .beta-copy > p:nth-of-type(4){
+    grid-column:1 / -1!important;
+    max-width:72ch!important;
+    margin-top:2px!important;
+  }
+  .page-beta .beta-copy > .button{
+    grid-column:1!important;
+    justify-self:start!important;
+    width:max-content!important;
+    margin:2px 0 0!important;
+  }
+  .page-beta .security-facts{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .page-beta .booking-shell{
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    padding-top:24px!important;
+  }
+  .page-beta .booking-placeholder{
+    width:100%!important;
+    max-width:none!important;
+    min-height:160px!important;
+    padding:30px 36px!important;
+  }
+  .page-beta .booking-placeholder p{
+    width:100%!important;
+    max-width:76ch!important;
+    margin:0!important;
+  }
+}
+
+/* Tablet: avoid desktop side-by-side copy once the canvas becomes tight. */
+@media (min-width:768px) and (max-width:900px){
+  .page-how-it-works .section-label > .measure,
+  .page-security .section-label > .measure,
+  .page-about .editorial-head,
+  .page-about .editorial-copy,
+  .page-beta .beta-panel,
+  .page-beta .beta-copy{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+  .page-how-it-works .section-label > .measure > *,
+  .page-security .section-label > .measure > p,
+  .page-about .editorial-copy > p,
+  .page-beta .beta-copy > p{
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 18px!important;
+    padding-left:0!important;
+    border-left:0!important;
+  }
+  .page-about .editorial-head > h2,
+  .page-beta .beta-panel h2{
+    max-width:15ch!important;
+    margin:0 0 24px!important;
+  }
+  .page-beta .beta-copy > .button{width:max-content!important}
+}
+
+@media (max-width:767px){
+  /* One phone-safe gutter; all desktop columns become a natural vertical flow. */
+  body.page-what-it-checks main > section,
+  body.page-how-it-works main > section,
+  body.page-security main > section,
+  body.page-about main > section,
+  body.page-beta main > section{
+    padding-left:22px!important;
+    padding-right:22px!important;
+  }
+  body.page-what-it-checks main > section > .container,
+  body.page-how-it-works main > section > .container,
+  body.page-security main > section > .container,
+  body.page-about main > section > .container,
+  body.page-beta main > section > .container{
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+
+  .page-what-it-checks .check-split,
+  .page-how-it-works .section-label,
+  .page-how-it-works .section-label > .measure,
+  .page-security .section-label,
+  .page-security .section-label > .measure,
+  .page-about .page-hero > .container,
+  .page-about .editorial-head,
+  .page-about .editorial-copy,
+  .page-beta .page-hero > .container,
+  .page-beta .beta-panel,
+  .page-beta .beta-copy,
+  .page-beta .security-facts{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    grid-template-columns:none!important;
+  }
+
+  /* What it checks */
+  .page-what-it-checks .check-group{
+    width:100%!important;
+    max-width:100%!important;
+    padding:18px 0 20px!important;
+    border-left:0!important;
+    border-right:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+  .page-what-it-checks .check-group + .check-group{
+    margin-top:18px!important;
+    border-left:0!important;
+    border-top:1px solid var(--rule)!important;
+    padding-top:24px!important;
+  }
+  .page-what-it-checks .check-list{
+    width:100%!important;
+    padding-left:0!important;
+  }
+  .page-what-it-checks .check-list li{
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  /* How it works */
+  .page-how-it-works .section-label > .measure > h2{
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 18px!important;
+  }
+  .page-how-it-works .section-label > .measure > ul{
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 22px!important;
+    padding-left:1.15rem!important;
+  }
+  .page-how-it-works .section-label > .measure > p{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+  }
+
+  /* Security */
+  .page-security .section-label > .measure > p{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    border-left:0!important;
+  }
+  .page-security .section-label > .measure > p + p{
+    margin-top:22px!important;
+    padding-top:22px!important;
+    border-top:1px solid var(--rule)!important;
+  }
+
+  /* About */
+  .page-about .page-hero h1,
+  .page-about .page-hero .lede,
+  .page-about .editorial-head > h2,
+  .page-about .editorial-copy > p{
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .page-about .page-hero .lede{margin-top:16px!important}
+  .page-about .editorial-head > h2{margin:0 0 22px!important}
+  .page-about .editorial-copy > p{
+    margin:0 0 18px!important;
+    padding:0!important;
+    border:0!important;
+  }
+  .page-about .editorial-copy > p:last-child{margin-bottom:0!important}
+
+  /* Beta / booking */
+  .page-beta .page-hero .eyebrow,
+  .page-beta .page-hero h1,
+  .page-beta .page-hero .lede,
+  .page-beta .beta-panel h2,
+  .page-beta .beta-copy > p{
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .page-beta .page-hero .eyebrow{margin:0 0 7px!important}
+  .page-beta .page-hero .lede{margin-top:16px!important}
+  .page-beta .beta-panel h2{margin:0 0 22px!important}
+  .page-beta .beta-copy{
+    padding-top:18px!important;
+  }
+  .page-beta .beta-copy > p{
+    margin:0 0 18px!important;
+  }
+  .page-beta .beta-copy > .button{
+    display:flex!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-height:44px!important;
+    margin:2px 0 0!important;
+  }
+  .page-beta .security-facts .fact{
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .page-beta .booking-shell{
+    width:100%!important;
+    max-width:100%!important;
+    min-height:0!important;
+    padding-top:18px!important;
+  }
+  .page-beta .booking-placeholder{
+    width:100%!important;
+    max-width:100%!important;
+    min-height:140px!important;
+    padding:22px 18px!important;
+  }
+  .page-beta .booking-placeholder p{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+}
+
+@media (max-width:390px){
+  body.page-what-it-checks main > section,
+  body.page-how-it-works main > section,
+  body.page-security main > section,
+  body.page-about main > section,
+  body.page-beta main > section{
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+}
+
+/* ========================================================================== 
+   v2 — About + beta call alignment
+   Keeps all existing copy unchanged; only structure/spacing is refined.
+   ========================================================================== */
+
+@media (min-width:901px){
+  /* ABOUT: use the same report-like rhythm as the other inner pages. */
+  .page-about .page-hero > .container{
+    grid-template-columns:minmax(360px,.72fr) minmax(520px,1.28fr)!important;
+    gap:clamp(56px,5vw,86px)!important;
+    align-items:center!important;
+  }
+  .page-about .page-hero h1{
+    max-width:14ch!important;
+    line-height:1.01!important;
+  }
+  .page-about .page-hero .lede{
+    max-width:760px!important;
+    align-self:center!important;
+  }
+  .page-about .editorial-head{
+    grid-template-columns:minmax(320px,.68fr) minmax(0,1.32fr)!important;
+    gap:clamp(54px,5vw,84px)!important;
+    border-top:2px solid #242424!important;
+    padding-top:26px!important;
+  }
+  .page-about .editorial-head > h2{
+    max-width:12ch!important;
+    line-height:1.02!important;
+  }
+  .page-about .editorial-copy{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:18px clamp(36px,4vw,62px)!important;
+    border-top:1px solid #242424!important;
+    padding-top:22px!important;
+  }
+  .page-about .editorial-copy > p{
+    padding:0!important;
+    border:0!important;
+  }
+  .page-about .editorial-copy > p:first-child{
+    grid-column:1 / -1!important;
+    max-width:none!important;
+  }
+  .page-about .editorial-copy > p:nth-child(2){grid-column:1!important}
+  .page-about .editorial-copy > p:nth-child(3){
+    grid-column:2!important;
+    max-width:none!important;
+  }
+
+  /* BETA HERO: title/date live in one stack so they can never occupy the same row. */
+  .page-beta .page-hero > .container{
+    grid-template-columns:minmax(360px,.72fr) minmax(520px,1.28fr)!important;
+    grid-template-rows:auto!important;
+    gap:clamp(56px,5vw,86px)!important;
+    align-items:center!important;
+  }
+  .page-beta .beta-hero-heading{
+    grid-column:1!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    gap:9px!important;
+    min-width:0!important;
+  }
+  .page-beta .beta-hero-heading .eyebrow{
+    display:block!important;
+    width:auto!important;
+    margin:0!important;
+    line-height:1.35!important;
+  }
+  .page-beta .beta-hero-heading h1{
+    width:100%!important;
+    max-width:11ch!important;
+    margin:0!important;
+    line-height:1.01!important;
+  }
+  .page-beta .page-hero .lede{
+    grid-column:2!important;
+    grid-row:auto!important;
+    align-self:center!important;
+    max-width:760px!important;
+    margin:0!important;
+  }
+
+  /* BETA BODY: mirror the same two-level rule/column treatment as the rest of the site. */
+  .page-beta .beta-panel{
+    grid-template-columns:minmax(320px,.68fr) minmax(0,1.32fr)!important;
+    gap:clamp(54px,5vw,84px)!important;
+    border-top:2px solid #242424!important;
+    padding-top:26px!important;
+  }
+  .page-beta .beta-panel h2{
+    max-width:12ch!important;
+    line-height:1.02!important;
+  }
+  .page-beta .beta-copy{
+    border-top:1px solid #242424!important;
+    padding-top:22px!important;
+    gap:18px clamp(36px,4vw,62px)!important;
+  }
+  .page-beta .beta-copy > p:nth-of-type(2),
+  .page-beta .beta-copy > p:nth-of-type(3){
+    align-self:start!important;
+  }
+  .page-beta .beta-copy > p:nth-of-type(4){
+    padding-top:2px!important;
+  }
+}
+
+@media (min-width:768px) and (max-width:900px){
+  .page-about .editorial-head,
+  .page-beta .beta-panel{
+    border-top:2px solid #242424!important;
+    padding-top:22px!important;
+  }
+  .page-about .editorial-copy,
+  .page-beta .beta-copy{
+    display:block!important;
+    border-top:1px solid #242424!important;
+    padding-top:18px!important;
+  }
+  .page-beta .beta-hero-heading{
+    display:block!important;
+  }
+  .page-beta .beta-hero-heading .eyebrow{
+    margin:0 0 9px!important;
+    line-height:1.35!important;
+  }
+  .page-beta .beta-hero-heading h1{margin:0!important}
+}
+
+@media (max-width:767px){
+  /* ABOUT: same vertical order/rules as the other mobile inner pages. */
+  .page-about .editorial-head{
+    border-top:2px solid #242424!important;
+    padding-top:18px!important;
+  }
+  .page-about .editorial-head > h2{
+    margin:0 0 20px!important;
+    line-height:1.04!important;
+  }
+  .page-about .editorial-copy{
+    display:block!important;
+    border-top:1px solid #242424!important;
+    padding-top:18px!important;
+  }
+  .page-about .editorial-copy > p{
+    margin:0 0 18px!important;
+  }
+
+  /* BETA: hard separation between date, title and description; then natural downward stacking. */
+  .page-beta .page-hero > .container{display:block!important}
+  .page-beta .beta-hero-heading{
+    display:block!important;
+    width:100%!important;
+  }
+  .page-beta .beta-hero-heading .eyebrow{
+    display:block!important;
+    width:auto!important;
+    margin:0 0 10px!important;
+    line-height:1.35!important;
+  }
+  .page-beta .beta-hero-heading h1{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    line-height:1.01!important;
+  }
+  .page-beta .page-hero .lede{
+    width:100%!important;
+    max-width:100%!important;
+    margin:18px 0 0!important;
+  }
+  .page-beta .beta-panel{
+    border-top:2px solid #242424!important;
+    padding-top:18px!important;
+  }
+  .page-beta .beta-panel h2{
+    margin:0 0 20px!important;
+    line-height:1.04!important;
+  }
+  .page-beta .beta-copy{
+    display:block!important;
+    border-top:1px solid #242424!important;
+    padding-top:18px!important;
+  }
+  .page-beta .beta-copy > p{
+    margin:0 0 18px!important;
+  }
+}
+
+/* ========================================================================== 
+   v3 — About page pairing/alignment
+   Keep the title and its supporting copy on the same visual level, and reduce
+   the unused horizontal/vertical space between paired content.
+   ========================================================================== */
+
+@media (min-width:901px){
+  /* Hero: there is no eyebrow on About, so do not reserve an empty first row. */
+  .page-about .page-hero{
+    padding-top:clamp(1.55rem,2vw,2rem)!important;
+    padding-bottom:clamp(1.35rem,1.7vw,1.75rem)!important;
+  }
+  .page-about .page-hero > .container{
+    grid-template-columns:minmax(340px,440px) minmax(0,1fr)!important;
+    grid-template-rows:auto!important;
+    column-gap:clamp(32px,2.6vw,44px)!important;
+    row-gap:0!important;
+    align-items:start!important;
+  }
+  .page-about .page-hero h1{
+    grid-column:1!important;
+    grid-row:1!important;
+    margin:0!important;
+    align-self:start!important;
+  }
+  .page-about .page-hero .lede{
+    grid-column:2!important;
+    grid-row:1!important;
+    margin:.42rem 0 0!important;
+    align-self:start!important;
+  }
+
+  /* Main About statement: one shared top rule, same starting baseline. */
+  .page-about .page-hero + .section{
+    padding-top:clamp(1rem,1.25vw,1.3rem)!important;
+  }
+  .page-about .editorial-head{
+    grid-template-columns:minmax(340px,440px) minmax(0,1fr)!important;
+    grid-template-rows:auto!important;
+    column-gap:clamp(32px,2.6vw,44px)!important;
+    row-gap:0!important;
+    align-items:start!important;
+    padding-top:22px!important;
+  }
+  .page-about .editorial-head > h2{
+    grid-column:1!important;
+    grid-row:1!important;
+    margin:0!important;
+    align-self:start!important;
+  }
+  .page-about .editorial-copy{
+    grid-column:2!important;
+    grid-row:1!important;
+    margin:0!important;
+    padding-top:0!important;
+    border-top:0!important;
+    align-self:start!important;
+  }
+}
+
+@media (min-width:768px) and (max-width:900px){
+  /* About has no eyebrow: stack the title and lede without an empty grid row. */
+  .page-about .page-hero > .container{
+    display:block!important;
+  }
+  .page-about .page-hero h1{
+    margin:0!important;
+  }
+  .page-about .page-hero .lede{
+    margin:16px 0 0!important;
+  }
+}
+
+
+/* ========================================================================
+   SECURITY OVERVIEW — make the two key policy paragraphs feel intentional.
+   Keeps the wording unchanged; only presentation/layout is enhanced.
+   ======================================================================== */
+@media (min-width:901px){
+  .page-security .security-overview-section{
+    padding:clamp(2.45rem,3.3vw,3.25rem) 0!important;
+    background:linear-gradient(180deg,#fbfbf9 0%,#fff 100%)!important;
+    border-top:1px solid var(--rule)!important;
+    border-bottom:1px solid var(--rule)!important;
+  }
+  .page-security .security-overview-section .section-label{
+    width:min(calc(100% - 72px),1460px)!important;
+    margin-inline:auto!important;
+  }
+  .page-security .security-overview-section .section-label > .measure{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:0!important;
+    width:100%!important;
+    max-width:none!important;
+    border:1px solid #d9d9d5!important;
+    border-radius:11px!important;
+    overflow:hidden!important;
+    background:#fff!important;
+    box-shadow:0 14px 42px rgba(20,20,20,.045)!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p{
+    position:relative!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:148px!important;
+    margin:0!important;
+    padding:30px 38px 30px 42px!important;
+    color:#343637!important;
+    font-size:.91rem!important;
+    line-height:1.72!important;
+    background:transparent!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p::before{
+    content:''!important;
+    display:block!important;
+    position:absolute!important;
+    left:0!important;
+    top:28px!important;
+    bottom:28px!important;
+    width:3px!important;
+    height:auto!important;
+    border:0!important;
+    border-radius:0 3px 3px 0!important;
+    background:var(--accent)!important;
+    box-shadow:none!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p + p{
+    padding-left:42px!important;
+    border-left:1px solid var(--rule)!important;
+  }
+}
+
+@media (min-width:768px) and (max-width:900px){
+  .page-security .security-overview-section{
+    padding:34px 0!important;
+    background:#fbfbf9!important;
+    border-top:1px solid var(--rule)!important;
+    border-bottom:1px solid var(--rule)!important;
+  }
+  .page-security .security-overview-section .section-label > .measure{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    border:1px solid #d9d9d5!important;
+    border-radius:10px!important;
+    overflow:hidden!important;
+    background:#fff!important;
+    box-shadow:0 10px 32px rgba(20,20,20,.04)!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p{
+    position:relative!important;
+    margin:0!important;
+    padding:25px 30px 25px 34px!important;
+    border:0!important;
+    max-width:none!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p::before{
+    content:''!important;
+    position:absolute!important;
+    left:0!important;
+    top:22px!important;
+    bottom:22px!important;
+    width:3px!important;
+    background:var(--accent)!important;
+    border-radius:0 3px 3px 0!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p + p{
+    border-top:1px solid var(--rule)!important;
+  }
+}
+
+@media (max-width:767px){
+  body.page-security main > .security-overview-section{
+    padding-top:26px!important;
+    padding-bottom:26px!important;
+    background:#fbfbf9!important;
+    border-top:1px solid var(--rule)!important;
+    border-bottom:1px solid var(--rule)!important;
+  }
+  .page-security .security-overview-section .section-label > .measure{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    border:1px solid #d9d9d5!important;
+    border-radius:9px!important;
+    overflow:hidden!important;
+    background:#fff!important;
+    box-shadow:0 8px 24px rgba(20,20,20,.035)!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p{
+    position:relative!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:21px 20px 21px 24px!important;
+    border:0!important;
+    color:#343637!important;
+    font-size:.92rem!important;
+    line-height:1.62!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p::before{
+    content:''!important;
+    display:block!important;
+    position:absolute!important;
+    left:0!important;
+    top:18px!important;
+    bottom:18px!important;
+    width:3px!important;
+    height:auto!important;
+    border:0!important;
+    background:var(--accent)!important;
+    border-radius:0 3px 3px 0!important;
+    box-shadow:none!important;
+  }
+  .page-security .security-overview-section .section-label > .measure > p + p{
+    margin-top:0!important;
+    padding-top:21px!important;
+    border-top:1px solid var(--rule)!important;
+  }
+}

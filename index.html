@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Accurao Reviewer — independent review of finished accounts</title>
-  <meta name="description" content="Independent, AI-assisted review of finished FRS 102 Section 1A and FRS 105 small-company accounts.">
+  <title>Accurao Reviewer — financial statement review, from trial balance to disclosure</title>
+  <meta name="description" content="AI-assisted review of UK small-company statutory financial statements, connecting FRS 102 disclosures, trial balances, supporting schedules, prior-year information and arithmetic checks.">
   <meta name="robots" content="index,follow">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Accurao Reviewer — independent review of finished accounts">
-  <meta property="og:description" content="Independent, AI-assisted review of finished FRS 102 Section 1A and FRS 105 small-company accounts.">
+  <meta property="og:title" content="Accurao Reviewer — financial statement review, from trial balance to disclosure">
+  <meta property="og:description" content="AI-assisted review of UK small-company statutory financial statements, connecting FRS 102 disclosures, trial balances, supporting schedules, prior-year information and arithmetic checks.">
   <meta property="og:image" content="images/og-image.png">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="stylesheet" href="styles.css?v=19">
 <style id="homepage-repeated-illustration-cleanup">
 /* Repeated mid-page illustrations removed: the same information now appears once,
    in the site's established editorial/card layouts. */
@@ -26,8 +26,8 @@
 }
 </style>
 
-<link rel="stylesheet" href="illustrations-3d.css?v=16">
-  <link rel="stylesheet" href="mobile-responsive.css?v=16">
+<link rel="stylesheet" href="illustrations-3d.css?v=17">
+  <link rel="stylesheet" href="mobile-responsive.css?v=19">
   <style id="home-checks-final-layout-v16">
 /* FINAL source-of-truth for the Home "What it checks" section.
    This sits after every stylesheet so no legacy grid can squeeze the content. */
@@ -165,16 +165,18 @@
   }
 }
   </style>
+  <link rel="stylesheet" href="layout-polish.css?v=4">
 </head>
 <body class="page-home">
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="Accurao Reviewer home">
+      <img class="brand-logo" src="images/accurao-logo-primary.svg" alt="">
       <span class="brand-fallback">Accurao</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
     <nav class="main-nav" id="primary-nav" aria-label="Primary navigation"><a href="index.html" aria-current="page">Home</a><a href="what-it-checks.html">What it checks</a><a href="how-it-works.html">How it works</a><a href="security.html">Security</a><a href="faq.html">FAQ</a><a href="about.html">About</a></nav>
-    <a class="nav-cta" href="https://cal.eu/momina.athar/free-consultation" target="_blank" rel="noopener">Book a beta call</a>
+    <a class="nav-cta" href="beta.html">Book a beta call</a>
   </div>
 </header>
 <main>
@@ -184,18 +186,18 @@
     <div class="reference-match-copy">
       
       <h1>
-        <span class="hero-sentence">Every set of accounts gets reviewed.</span>
-        <span class="hero-sentence hero-secondary-sentence">Not every review catches <em>everything.</em></span>
+        <span class="hero-sentence">Financial statement review,</span>
+        <span class="hero-sentence hero-secondary-sentence">from trial balance to <em>disclosure.</em></span>
       </h1>
-      <p class="reference-match-sub">Accurao Reviewer is an independent, AI-assisted review layer for FRS 102 Section 1A and FRS 105 small-company accounts. Give it the finished accounts and the trial balance they came from. It ties out every figure, checks the document against itself, and flags disclosure gaps — before the accounts are signed.</p>
+      <p class="reference-match-sub">Accurao Reviewer supports the review of UK small-company statutory financial statements through AI-assisted mapping and structured verification checks. It connects disclosures, trial balances, underlying schedules, prior-year filed information and arithmetical checks in one review.</p>
       <div class="reference-match-actions">
-        <a class="button" href="https://cal.eu/momina.athar/free-consultation" target="_blank" rel="noopener">Book a beta call</a>
+        <a class="button" href="beta.html">Book a beta call</a>
         <a class="reference-match-link" href="what-it-checks.html">See everything it checks <b aria-hidden="true">→</b></a>
       </div>
-      <p class="reference-beta-note"><span aria-hidden="true"></span>Closed beta, around 15 practices and controllers. No charge during beta.</p>
+      <p class="reference-beta-note"><span aria-hidden="true"></span>Free invitation-only beta · 1–30 September 2026</p>
     </div>
 
-    <div class="reference-match-visual interactive-stack" data-layer-stack data-premium-illustration="home-review-flow" aria-label="Interactive illustration of Accurao Reviewer checking finished accounts against their source">
+    <div class="reference-match-visual interactive-stack" data-layer-stack data-premium-illustration="home-review-flow" aria-label="Interactive illustration of Accurao Reviewer connecting statutory financial statements with their supporting information">
       <div class="reference-grid" aria-hidden="true"></div>
       <svg class="reference-path" viewBox="0 0 620 440" aria-hidden="true" role="presentation">
         <path class="path-accounts" d="M180 88 L112 126 L112 169 L170 191" />
@@ -203,21 +205,21 @@
         <path class="path-reviewer" d="M456 220 L532 250 L532 347 L468 378" />
       </svg>
 
-      <button class="reference-card reference-card-accounts interactive-layer" type="button" data-layer="accounts" aria-label="Finished accounts: draft or signed PDF, reviewed read-only">
+      <button class="reference-card reference-card-accounts interactive-layer" type="button" data-layer="accounts" aria-label="Statutory financial statements supplied as a read-only PDF">
         <span class="layer-icon document-icon" aria-hidden="true"><i></i></span>
-        <span class="layer-copy"><strong>Finished accounts</strong><small>Draft or signed PDF · read-only</small></span>
+        <span class="layer-copy"><strong>Financial statements</strong><small>Statutory accounts PDF · read-only</small></span>
         <span class="layer-tag">PDF</span>
       </button>
 
-      <button class="reference-card reference-card-source interactive-layer" type="button" data-layer="source" aria-label="Trial balance: the trial balance the finished accounts were prepared from">
+      <button class="reference-card reference-card-source interactive-layer" type="button" data-layer="source" aria-label="Trial balance and underlying schedules supporting the financial statements">
         <span class="layer-icon ledger-icon" aria-hidden="true"><i></i></span>
-        <span class="layer-copy"><strong>Trial balance</strong><small>The trial balance they came from</small></span>
+        <span class="layer-copy"><strong>Trial balance</strong><small>Mapped to the financial statements</small></span>
         <span class="layer-tag">TB</span>
       </button>
 
-      <button class="reference-card reference-card-reviewer interactive-layer" type="button" data-layer="reviewer" aria-label="Accurao Reviewer: an independent, AI-assisted review layer with deterministic checks and disclosure prompts">
+      <button class="reference-card reference-card-reviewer interactive-layer" type="button" data-layer="reviewer" aria-label="Accurao Reviewer: structured verification and AI-assisted mapping">
         <span class="layer-icon ai-icon" aria-hidden="true"><i>AI</i></span>
-        <span class="layer-copy"><strong>Accurao Reviewer</strong><small class="layer-default">Independent, AI-assisted review layer</small><small class="layer-hover">Exact checks + AI-assisted disclosure prompts</small></span>
+        <span class="layer-copy"><strong>Accurao Reviewer</strong><small class="layer-default">Structured financial statement review</small><small class="layer-hover">Disclosures · mapping · consistency</small></span>
         <span class="layer-tag">Review</span>
       </button>
 
@@ -225,27 +227,27 @@
 
       <div class="stack-insight" data-stack-insight aria-live="polite">
         <div class="stack-insight-mark" aria-hidden="true"></div>
-        <div><strong data-stack-insight-title>Read-only review</strong><p data-stack-insight-body>The accounts stay read-only. You decide what happens to every finding.</p></div>
+        <div><strong data-stack-insight-title>Connected review</strong><p data-stack-insight-body>Review figures, disclosures and supporting information together.</p></div>
       </div>
     </div>
   </div>
 
   <div class="container reference-benefits" aria-label="Product principles">
-    <div><i></i><strong>Independent, AI-assisted review layer</strong><span>Works beside your existing accounts software.</span></div>
-    <div><i></i><strong>Exact checks</strong><span>Arithmetic and matching are deterministic.</span></div>
-    <div><i></i><strong>AI-assisted checks</strong><span>Disclosure presence is a prompt to confirm.</span></div>
-    <div><i></i><strong>Read-only</strong><span>It does not prepare, edit, file, or export accounts.</span></div>
+    <div><i></i><strong>Disclosure completeness</strong><span>Checks applicable FRS 102 Section 1A requirements.</span></div>
+    <div><i></i><strong>Trial balance mapping</strong><span>Highlights potential gaps and omissions.</span></div>
+    <div><i></i><strong>Prior-year consistency</strong><span>Uses statutory accounts filed at Companies House.</span></div>
+    <div><i></i><strong>Read-only review</strong><span>Does not prepare, edit, file or export accounts.</span></div>
   </div>
 </section>
 
 <section class="section intro-section" id="the-problem">
   <div class="container editorial-head">
     
-    <h2>Most of what gets missed isn't judgement.</h2>
+    <h2>Reviewing the statements means looking beyond their face.</h2>
 <div class="editorial-copy">
-      <p>Accounts are reviewed under time pressure, often by the person who prepared them, often after a late adjustment that made it into the face of the balance sheet but not into every note.</p>
-      <p>What slips through is rarely a technical call. It's a figure that quietly stopped tying to the trial balance. A note that no longer agrees to the face. A comparative that doesn't match what was actually filed last year. A director's name left over from the client the file was copied from.</p>
-      <p class="pitch">These are exactly the errors a human reviewer is worst at catching and a machine is best at — and exactly the ones a client notices first.</p>
+      <p>A financial statement review draws on information spread across the statements, disclosure notes, trial balance, supporting schedules and prior-year filed accounts.</p>
+      <p>Gaps can appear when a balance is not mapped into the statements, a disclosure note no longer agrees with its schedule, comparative information changes between periods, or a required disclosure is missing.</p>
+      <p class="pitch">Accurao Reviewer brings those connections into one structured review and returns findings for a qualified person to assess.</p>
     </div>
   </div>
 </section>
@@ -256,22 +258,22 @@
       <h2 class="wic-hero-heading">What it checks</h2>
     </div>
     <div class="check-split home-check-split">
-      <section class="check-group" aria-labelledby="home-exact-checks">
-        <h3 id="home-exact-checks">Exact checks</h3>
-        <p class="group-note">Arithmetic and matching. Deterministic — same inputs, same result, every time.</p>
+      <section class="check-group" aria-labelledby="home-disclosure-checks">
+        <h3 id="home-disclosure-checks">Disclosures and supporting evidence</h3>
+        <p class="group-note">Checks whether required information appears present and agrees with the information supporting it.</p>
         <ul class="check-list">
-          <li><strong>Trial balance tie-out</strong> — every line in the accounts traced back to the trial balance, with the difference shown</li>
-          <li><strong>Internal consistency</strong> — the balance sheet foots, notes agree to the face of the balance sheet, the fixed asset note casts</li>
-          <li><strong>Fixed asset register cross-match</strong> — your uploaded register against the fixed-asset note</li>
-          <li><strong>Prior-year comparatives</strong> — checked against the actual prior-year accounts filed at Companies House, or a copy you upload</li>
-          <li><strong>Identifier consistency</strong> — company name, registered number and director names used consistently throughout the document</li>
+          <li><strong>Disclosure verification and completeness</strong> — checks applicable FRS 102 Section 1A requirements and flags potential omissions for review</li>
+          <li><strong>Note-to-schedule agreement</strong> — compares disclosure notes with their underlying schedules and surfaces differences</li>
+          <li><strong>Identifier consistency</strong> — checks the company name, registered number and director names throughout the document</li>
         </ul>
       </section>
-      <section class="check-group" aria-labelledby="home-ai-checks">
-        <h3 id="home-ai-checks">AI-assisted checks</h3>
-        <p class="group-note">Presence detection, not certainty. Treat these as prompts to confirm.</p>
+      <section class="check-group" aria-labelledby="home-consistency-checks">
+        <h3 id="home-consistency-checks">Figures and consistency</h3>
+        <p class="group-note">Connects the statements to their source information and checks whether the numbers hold together.</p>
         <ul class="check-list">
-          <li><strong>Disclosure assessment</strong> — <span class="token">{{DISCLOSURE_COUNT}}</span> FRS 102 Section 1A disclosure requirements, each returned with the specific text found in your document as evidence, so you can judge it yourself rather than trust a tick</li>
+          <li><strong>AI-assisted trial balance mapping</strong> — maps the trial balance to the financial statements to identify potential gaps and omissions</li>
+          <li><strong>Prior-year consistency</strong> — retrieves prior-year statutory accounts from Companies House and compares current and comparative information</li>
+          <li><strong>Casting and arithmetical accuracy</strong> — checks totals, subtotals, roll-ups and note-to-face agreement</li>
         </ul>
       </section>
     </div>
@@ -292,24 +294,24 @@
 
 <section class="section steps-section">
   <div class="container feature-heading">
-    <div><h2>Finished accounts in. Findings out. Your judgement stays in the loop.</h2></div>
+    <div><h2>Financial statements in. Structured findings out. Your judgement stays in the loop.</h2></div>
     <p>It sits beside the tools you already use. Nothing is installed and nothing is written back into the accounts production workflow.</p>
   </div>
 <div class="container attio-steps">
-    <article><div class="step-num">01</div><h3>Give it the finished accounts and the trial balance</h3><p>The signed or draft accounts as a PDF, and the trial balance they were prepared from. Optionally a fixed asset register, and last year's filed accounts — or let it pull those from Companies House.</p></article>
-    <article><div class="step-num">02</div><h3>It checks the accounts against the numbers, and against themselves</h3><p>Every FS line tied back to the trial balance. The balance sheet foots. Notes agree to the face. The fixed asset note casts and matches the register. Comparatives match what was filed. Company name, registered number and director names are checked for consistency throughout.</p></article>
+    <article><div class="step-num">01</div><h3>Provide the financial statements and supporting information</h3><p>Upload the statutory financial statements as a text-readable PDF, together with the trial balance and relevant underlying schedules. Prior-year filed accounts are retrieved from Companies House.</p></article>
+    <article><div class="step-num">02</div><h3>Accurao Reviewer connects and checks the information</h3><p>It reviews disclosure completeness, maps the trial balance to the statements, agrees notes to schedules, compares prior-year information and checks casting and arithmetical accuracy.</p></article>
     <article><div class="step-num">03</div><h3>You work through the findings</h3><p>Everything above the materiality threshold you set, anchored to the relevant text. Confirm, dismiss, or correct each one. Sign off section by section. The trail is kept.</p></article>
   </div>
-  <div class="container"><div class="quiet-block"><p>It does not prepare, edit, export or file statutory accounts. There is no iXBRL output and no filing capability. It reviews the finished accounts you've already produced, in whatever software you produce them in. The document view is read-only, deliberately.</p></div></div>
+  <div class="container"><div class="quiet-block"><p>Accurao Reviewer does not prepare, edit, export or file statutory accounts. It does not produce iXBRL, perform an audit or assurance engagement, certify compliance, or replace accounts-production systems and professional judgement. The financial statement view is read-only.</p></div></div>
 </section>
 
 <section class="section audience-section">
   <div class="container feature-heading">
-    <div><h2>Built for the reviewer who needs another pair of eyes.</h2></div>
+    <div><h2>Built for people responsible for statutory financial statement review.</h2></div>
   </div>
 <div class="container audience-grid">
-    <div class="audience-item"><p><strong>Small practices</strong> preparing FRS 102 Section 1A and FRS 105 accounts, where the reviewer and the preparer are often the same person or sit at the same two desks.</p></div>
-    <div class="audience-item"><p><strong>Financial controllers</strong> preparing their own company's statutory accounts, without a second qualified pair of eyes in the building.</p></div>
+    <div class="audience-item"><p><strong>Small UK accountancy practices and qualified accountants</strong> reviewing FRS 102 Section 1A small-company statutory financial statements.</p></div>
+    <div class="audience-item"><p><strong>Financial controllers</strong> reviewing their own company's statutory financial statements and supporting information.</p></div>
   </div>
 </section>
 
@@ -319,23 +321,22 @@
 <section class="section final-cta">
   <div class="container final-cta-inner">
     
-    <h2>We're running a small closed beta.</h2>
-<p>Around 15 practices and financial controllers. We're not looking for feedback on the interface — we're looking to find out whether it catches something real on your files that would otherwise have gone out.</p>
-    <p>What we ask: run it over a handful of sets you've already reviewed and signed off, and tell us honestly what it found and what it missed.</p>
-    <p>Closed beta participation is at no charge.</p>
-    <p>What you get: <span class="token">{{BETA_TERMS}}</span></p>
-    <div class="hero-actions centered-actions"><a class="button" href="https://cal.eu/momina.athar/free-consultation" target="_blank" rel="noopener">Book a beta call</a></div>
-    <p class="hero-note tabular">20 minutes, with Momina.</p>
+    <h2>Join the September closed beta.</h2>
+<p>From 1 to 30 September 2026, we are working with a small group of UK accountancy practices, qualified accountants and financial controllers.</p>
+    <p>Participation is invitation-only and free. Each participant's users and review volume are agreed separately.</p>
+    <p>There is no automatic conversion to a paid service.</p>
+    <div class="hero-actions centered-actions"><a class="button" href="beta.html">Book a beta call</a></div>
+    <p class="hero-note tabular">A focused 20-minute conversation about the closed beta.</p>
   </div>
 </section>
 
 </main>
 <footer class="site-footer">
   <div class="container footer-rule">
-    <div class="footer-brand">Accurao Reviewer</div>
-    <nav class="footer-links" aria-label="Footer navigation"><a href="what-it-checks.html">What it checks</a><a href="security.html">Security</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="beta.html">Beta</a></nav>
+    <div class="footer-identity"><div class="footer-brand">Accurao Reviewer</div><p class="footer-company">A product of Accurao Limited · Company 17421054 · Registered in England and Wales<br><a href="mailto:info@accurao.com">info@accurao.com</a></p></div>
+    <nav class="footer-links" aria-label="Footer navigation"><a href="what-it-checks.html">What it checks</a><a href="security.html">Security</a><a href="beta.html">Beta</a></nav>
   </div>
 </footer>
-<script src="site.js?v=16" defer></script>
+<script src="site.js?v=19" defer></script>
 </body>
 </html>

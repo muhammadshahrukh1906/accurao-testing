@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <line x1="86" y1="72" x2="1114" y2="72" stroke="#171717" stroke-width="1.5"/>
+  <g transform="translate(86 96) scale(.14)" fill="#111111">
+    <circle cx="210" cy="200" r="94" fill="none" stroke="#111111" stroke-width="34"/>
+    <rect x="286" y="89" width="34" height="222" rx="17"/>
+    <rect x="145" y="174" width="108" height="15" rx="7.5"/>
+    <rect x="145" y="211" width="108" height="15" rx="7.5"/>
+  </g>
+  <text x="139" y="130" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="-1" fill="#111111">accurao</text>
+  <text x="140" y="151" font-family="Arial, Helvetica, sans-serif" font-size="10" letter-spacing="5" fill="#111111">REVIEWER</text>
+  <text x="1114" y="128" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="15" letter-spacing="2.4" fill="#666666">FOR UK SMALL-COMPANY ACCOUNTS</text>
+  <text x="86" y="266" font-family="Arial, Helvetica, sans-serif" font-size="59" font-weight="700" letter-spacing="-1.7" fill="#111111">Financial statement review,</text>
+  <text x="86" y="334" font-family="Arial, Helvetica, sans-serif" font-size="59" font-weight="700" letter-spacing="-1.7" fill="#111111">from trial balance to disclosure.</text>
+  <g transform="translate(86 450)" font-family="Arial, Helvetica, sans-serif">
+    <line x1="6" y1="0" x2="1022" y2="0" stroke="#c6c6c2" stroke-width="1.5"/>
+    <circle cx="6" cy="0" r="5" fill="#111111"/>
+    <circle cx="340" cy="0" r="5" fill="#111111"/>
+    <circle cx="682" cy="0" r="5" fill="#111111"/>
+    <circle cx="1022" cy="0" r="5" fill="#111111"/>
+    <text x="0" y="40" font-size="13" font-weight="700" letter-spacing="2" fill="#555555">TRIAL BALANCE</text>
+    <text x="334" y="40" font-size="13" font-weight="700" letter-spacing="2" fill="#555555">FINANCIAL STATEMENTS</text>
+    <text x="676" y="40" font-size="13" font-weight="700" letter-spacing="2" fill="#555555">NOTES &amp; SCHEDULES</text>
+    <text x="1028" y="40" text-anchor="end" font-size="13" font-weight="700" letter-spacing="2" fill="#555555">DISCLOSURES</text>
+  </g>
+  <line x1="86" y1="558" x2="1114" y2="558" stroke="#171717" stroke-width="1.5"/>
+</svg>
